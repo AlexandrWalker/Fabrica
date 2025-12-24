@@ -1,0 +1,53 @@
+{
+  "name": "gulp",
+  "version": "2.0.0-D",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build --imgmin",
+    "docs": "gulp build --docs",
+    "deploy": "gh-pages -d build",
+    "zipsrc": "gulp zipsrc",
+    "zipbuild": "gulp zipbuild",
+    "zipdocs": "gulp zipdocs"
+  },
+  "author": "Alexandr Sergeev",
+  "type": "module",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "css-loader": "^7.0.0",
+    "gh-pages": "^6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-avif": "^1.1.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-csso": "^4.0.1",
+    "gulp-file-include": "^2.3.0",
+    "gulp-fonter-fix": "^0.0.1",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass": "^5.1.0",
+    "gulp-sass-glob-use-forward": "^0.1.3",
+    "gulp-svg-sprite": "^2.0.3",
+    "gulp-ttf2woff2": "^4.0.1",
+    "gulp-typograf": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webp": "^4.0.1",
+    "gulp-zip": "^6.0.0",
+    "imagemin-webp": "^8.0.0",
+    "sass": "^1.66.1"
+  },
+  "browserslist": [
+    "last 5 versions"
+  ],
+  "dependencies": {
+    "swiper": "^12.0.2"
+  }
+}

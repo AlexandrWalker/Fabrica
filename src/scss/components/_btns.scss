@@ -1,0 +1,59 @@
+@use './../mixins' as *;
+
+.btn {
+  --btn-color: var(--black);
+  --btn-background: var(--bg);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  background-color: var(--btn-background);
+  border-radius: 3rem;
+
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 120%;
+  text-align: center;
+  color: var(--btn-color);
+
+  i {
+    font-size: var(--btn-icon-size);
+    color: var(--btn-icon-color);
+
+    width: var(--btn-icon-size);
+    height: var(--btn-icon-size);
+    background-color: var(--btn-icon-background);
+    border-radius: var(--btn-icon-radius);
+  }
+
+  &--beige {
+    --btn-background: var(--bg);
+
+    border: 0.1rem solid var(--beige);
+  }
+
+  &--green {
+    --btn-color: var(--white);
+    --btn-background: var(--green);
+  }
+
+  &--icon {
+    --btn-icon-size: 2.4rem;
+    --btn-icon-color: var(--white);
+
+    gap: 0.8rem;
+  }
+
+  &--arrow {
+    --btn-icon-size: 2.4rem;
+    --btn-icon-color: var(--green);
+    --btn-icon-background: var(--white);
+    --btn-icon-radius: 50%;
+
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 1.5rem;
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+@@include('blocks/head.html', {"title": "Фабрика"})
+
+<body>
+  <div class="wrapper">
+    <!-- Шапка -->
+    @@include('./blocks/header.html')
+    <main class="main">
+
+      <section class="hero">
+        <div class="container">
+          <div class="hero__inner">
+
+            <button class="btn btn--beige btn--arrow">
+              Кнопка
+              <i class="icon-chevron-right"></i>
+            </button>
+
+            <div class="hero__items">
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Кальяны
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Завтрак
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Ланч
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Салаты
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Кальяны
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Завтрак
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Ланч
+                </span>
+              </div>
+              <div class="hero__item">
+                <span class="hero__item-text">
+                  Салаты
+                </span>
+              </div>
+            </div>
+
+            <div class="hero__banners">
+              <a class="hero__banners-link" href="/">
+                <img src="./../images/temp/hero-banner-1.png" alt="">
+              </a>
+              <a class="hero__banners-link" href="/">
+                <img src="./../images/temp/hero-banner-2.png" alt="">
+              </a>
+              <a class="hero__banners-link" href="/">
+                <img src="./../images/temp/hero-banner-3.png" alt="">
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <!-- Панель -->
+    @@include('blocks/panel.html')
+    <!-- Подвал -->
+    @@include('blocks/footer.html')

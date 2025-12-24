@@ -1,0 +1,35 @@
+@use './../mixins' as *;
+
+:root {
+  --font-family: SFPro, sans-serif;
+  --second-family: Inter, sans-serif;
+  --third-family: SFCompact, sans-serif;
+  --fourth-family: PlayfairDisplay, sans-serif;
+  --fifth-family: SofiaPro, sans-serif;
+  --sixth-family: LeagueSpartan, sans-serif;
+
+  --container-padding: 1.5rem;
+  --container-width: 37.2rem;
+  --header-height: 7.6rem;
+  --panel-height: 7.7rem;
+  --wrapper-padding: 9.1rem;
+
+  --bg: #F4EBDC;
+  --white: #FDF6EC;
+  --black: #0A2533;
+  --aqua: #06A5AA;
+  --aqua-light: #00D0C5;
+  --green-dark: #0B3136;
+  --green: #185D66;
+  --green-light: #25D366;
+  --orange-light: #FF9F5F;
+  --red: #D93128;
+  --beige: #EDE4D5;
+
+  @include domd {
+    --container-padding: 40rem;
+    --container-width: 112rem;
+    --header-height: 11rem;
+    --wrapper-padding: 13rem;
+  }
+}

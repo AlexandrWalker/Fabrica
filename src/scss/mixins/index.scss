@@ -1,0 +1,61 @@
+@use 'sass:math';
+
+@mixin xxl() {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin xl() {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin lg() {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @media (max-width: 834px) {
+    @content;
+  }
+}
+
+@mixin domd() {
+  @media (min-width: 835px) {
+    @content;
+  }
+}
+
+@mixin xmd() {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin dosm() {
+  @media (min-width: 601px) {
+    @content;
+  }
+}
+
+@mixin sm() {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+@mixin xs() {
+  @media (max-width: 420px) {
+    @content;
+  }
+}
+
+@mixin xxs() {
+  @media (max-width: 372px) {
+    @content;
+  }
+}

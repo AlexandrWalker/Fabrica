@@ -1,0 +1,38 @@
+@use './../mixins' as *;
+
+.header {
+  // background: radial-gradient(52.9% 62.27% at 57.34% 40.22%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 100%), var(--green);
+  background-color: var(--green);
+  height: var(--header-height);
+  border-radius: 0 0 1.6rem 1.6rem;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 0 1rem;
+  }
+
+  &__points {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    padding: 0.5rem 2.2rem;
+    border-radius: 10rem;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0px 0px 14.4px rgba(0, 247, 255, 0.29);
+
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 120%;
+    color: var(--white);
+  }
+}

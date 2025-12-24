@@ -1,0 +1,1056 @@
+@charset "UTF-8";
+
+/* Base */
+
+html {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  --refRes: 402;
+  font-size: calc(100vw / var(--refRes) * 10);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background-color: var(--white);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 140%;
+  color: var(--black);
+  cursor: default;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-top: var(--wrapper-padding);
+}
+
+.main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.footer {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+section {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: inherit;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  max-width: calc(var(--container-width) + var(--container-padding) * 2);
+  width: 100%;
+  height: 100%;
+}
+
+.container--fluid {
+  padding: 0;
+  max-width: 100%;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Black.woff2") format("woff2"), url("../fonts/Inter-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-ExtraBold.woff2") format("woff2"), url("../fonts/Inter-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-ExtraLight.woff2") format("woff2"), url("../fonts/Inter-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Regular.woff2") format("woff2"), url("../fonts/Inter-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-SemiBold.woff2") format("woff2"), url("../fonts/Inter-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Thin.woff2") format("woff2"), url("../fonts/Inter-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Bold.woff2") format("woff2"), url("../fonts/LeagueSpartan-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-ExtraBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-ExtraLight.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Light.woff2") format("woff2"), url("../fonts/LeagueSpartan-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Medium.woff2") format("woff2"), url("../fonts/LeagueSpartan-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Regular.woff2") format("woff2"), url("../fonts/LeagueSpartan-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-SemiBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Thin.woff2") format("woff2"), url("../fonts/LeagueSpartan-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-Black.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-ExtraBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-Medium.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-Regular.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-SemiBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Black.woff2") format("woff2"), url("../fonts/SFCompact-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Bold.woff2") format("woff2"), url("../fonts/SFCompact-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Heavy.woff2") format("woff2"), url("../fonts/SFCompact-Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Light.woff2") format("woff2"), url("../fonts/SFCompact-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Medium.woff2") format("woff2"), url("../fonts/SFCompact-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Regular.woff2") format("woff2"), url("../fonts/SFCompact-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-SemiBold.woff2") format("woff2"), url("../fonts/SFCompact-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
+  src: url("../fonts/SFCompact-UltraLight.woff2") format("woff2"), url("../fonts/SFCompact-UltraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Black.woff2") format("woff2"), url("../fonts/SFPro-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Bold.woff2") format("woff2"), url("../fonts/SFPro-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Heavy.woff2") format("woff2"), url("../fonts/SFPro-Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Light.woff2") format("woff2"), url("../fonts/SFPro-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Medium.woff2") format("woff2"), url("../fonts/SFPro-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Regular.woff2") format("woff2"), url("../fonts/SFPro-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Bold.woff2") format("woff2"), url("../fonts/SofiaPro-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-ExtraLight.woff2") format("woff2"), url("../fonts/SofiaPro-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Light.woff2") format("woff2"), url("../fonts/SofiaPro-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Medium.woff2") format("woff2"), url("../fonts/SofiaPro-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Regular.woff2") format("woff2"), url("../fonts/SofiaPro-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-SemiBold.woff2") format("woff2"), url("../fonts/SofiaPro-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-UltraLight.woff2") format("woff2"), url("../fonts/SofiaPro-UltraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* Reset and base styles  */
+
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Links */
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button,
+input[type=submit] {
+  display: inline-block;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active,
+button:focus,
+button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.none {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.html-no-scroll {
+  overflow: hidden !important;
+  --f-scrollbar-compensate: 0px;
+  max-height: 100vh;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  overscroll-behavior-y: none;
+  max-height: 100vh;
+}
+
+:root {
+  --font-family: SFPro, sans-serif;
+  --second-family: Inter, sans-serif;
+  --third-family: SFCompact, sans-serif;
+  --fourth-family: PlayfairDisplay, sans-serif;
+  --fifth-family: SofiaPro, sans-serif;
+  --sixth-family: LeagueSpartan, sans-serif;
+  --container-padding: 1.5rem;
+  --container-width: 37.2rem;
+  --header-height: 7.6rem;
+  --panel-height: 7.7rem;
+  --wrapper-padding: 9.1rem;
+  --bg: #F4EBDC;
+  --white: #FDF6EC;
+  --black: #0A2533;
+  --aqua: #06A5AA;
+  --aqua-light: #00D0C5;
+  --green-dark: #0B3136;
+  --green: #185D66;
+  --green-light: #25D366;
+  --orange-light: #FF9F5F;
+  --red: #D93128;
+  --beige: #EDE4D5;
+}
+
+/* Components */
+
+.btn {
+  --btn-color: var(--black);
+  --btn-background: var(--bg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  background-color: var(--btn-background);
+  border-radius: 3rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 120%;
+  text-align: center;
+  color: var(--btn-color);
+}
+
+.btn i {
+  font-size: var(--btn-icon-size);
+  color: var(--btn-icon-color);
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
+  background-color: var(--btn-icon-background);
+  border-radius: var(--btn-icon-radius);
+}
+
+.btn--beige {
+  --btn-background: var(--bg);
+  border: 0.1rem solid var(--beige);
+}
+
+.btn--green {
+  --btn-color: var(--white);
+  --btn-background: var(--green);
+}
+
+.btn--icon {
+  --btn-icon-size: 2.4rem;
+  --btn-icon-color: var(--white);
+  gap: 0.8rem;
+}
+
+.btn--arrow {
+  --btn-icon-size: 2.4rem;
+  --btn-icon-color: var(--green);
+  --btn-icon-background: var(--white);
+  --btn-icon-radius: 50%;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem 1rem 1.5rem;
+}
+
+/* Стили для иконок */
+
+h1 {
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 120%;
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 120%;
+}
+
+h3 {
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 120%;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 120%;
+}
+
+h5 {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 120%;
+}
+
+h6 {
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 120%;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 120%;
+}
+
+/* Modules */
+
+.burger-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: 1000;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--white);
+  text-shadow: 0px 0px 9.5px var(--aqua-light);
+}
+
+/* Blocks */
+
+.header {
+  background-color: var(--green);
+  height: var(--header-height);
+  border-radius: 0 0 1.6rem 1.6rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.7rem 0 1rem;
+}
+
+.header__points {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 3rem;
+  padding: 0.5rem 2.2rem;
+  border-radius: 10rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: inset 0px 0px 14.4px rgba(0, 247, 255, 0.29);
+  box-shadow: inset 0px 0px 14.4px rgba(0, 247, 255, 0.29);
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 120%;
+  color: var(--white);
+}
+
+.logo {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 6rem;
+}
+
+.logo img {
+  width: auto;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -webkit-filter: drop-shadow(0rem 0rem 1.5rem var(--aqua-light));
+  filter: drop-shadow(0rem 0rem 1.5rem var(--aqua-light));
+}
+
+.panel {
+  width: 100%;
+  height: var(--panel-height);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+}
+
+.panel::before {
+  content: "";
+  width: 100%;
+  height: 13rem;
+  background: linear-gradient(179.09deg, #0A2533 22.45%, rgba(255, 255, 255, 0) 86.33%);
+  backdrop-filter: blur(2px);
+  -webkit-transform: matrix(1, 0, 0, -1, 0, 0);
+  -ms-transform: matrix(1, 0, 0, -1, 0, 0);
+  transform: matrix(1, 0, 0, -1, 0, 0);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.panel__container {
+  width: 100%;
+  height: 100%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAyIiBoZWlnaHQ9Ijc3IiB2aWV3Qm94PSIwIDAgNDAyIDc3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KPHBhdGggZD0iTTAgMjEuNDQ1OEMwIDkuNjAxNjEgOS41OTkwMiAwIDIxLjQ0IDBIMTQ1Ljc5NkMxNTIuNzc0IDAgMTU4LjczNyAyLjAyNjAzIDE2Mi44OSA3LjYzNDc4QzE3MS40MTYgMTkuMTUwNiAxNzguNTQ5IDM1LjM4NTUgMjAxIDM1LjM4NTVDMjIzLjQ5MSAzNS4zODU1IDIzMS4yODQgMTkuMDkyIDI0MC4xMTIgNy41NzI0N0MyNDQuMzU3IDIuMDMzMjcgMjUwLjI5OCAwIDI1Ny4yNzYgMEgzODAuNTZDMzkyLjQwMSAwIDQwMiA5LjYwMTYgNDAyIDIxLjQ0NThWNzdIMFYyMS40NDU4WiIgZmlsbD0iI0ZERjZFQyIvPg0KPC9zdmc+DQo=);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.panel__inner {
+  height: 100%;
+}
+
+.panel__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.panel__btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.3rem;
+  width: 7rem;
+  height: 7rem;
+  padding: 1.2rem 0 1.8rem;
+}
+
+.panel__btn i {
+  font-size: 3rem;
+  color: var(--green);
+}
+
+.panel__btn span {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 120%;
+}
+
+.panel__btn--mid {
+  border-radius: 50%;
+  background-color: var(--green);
+  -webkit-transform: translateY(-4.1rem);
+  -ms-transform: translateY(-4.1rem);
+  transform: translateY(-4.1rem);
+  color: var(--white);
+}
+
+.panel__btn--mid i {
+  font-size: 2.8rem;
+  color: var(--white);
+}
+
+/* Elements */
+
+/* Pages */
+
+/* Sections */
+
+.hero__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero__items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0 var(--container-padding);
+  margin-left: calc(var(--container-padding) * -1);
+  width: 100vw;
+}
+
+.hero__items::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hero__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: calc(25% - 0.6rem);
+  height: 10.9rem;
+  border-radius: 1.6rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgb(24, 93, 102);
+  color: var(--white);
+}
+
+.hero__item-text {
+  font-weight: 1000;
+  font-size: 1.2rem;
+  line-height: 120%;
+  text-align: center;
+}
+
+.hero__banners {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0 var(--container-padding);
+  margin-left: calc(var(--container-padding) * -1);
+  width: 100vw;
+}
+
+.hero__banners::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hero__banners-link {
+  width: 18.2rem;
+  height: 17.8rem;
+  border-radius: 1.6rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.hero__banners-link img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+@media (min-width: 835px) {
+  html {
+    --refRes: 1920;
+  }
+
+  :root {
+    --container-padding: 40rem;
+    --container-width: 112rem;
+    --header-height: 11rem;
+    --wrapper-padding: 13rem;
+  }
+}
