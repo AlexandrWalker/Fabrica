@@ -1,0 +1,8 @@
+@use './../mixins' as *;
+
+.layout {
+
+  &__head {
+    margin-bottom: 1.5rem;
+  }
+}

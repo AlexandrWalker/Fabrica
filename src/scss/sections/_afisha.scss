@@ -1,0 +1,61 @@
+@use './../mixins' as *;
+
+.afisha {
+
+  &__items {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+
+    overflow-x: auto;
+    padding: 0 var(--container-padding);
+    margin-left: calc(var(--container-padding) * -1);
+    width: 100vw;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__item {
+    width: 22rem;
+    height: 18rem;
+    border-radius: 1.6rem;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    position: relative;
+
+    i {
+      background-color: var(--white);
+      border-radius: 50%;
+
+      font-size: 3rem;
+      color: var(--green);
+
+      position: absolute;
+      right: 2rem;
+      bottom: 2rem;
+    }
+
+    &:hover i {
+      background-color: var(--green);
+
+      color: var(--white);
+    }
+
+    &-date {
+      font-weight: 400;
+      font-size: 1.2rem;
+      line-height: 120%;
+      color: var(--white);
+
+      position: absolute;
+      bottom: 2.8rem;
+      left: 2rem;
+    }
+  }
+}
