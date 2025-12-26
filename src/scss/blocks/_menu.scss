@@ -10,6 +10,7 @@
   background-color: var(--white);
   transition: all 0.5s ease-in-out;
   transform: translateY(100%);
+  touch-action: none;
 
   position: fixed;
   bottom: 0;
