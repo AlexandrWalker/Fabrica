@@ -1,0 +1,62 @@
+[
+  {
+    "link": "/",
+    "img": "./../../images/temp/business-lunch-1.png",
+    "tags-top": "Топчик",
+    "tags-hot": "Островато",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/business-lunch-2.png",
+    "tags-top": "Топчик",
+    "tags-hot": "Островато",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/business-lunch-3.png",
+    "tags-top": "Топчик",
+    "tags-hot": "Островато",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/business-lunch-4.png",
+    "tags-top": "Топчик",
+    "tags-hot": "Островато",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  }
+]

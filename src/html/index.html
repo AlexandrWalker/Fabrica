@@ -10,7 +10,7 @@
     @@include('./blocks/menu.html')
     <main class="main">
 
-      <section class="hero">
+      <section id="hero" class="hero">
         <div class="container">
           <div class="hero__inner">
 
@@ -120,7 +120,7 @@
             <div class="afisha__items">
               <div class="afisha__item">
                 <div class="afisha__item-img">
-                  <img src="./../images/temp/afisha-1.svg" alt="">
+                  <img src="./../images/temp/afisha-1.png" alt="">
                 </div>
                 <div class="afisha__item-date">
                   10.12.2025
@@ -129,7 +129,7 @@
               </div>
               <div class="afisha__item">
                 <div class="afisha__item-img">
-                  <img src="./../images/temp/afisha-2.svg" alt="">
+                  <img src="./../images/temp/afisha-2.png" alt="">
                 </div>
                 <div class="afisha__item-date">
                   10.12.2025
@@ -138,7 +138,7 @@
               </div>
               <div class="afisha__item">
                 <div class="afisha__item-img">
-                  <img src="./../images/temp/afisha-1.svg" alt="">
+                  <img src="./../images/temp/afisha-1.png" alt="">
                 </div>
                 <div class="afisha__item-date">
                   10.12.2025
@@ -147,7 +147,7 @@
               </div>
               <div class="afisha__item">
                 <div class="afisha__item-img">
-                  <img src="./../images/temp/afisha-2.svg" alt="">
+                  <img src="./../images/temp/afisha-2.png" alt="">
                 </div>
                 <div class="afisha__item-date">
                   10.12.2025
@@ -239,7 +239,7 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items.json')
+              @@loop('./elements/card-item.html', './data/card-items-lunch.json')
             </div>
 
           </div>
@@ -265,7 +265,7 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items.json')
+              @@loop('./elements/card-item.html', './data/card-items-business-lunch.json')
             </div>
 
           </div>
@@ -285,7 +285,7 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items.json')
+              @@loop('./elements/card-item.html', './data/card-items-salads.json')
             </div>
 
           </div>
