@@ -21,18 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     lenis.raf(time * 1000);
   });
 
-  const burgerBtn = document.getElementById('burger-btn');
-
-  burgerBtn.addEventListener('click', function () {
-
-    document.documentElement.classList.toggle('menu--open');
-  });
 
 
   class BottomPopup {
     constructor(popupEl, lenisInstance) {
       this.popup = popupEl;
-      this.header = popupEl.querySelector('.popup__header');
+      this.header = popupEl.querySelector('[data-popup-head="popupHead"]');
       this.lenis = lenisInstance;
 
       this.startY = 0;
@@ -40,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.lastY = 0;
       this.startTime = 0;
       this.isDragging = false;
-      this.popupHeight = this.popup.offsetHeight;
+      this.popupHeight = 0;
 
       this.bind();
     }
@@ -51,16 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
       this.header.addEventListener('touchend', this.onEnd.bind(this));
     }
 
+    isOpen() {
+      return document.documentElement.classList.contains('menu--open');
+    }
+
     open() {
+      if (this.isOpen()) return;
+      this.popupHeight = this.popup.offsetHeight;
       this.popup.style.transition = 'transform 0.3s ease-out';
       this.popup.style.transform = 'translateY(0)';
+      document.documentElement.classList.add('menu--open');
       this.blockScroll();
     }
 
-    close() {
-      this.popup.style.transition = 'transform 0.3s ease-out';
+    close(duration = 0.3) {
+      if (!this.isOpen()) return;
+      this.popup.style.transition = `transform ${duration}s cubic-bezier(0.25, 0.8, 0.25, 1)`;
       this.popup.style.transform = 'translateY(100%)';
+      document.documentElement.classList.remove('menu--open');
       this.unblockScroll();
+    }
+
+    toggle() {
+      if (this.isOpen()) {
+        this.close();
+      } else {
+        this.open();
+      }
     }
 
     onStart(e) {
@@ -74,34 +85,34 @@ document.addEventListener('DOMContentLoaded', () => {
     onMove(e) {
       if (!this.isDragging) return;
 
-      this.currentY = e.touches[0].clientY;
-      let delta = this.currentY - this.startY;
-
+      const touchY = e.touches[0].clientY;
+      let delta = touchY - this.startY;
       if (delta < 0) delta = 0;
 
       this.popup.style.transform = `translateY(${delta}px)`;
-      this.lastY = this.currentY;
+      this.lastY = touchY;
 
       e.preventDefault();
     }
 
     onEnd() {
       if (!this.isDragging) return;
-
       this.isDragging = false;
 
-      const delta = this.currentY - this.startY;
-      const time = Date.now() - this.startTime;
-      const velocity = delta / time;
+      const endY = this.lastY || this.startY;
+      const delta = endY - this.startY;
+      const time = Math.max(Date.now() - this.startTime, 1);
+      const velocity = delta / time; // px/ms
 
-      const shouldClose =
-        delta > this.popupHeight * 0.25 || velocity > 0.5;
-
-      this.popup.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
+      const shouldClose = delta > this.popupHeight * 0.25 || velocity > 0.5;
 
       if (shouldClose) {
-        this.close();
+        // Чем выше скорость, тем быстрее закрытие (0.1..0.3s)
+        let duration = Math.max(0.1, Math.min(0.3, 0.3 - velocity));
+        this.close(duration);
       } else {
+        // Возврат с анимацией
+        this.popup.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
         this.popup.style.transform = 'translateY(0)';
       }
     }
@@ -122,5 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
+  // Инициализация
+  const popup1 = new BottomPopup(
+    document.getElementById('menu'),
+    window.lenis
+  );
+
+  const burgerBtn = document.getElementById('burger-btn');
+
+  burgerBtn.addEventListener('click', function () {
+    popup1.toggle();
+  });
+
+
 
 });
