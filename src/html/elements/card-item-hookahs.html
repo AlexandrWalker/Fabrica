@@ -1,0 +1,41 @@
+<a class="card" href="@@link">
+  <div class="card__head">
+    <div class="card__tags">
+      <div class="card__tags-item card__tags-top">
+        @@tags-top
+      </div>
+    </div>
+    <div class="card__img">
+      <img src="@@img" alt="">
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__content">
+      <div class="card__rating">
+        <div class="card__rating-text">
+          @@rating
+        </div>
+        <i class="icon-star-fill"></i>
+      </div>
+      <div class="card__name">
+        @@name
+      </div>
+      <div class="card__weight">
+        @@weight
+      </div>
+      <div class="card__desc">
+        <p>
+          @@desc
+        </p>
+      </div>
+    </div>
+    <div class="card__foot">
+      <div class="card__price">
+        @@price
+      </div>
+      <div class="card__like" onclick="event.stopPropagation(); alert('Вы добавили в понравившееся!'); return false;">
+        <i class="icon-like"></i>
+      </div>
+    </div>
+  </div>
+</a>

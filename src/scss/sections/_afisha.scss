@@ -8,6 +8,11 @@
     gap: 0.8rem;
 
     overflow-x: auto;
+    /* опционально, для «приклеивания» к элементам */
+    scroll-snap-type: x mandatory;
+    /* плавный инерционный скролл на iOS */
+    -webkit-overflow-scrolling: touch;
+
     padding: 0 var(--container-padding);
     margin-left: calc(var(--container-padding) * -1);
     width: 100vw;
@@ -26,6 +31,8 @@
     border-radius: 1.6rem;
     overflow: hidden;
     flex-shrink: 0;
+    /* для snap-effect */
+    scroll-snap-align: center;
 
     position: relative;
 

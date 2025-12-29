@@ -14,6 +14,11 @@
     gap: 0.8rem;
 
     overflow-x: auto;
+    /* опционально, для «приклеивания» к элементам */
+    scroll-snap-type: x mandatory;
+    /* плавный инерционный скролл на iOS */
+    -webkit-overflow-scrolling: touch;
+
     padding: 0 var(--container-padding);
     margin-left: calc(var(--container-padding) * -1);
     width: 100vw;
@@ -37,11 +42,17 @@
     border-radius: 1.6rem;
     // background-color: var(--green);
     flex-shrink: 0;
-
+    /* для snap-effect */
+    scroll-snap-align: center;
+    transition: all 0.5s ease;
     // background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgba(24, 93, 102, 0.6);
     background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgba(24, 93, 102, 1);
 
     color: var(--white);
+
+    &:hover {
+      background: var(--green-dark);
+    }
 
     &-img {
       display: flex;
@@ -71,6 +82,11 @@
     gap: 0.8rem;
 
     overflow-x: auto;
+    /* опционально, для «приклеивания» к элементам */
+    scroll-snap-type: x mandatory;
+    /* плавный инерционный скролл на iOS */
+    -webkit-overflow-scrolling: touch;
+
     padding: 0 var(--container-padding);
     margin-left: calc(var(--container-padding) * -1);
     width: 100vw;
@@ -87,6 +103,8 @@
       height: 17.8rem;
       border-radius: 1.6rem;
       flex-shrink: 0;
+      /* для snap-effect */
+      scroll-snap-align: center;
 
       position: relative;
 

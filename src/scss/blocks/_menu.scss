@@ -2,12 +2,15 @@
 
 .menu {
   width: 100%;
-  height: calc(100vh - var(--wrapper-padding));
+  height: calc(100dvh - var(--wrapper-padding));
   z-index: 600;
   border-radius: 1.6rem 1.6rem 0 0;
   border: 0.1rem solid var(--beige);
   overflow: hidden;
   background-color: var(--white);
+  background-image: url(./../../images/temp/menu-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   transition: all 0.5s ease-in-out;
   transform: translateY(100%);
   touch-action: none;

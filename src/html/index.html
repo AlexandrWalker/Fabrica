@@ -105,9 +105,9 @@
         </div>
       </section>
 
-      <section class="afisha">
+      <section class="layout">
         <div class="container">
-          <div class="afisha__inner">
+          <div class="layout__inner">
 
             <div class="layout__head">
               <div class="layout__title">
@@ -154,6 +154,138 @@
                 </div>
                 <i class="icon-chevron-right"></i>
               </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="likeit">
+        <div class="container">
+          <div class="likeit__inner">
+
+            <div class="likeit__head">
+              <div class="likeit__title">
+                <h2>
+                  Вам понравится
+                </h2>
+              </div>
+            </div>
+
+            <div class="likeit__items">
+              @@loop('./elements/card-item.html', './data/card-items.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout seasons">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Сезонные <span>Specials</span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Кальяны
+                </h2>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item-hookahs.html', './data/card-items-hookahs.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Завтраки
+                </h2>
+              </div>
+              <div class="layout__time">
+                <i class="icon-clock"></i>
+                <p>
+                  с 10:00 до 11:00 
+                </p>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Бизнес-ланч
+                </h2>
+              </div>
+              <div class="layout__time">
+                <i class="icon-clock"></i>
+                <p>
+                  с 12:00 до 14:00 
+                </p>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Салаты
+                </h2>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items.json')
             </div>
 
           </div>

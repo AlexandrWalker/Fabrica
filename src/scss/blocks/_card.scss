@@ -1,0 +1,192 @@
+@use './../mixins' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  /* для snap-effect */
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background: var(--bg);
+  border: 0.1rem solid var(--beige);
+
+  position: relative;
+
+  * {
+    transition: all 0.3s ease;
+  }
+
+  &__head {}
+
+  &__tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1;
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1.6rem;
+      padding: 0.6rem 0.55rem;
+      background-color: var(--aqua);
+      width: fit-content;
+
+      font-weight: 700;
+      font-size: 0.8rem;
+      line-height: 100%;
+      color: var(--white);
+    }
+
+    &-top {
+      background-color: var(--green-light);
+    }
+
+    &-hot {
+      background-color: var(--red);
+    }
+  }
+
+  &__img {
+    border-radius: 1.6rem;
+    overflow: hidden;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  &__rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    width: fit-content;
+    padding: 0.3rem 0.55rem;
+    border-radius: 1.6rem;
+    background-color: var(--orange-light);
+
+    color: var(--bg);
+
+    &-text {
+      font-weight: 700;
+      font-size: 0.8rem;
+      line-height: 100%;
+    }
+
+    i {
+      font-size: 0.8rem;
+    }
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 120%;
+  }
+
+  &__weight {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 120%;
+    color: var(--black-50);
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+
+    i {
+      border-radius: 0.5rem;
+      background-color: var(--white);
+
+      font-size: 1.6rem;
+      color: var(--green);
+    }
+
+    &-text {
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 120%;
+    }
+  }
+
+  &__desc {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 120%;
+    color: var(--green-light);
+  }
+
+  &__foot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 1.6rem;
+    background-color: var(--white);
+
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 100%;
+    color: var(--aqua);
+
+    &:hover {
+      background-color: var(--green);
+      color: var(--white);
+    }
+  }
+
+  &__like {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--green);
+
+    color: var(--white);
+
+    &:hover {
+      background-color: var(--white);
+      color: var(--green);
+    }
+
+    i {
+      font-size: 1.8rem;
+    }
+  }
+}

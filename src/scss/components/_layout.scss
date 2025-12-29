@@ -3,6 +3,46 @@
 .layout {
 
   &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     margin-bottom: 1.5rem;
+  }
+
+  &__title {
+
+    span {
+      color: var(--red);
+      font-style: italic;
+    }
+  }
+
+  &__time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    padding: 0.7rem 1rem;
+    background-color: var(--bg);
+    border: 0.1rem solid var(--beige);
+    border-radius: 3rem;
+
+    i {
+      font-size: 1.6rem;
+      color: var(--green);
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 120%;
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
 }
