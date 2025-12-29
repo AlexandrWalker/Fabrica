@@ -30,6 +30,7 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   padding-top: var(--wrapper-padding);
+  padding-bottom: 15rem;
 }
 
 .main {
@@ -239,16 +240,16 @@ img {
 @font-face {
   font-family: PlayfairDisplay;
   font-display: swap;
-  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/PlayfairDisplay-Medium.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Medium.woff") format("woff");
+  font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: PlayfairDisplay;
   font-display: swap;
-  src: url("../fonts/PlayfairDisplay-Medium.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -391,16 +392,16 @@ img {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
-  font-weight: 100;
+  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
-  font-weight: 600;
+  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -643,6 +644,7 @@ body {
   --bg: #F4EBDC;
   --white: #FDF6EC;
   --black: #0A2533;
+  --black-50: rgba(10, 37, 51, 0.5);
   --aqua: #06A5AA;
   --aqua-light: #00D0C5;
   --green-dark: #0B3136;
@@ -725,7 +727,58 @@ body {
 }
 
 .layout__head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.layout__title span {
+  color: var(--red);
+  font-style: italic;
+}
+
+.layout__time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.7rem 1rem;
+  background-color: var(--bg);
+  border: 0.1rem solid var(--beige);
+  border-radius: 3rem;
+}
+
+.layout__time i {
+  font-size: 1.6rem;
+  color: var(--green);
+}
+
+.layout__time p {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+}
+
+.layout__items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
 }
 
 h1 {
@@ -787,6 +840,257 @@ p {
 }
 
 /* Blocks */
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  /* для snap-effect */
+  scroll-snap-align: center;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background: var(--bg);
+  border: 0.1rem solid var(--beige);
+  position: relative;
+}
+
+.card * {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.card__tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+}
+
+.card__tags-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 1.6rem;
+  padding: 0.6rem 0.55rem;
+  background-color: var(--aqua);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 100%;
+  color: var(--white);
+}
+
+.card__tags-top {
+  background-color: var(--green-light);
+}
+
+.card__tags-hot {
+  background-color: var(--red);
+}
+
+.card__img {
+  border-radius: 1.6rem;
+  overflow: hidden;
+}
+
+.card__body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.card__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card__rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.2rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.3rem 0.55rem;
+  border-radius: 1.6rem;
+  background-color: var(--orange-light);
+  color: var(--bg);
+}
+
+.card__rating-text {
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 100%;
+}
+
+.card__rating i {
+  font-size: 0.8rem;
+}
+
+.card__name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 120%;
+}
+
+.card__weight {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+  color: var(--black-50);
+}
+
+.card__items {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+}
+
+.card__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card__item i {
+  border-radius: 0.5rem;
+  background-color: var(--white);
+  font-size: 1.6rem;
+  color: var(--green);
+}
+
+.card__item-text {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+}
+
+.card__desc {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+  color: var(--green-light);
+}
+
+.card__foot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.7rem 1.25rem;
+  border-radius: 1.6rem;
+  background-color: var(--white);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 100%;
+  color: var(--aqua);
+}
+
+.card__price:hover {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.card__like {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.card__like:hover {
+  background-color: var(--white);
+  color: var(--green);
+}
+
+.card__like i {
+  font-size: 1.8rem;
+}
 
 .header {
   background-color: var(--green);
@@ -856,12 +1160,15 @@ p {
 
 .menu {
   width: 100%;
-  height: calc(100vh - var(--wrapper-padding));
+  height: calc(100dvh - var(--wrapper-padding));
   z-index: 600;
   border-radius: 1.6rem 1.6rem 0 0;
   border: 0.1rem solid var(--beige);
   overflow: hidden;
   background-color: var(--white);
+  background-image: url(./../images/temp/menu-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
   -webkit-transform: translateY(100%);
@@ -1067,6 +1374,11 @@ p {
   flex-direction: row;
   gap: 0.8rem;
   overflow-x: auto;
+  /* опционально, для «приклеивания» к элементам */
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  /* плавный инерционный скролл на iOS */
+  -webkit-overflow-scrolling: touch;
   padding: 0 var(--container-padding);
   margin-left: calc(var(--container-padding) * -1);
   width: 100vw;
@@ -1086,6 +1398,8 @@ p {
   overflow: hidden;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  /* для snap-effect */
+  scroll-snap-align: center;
   position: relative;
 }
 
@@ -1135,6 +1449,11 @@ p {
   flex-direction: row;
   gap: 0.8rem;
   overflow-x: auto;
+  /* опционально, для «приклеивания» к элементам */
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  /* плавный инерционный скролл на iOS */
+  -webkit-overflow-scrolling: touch;
   padding: 0 var(--container-padding);
   margin-left: calc(var(--container-padding) * -1);
   width: 100vw;
@@ -1167,8 +1486,16 @@ p {
   border-radius: 1.6rem;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  /* для snap-effect */
+  scroll-snap-align: center;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgb(24, 93, 102);
   color: var(--white);
+}
+
+.hero__item:hover {
+  background: var(--green-dark);
 }
 
 .hero__item-img {
@@ -1208,6 +1535,11 @@ p {
   flex-direction: row;
   gap: 0.8rem;
   overflow-x: auto;
+  /* опционально, для «приклеивания» к элементам */
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  /* плавный инерционный скролл на iOS */
+  -webkit-overflow-scrolling: touch;
   padding: 0 var(--container-padding);
   margin-left: calc(var(--container-padding) * -1);
   width: 100vw;
@@ -1226,6 +1558,8 @@ p {
   border-radius: 1.6rem;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  /* для snap-effect */
+  scroll-snap-align: center;
   position: relative;
 }
 
@@ -1249,6 +1583,41 @@ p {
 .hero__banners-link:hover i {
   background-color: var(--green);
   color: var(--white);
+}
+
+.likeit__head {
+  margin-bottom: 1.5rem;
+}
+
+.likeit__items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 0.8rem;
+  overflow-x: auto;
+  /* опционально, для «приклеивания» к элементам */
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  /* плавный инерционный скролл на iOS */
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--container-padding);
+  margin-left: calc(var(--container-padding) * -1);
+  width: 100vw;
+}
+
+.likeit__items::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.likeit .card {
+  width: 14.4rem;
 }
 
 @media (min-width: 835px) {
