@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lenis.raf(time * 1000);
   });
 
-
-
   class BottomPopup {
     constructor(popupEl, lenisInstance) {
       this.popup = popupEl;
@@ -145,7 +143,5 @@ document.addEventListener('DOMContentLoaded', () => {
   burgerBtn.addEventListener('click', function () {
     popup1.toggle();
   });
-
-
 
 });

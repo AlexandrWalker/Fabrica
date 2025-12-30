@@ -1,0 +1,30 @@
+[
+  {
+    "link": "/",
+    "img": "./../../images/temp/drinks-1.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/drinks-2.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Домашний омлет с моцареллой и чоризо",
+    "weight": "380/30 Г",
+    "calories": "120 Ккал",
+    "protein": "Б-10г",
+    "fat": "Ж-10г",
+    "carbohydrates": "У-65г",
+    "desc": "Свободен",
+    "price": "500 ₽"
+  }
+]

@@ -14,6 +14,12 @@
 
   &__inner {
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__content {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem 0 1rem;

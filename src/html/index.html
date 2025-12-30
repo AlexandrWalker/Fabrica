@@ -180,7 +180,7 @@
         </div>
       </section>
 
-      <section class="layout seasons">
+      <section class="layout">
         <div class="container">
           <div class="layout__inner">
 
@@ -233,7 +233,7 @@
               <div class="layout__time">
                 <i class="icon-clock"></i>
                 <p>
-                  с 10:00 до 11:00 
+                  с 10:00 до 11:00
                 </p>
               </div>
             </div>
@@ -259,7 +259,7 @@
               <div class="layout__time">
                 <i class="icon-clock"></i>
                 <p>
-                  с 12:00 до 14:00 
+                  с 12:00 до 14:00
                 </p>
               </div>
             </div>
@@ -286,6 +286,136 @@
 
             <div class="layout__items">
               @@loop('./elements/card-item.html', './data/card-items-salads.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Горячее
+                </h2>
+              </div>
+              <div class="layout__nav">
+                <div class="layout__nav-item active">
+                  Горячее
+                </div>
+                <div class="layout__nav-item">
+                  Паста
+                </div>
+                <div class="layout__nav-item">
+                  Гарниры
+                </div>
+                <div class="layout__nav-item">
+                  Супы
+                </div>
+                <div class="layout__nav-item">
+                  Паста
+                </div>
+                <div class="layout__nav-item">
+                  Гарниры
+                </div>
+                <div class="layout__nav-item">
+                  Супы
+                </div>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items-salads.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Закуски
+                </h2>
+              </div>
+              <div class="layout__nav">
+                <div class="layout__nav-item active">
+                  Горячие закуски 
+                </div>
+                <div class="layout__nav-item">
+                  Холодные закуски
+                </div>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item.html', './data/card-items-salads.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Напитки
+                </h2>
+              </div>
+              <div class="layout__nav">
+                <div class="layout__nav-item active">
+                  Горячие
+                </div>
+                <div class="layout__nav-item">
+                  Холодные
+                </div>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item-drinks.html', './data/card-items-drinks.json')
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Напитки
+                </h2>
+              </div>
+              <div class="layout__nav">
+                <div class="layout__nav-item active">
+                  Безалкогольные
+                </div>
+                <div class="layout__nav-item">
+                  Фабричный алкоголь
+                </div>
+                <div class="layout__nav-item">
+                  Настойки и вино ту го 
+                </div>
+              </div>
+            </div>
+
+            <div class="layout__items">
+              @@loop('./elements/card-item-cocktails.html', './data/card-items-cocktails.json')
             </div>
 
           </div>

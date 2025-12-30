@@ -49,6 +49,7 @@ section {
   overflow-x: hidden;
   overflow-y: hidden;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 a {
@@ -96,14 +97,6 @@ img {
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
   src: url("../fonts/Inter-ExtraLight.woff2") format("woff2"), url("../fonts/Inter-ExtraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
@@ -112,8 +105,8 @@ img {
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -122,6 +115,14 @@ img {
   font-display: swap;
   src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
   font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -152,16 +153,16 @@ img {
 @font-face {
   font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/LeagueSpartan-Bold.woff2") format("woff2"), url("../fonts/LeagueSpartan-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
-  font-weight: 900;
+  src: url("../fonts/LeagueSpartan-Bold.woff2") format("woff2"), url("../fonts/LeagueSpartan-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -240,8 +241,8 @@ img {
 @font-face {
   font-family: PlayfairDisplay;
   font-display: swap;
-  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/PlayfairDisplay-Regular.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Regular.woff") format("woff");
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -250,6 +251,14 @@ img {
   font-display: swap;
   src: url("../fonts/PlayfairDisplay-Medium.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Medium.woff") format("woff");
   font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -266,14 +275,6 @@ img {
   font-display: swap;
   src: url("../fonts/SFCompact-Black.woff2") format("woff2"), url("../fonts/SFCompact-Black.woff") format("woff");
   font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: PlayfairDisplay;
-  font-display: swap;
-  src: url("../fonts/PlayfairDisplay-Regular.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Regular.woff") format("woff");
-  font-weight: 400;
   font-style: normal;
 }
 
@@ -320,16 +321,16 @@ img {
 @font-face {
   font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
-  font-weight: 100;
+  src: url("../fonts/SFCompact-SemiBold.woff2") format("woff2"), url("../fonts/SFCompact-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFCompact-SemiBold.woff2") format("woff2"), url("../fonts/SFCompact-SemiBold.woff") format("woff");
-  font-weight: 600;
+  src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -392,16 +393,16 @@ img {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
-  font-weight: 100;
+  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
-  font-weight: 600;
+  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -638,8 +639,8 @@ body {
   --sixth-family: LeagueSpartan, sans-serif;
   --container-padding: 1.5rem;
   --container-width: 37.2rem;
+  --header-height: 27.4rem;
   --header-height: 7.6rem;
-  --panel-height: 7.7rem;
   --wrapper-padding: 9.1rem;
   --bg: #F4EBDC;
   --white: #FDF6EC;
@@ -775,6 +776,76 @@ body {
   line-height: 120%;
 }
 
+.layout__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.8rem;
+  overflow-x: auto;
+  /* опционально, для «приклеивания» к элементам */
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  /* плавный инерционный скролл на iOS */
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--white);
+  padding: 0 var(--container-padding);
+  margin-left: calc(var(--container-padding) * -1);
+  width: 100vw;
+  position: relative;
+  z-index: 100;
+}
+
+.layout__nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.layout__nav.is-fixed {
+  position: fixed;
+  top: var(--wrapper-padding);
+  z-index: 100;
+}
+
+.layout__nav-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 4rem;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+  border-radius: 3rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  /* для snap-effect */
+  scroll-snap-align: center;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 120%;
+}
+
+.layout__nav-item.active {
+  background-color: var(--green);
+  color: var(--white);
+}
+
 .layout__items {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -853,6 +924,7 @@ p {
   scroll-snap-align: center;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  min-height: 30.3rem;
   border-radius: 1.6rem;
   overflow: hidden;
   background: var(--bg);
@@ -928,6 +1000,7 @@ p {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem;
+  height: 100%;
 }
 
 .card__content {
@@ -1104,6 +1177,17 @@ p {
 }
 
 .header__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

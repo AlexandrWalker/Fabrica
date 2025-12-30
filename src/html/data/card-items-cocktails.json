@@ -1,0 +1,38 @@
+[
+  {
+    "link": "/",
+    "img": "./../../images/temp/cocktails-1.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Название фабричного напитка",
+    "weight": "250 мл",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/cocktails-2.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Название фабричного напитка",
+    "weight": "250 мл",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/cocktails-3.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Название фабричного напитка",
+    "weight": "250 мл",
+    "price": "500 ₽"
+  },
+  {
+    "link": "/",
+    "img": "./../../images/temp/cocktails-4.png",
+    "tags-top": "Топчик",
+    "rating": "4.8",
+    "name": "Название фабричного напитка",
+    "weight": "250 мл",
+    "price": "500 ₽"
+  }
+]
