@@ -58,3 +58,24 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+ul {}
+
+li {
+  padding-left: 2rem;
+
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: var(--black);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0.7rem;
+    left: 0.9rem;
+  }
+}

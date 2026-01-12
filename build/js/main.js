@@ -23,125 +23,163 @@ document.addEventListener('DOMContentLoaded', () => {
 
   class BottomPopup {
     constructor(popupEl, lenisInstance) {
+      if (!popupEl) return;
       this.popup = popupEl;
-      this.header = popupEl.querySelector('[data-popup-head="popupHead"]');
       this.lenis = lenisInstance;
 
       this.startY = 0;
-      this.currentY = 0;
       this.lastY = 0;
       this.startTime = 0;
       this.isDragging = false;
       this.popupHeight = 0;
+      this.activePopup = null;
+      this.scrollable = null;
 
-      this.bind();
-    }
-
-    bind() {
-      this.header.addEventListener('touchstart', this.onStart.bind(this), { passive: false });
-      this.header.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-      this.header.addEventListener('touchend', this.onEnd.bind(this));
+      document.addEventListener('touchstart', this.onStart.bind(this), { passive: false });
+      document.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+      document.addEventListener('touchend', this.onEnd.bind(this));
     }
 
     isOpen() {
-      return document.documentElement.classList.contains('menu--open');
+      return this.popup?.dataset?.open === 'true';
     }
 
     open() {
-      if (this.isOpen()) return;
+      if (!this.popup || this.isOpen()) return;
+
+      BottomPopup.closeAll();
+
       this.popupHeight = this.popup.offsetHeight;
       this.popup.style.transition = 'transform 0.3s ease-out';
       this.popup.style.transform = 'translateY(0)';
-      document.documentElement.classList.add('menu--open');
-      this.blockScroll();
+      this.popup.dataset.open = 'true';
+
+      if (this.lenis) this.lenis.stop();
+      else document.body.style.overflow = 'hidden';
     }
 
     close(duration = 0.3) {
-      if (!this.isOpen()) return;
-      this.popup.style.transition = `transform ${duration}s cubic-bezier(0.25, 0.8, 0.25, 1)`;
+      if (!this.popup || !this.isOpen()) return;
+
+      this.popup.style.transition = `transform ${duration}s cubic-bezier(0.25,0.8,0.25,1)`;
       this.popup.style.transform = 'translateY(100%)';
-      document.documentElement.classList.remove('menu--open');
-      this.unblockScroll();
+      this.popup.dataset.open = 'false';
+
+      if (this.lenis) this.lenis.start();
+      else document.body.style.overflow = '';
     }
 
     toggle() {
-      if (this.isOpen()) {
-        this.close();
-      } else {
-        this.open();
-      }
+      if (this.isOpen()) this.close();
+      else this.open();
     }
 
     onStart(e) {
-      this.isDragging = true;
+      const openPopup = BottomPopup.getOpen();
+      if (!openPopup) return;
+
+      this.activePopup = openPopup.popup;
+      this.scrollable = this.activePopup.querySelector('[data-popup-scroll]');
+
+      const canSwipe = !this.scrollable || this.scrollable.scrollTop === 0;
+      this.isDragging = canSwipe;
+
       this.startY = e.touches[0].clientY;
       this.lastY = this.startY;
       this.startTime = Date.now();
-      this.popup.style.transition = 'none';
+      if (this.activePopup) this.activePopup.style.transition = 'none';
     }
 
     onMove(e) {
-      if (!this.isDragging) return;
-
+      if (!this.activePopup) return;
       const touchY = e.touches[0].clientY;
       let delta = touchY - this.startY;
+
+      // Скролл внутри
+      if (this.scrollable) {
+        const atTop = this.scrollable.scrollTop === 0;
+        const atBottom = this.scrollable.scrollHeight - this.scrollable.scrollTop === this.scrollable.clientHeight;
+
+        if ((delta > 0 && !atTop) || (delta < 0 && !atBottom)) {
+          this.isDragging = false;
+          return; // скроллим контент, не попап
+        }
+      }
+
+      if (!this.isDragging) return;
+
       if (delta < 0) delta = 0;
 
-      this.popup.style.transform = `translateY(${delta}px)`;
+      // добавляем "резиновость" при маленьком смещении
+      const resistance = delta > 100 ? 100 + (delta - 100) * 0.5 : delta;
+      this.activePopup.style.transform = `translateY(${resistance}px)`;
       this.lastY = touchY;
 
       e.preventDefault();
     }
 
     onEnd() {
-      if (!this.isDragging) return;
+      if (!this.isDragging || !this.activePopup) return;
       this.isDragging = false;
 
-      const endY = this.lastY || this.startY;
-      const delta = endY - this.startY;
+      const delta = (this.lastY || this.startY) - this.startY;
       const time = Math.max(Date.now() - this.startTime, 1);
       const velocity = delta / time; // px/ms
 
-      const shouldClose = delta > this.popupHeight * 0.25 || velocity > 0.5;
+      // инерционный расчёт: учитываем текущую позицию + скорость
+      const predicted = delta + velocity * 150; // множитель для инерции
+
+      const shouldClose = predicted > this.activePopup.offsetHeight * 0.25 || velocity > 0.5;
 
       if (shouldClose) {
-        // Чем выше скорость, тем быстрее закрытие (0.1..0.3s)
-        let duration = Math.max(0.1, Math.min(0.3, 0.3 - velocity));
+        // быстрее закрытие при быстром flick
+        let duration = Math.max(0.05, Math.min(0.25, 0.25 - velocity));
         this.close(duration);
       } else {
-        // Возврат с анимацией
-        this.popup.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
-        this.popup.style.transform = 'translateY(0)';
+        // возвращаем на место с плавной анимацией
+        this.activePopup.style.transition = 'transform 0.3s cubic-bezier(0.25,0.8,0.25,1)';
+        this.activePopup.style.transform = 'translateY(0)';
       }
     }
 
-    blockScroll() {
-      if (this.lenis) {
-        this.lenis.stop();
-      } else {
-        document.body.style.overflow = 'hidden';
-      }
+    static register(key, instance) {
+      if (!BottomPopup.instances) BottomPopup.instances = {};
+      BottomPopup.instances[key] = instance;
     }
 
-    unblockScroll() {
-      if (this.lenis) {
-        this.lenis.start();
-      } else {
-        document.body.style.overflow = '';
-      }
+    static get(key) {
+      return BottomPopup.instances ? BottomPopup.instances[key] : null;
+    }
+
+    static closeAll() {
+      if (!BottomPopup.instances) return;
+      Object.values(BottomPopup.instances).forEach(popup => popup.close());
+    }
+
+    static getOpen() {
+      if (!BottomPopup.instances) return null;
+      return Object.values(BottomPopup.instances).find(p => p.isOpen()) || null;
     }
   }
 
-  // Инициализация
-  const popup1 = new BottomPopup(
-    document.getElementById('menu'),
-    window.lenis
-  );
+  // --- Инициализация попапов ---
+  const popups = {
+    menu: new BottomPopup(document.getElementById('menu'), window.lenis),
+    dish: new BottomPopup(document.getElementById('dish'), window.lenis)
+  };
 
-  const burgerBtn = document.getElementById('burger-btn');
+  for (let key in popups) {
+    BottomPopup.register(key, popups[key]);
+  }
 
-  burgerBtn.addEventListener('click', function () {
-    popup1.toggle();
+  // --- Привязка кнопок с toggle ---
+  document.querySelectorAll('[data-popup-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.popupTarget;
+      const popup = BottomPopup.get(target);
+      if (!popup) return;
+      popup.toggle();
+    });
   });
 
 });
