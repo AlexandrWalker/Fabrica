@@ -46,86 +46,89 @@
   </div>
 </header>
     <!-- Меню -->
-    <div class="menu" id="menu" data-lenis-prevent>
+    <div id="menu" class="menu popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
   <div class="container">
-    <div class="menu__inner">
-      <div class="layout__head menu__head" data-popup-head="popupHead">
-        <div class="layout__title">
-          <h2>
-            Еще
-          </h2>
+    <div class="popup__inner">
+      <div class="menu__inner">
+        <div class="menu__head">
+          <div class="layout__title">
+            <h2>
+              Еще
+            </h2>
+          </div>
         </div>
-      </div>
-      <div class="menu__body">
-        <div class="menu__items">
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-microphone"></i>
+        <div class="menu__body">
+          <div class="menu__items">
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-microphone"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Афиша
+                </h6>
+              </div>
             </div>
-            <div class="menu__item-title">
-              <h6>
-                Афиша
-              </h6>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-list"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Фабричные правила
+                </h6>
+              </div>
             </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-list"></i>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-rassadka"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Рассадка
+                </h6>
+              </div>
             </div>
-            <div class="menu__item-title">
-              <h6>
-                Фабричные правила
-              </h6>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-catering"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Кальянный кейтеринг
+                </h6>
+              </div>
             </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-rassadka"></i>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-loyalty-system"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Система лояльности
+                </h6>
+              </div>
             </div>
-            <div class="menu__item-title">
-              <h6>
-                Рассадка
-              </h6>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-contacts"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Контакты
+                </h6>
+              </div>
             </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-catering"></i>
-            </div>
-            <div class="menu__item-title">
-              <h6>
-                Кальянный кейтеринг
-              </h6>
-            </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-loyalty-system"></i>
-            </div>
-            <div class="menu__item-title">
-              <h6>
-                Система лояльности
-              </h6>
-            </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-contacts"></i>
-            </div>
-            <div class="menu__item-title">
-              <h6>
-                Контакты
-              </h6>
-            </div>
-          </div>
-          <div class="menu__item">
-            <div class="menu__item-icon">
-              <i class="icon-menu-slang"></i>
-            </div>
-            <div class="menu__item-title">
-              <h6>
-                Фабричный сленг
-              </h6>
+            <div class="menu__item">
+              <div class="menu__item-icon">
+                <i class="icon-menu-slang"></i>
+              </div>
+              <div class="menu__item-title">
+                <h6>
+                  Фабричный сленг
+                </h6>
+              </div>
             </div>
           </div>
         </div>
@@ -134,129 +137,614 @@
   </div>
 </div>
     <!-- Блюдо -->
-    <div id="dish" class="dish" data-lenis-prevent>
-  <div class="dish__inner" data-popup-scroll>
+    <div id="dish" class="dish popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="popup__inner">
+    <div class="dish__inner" data-popup-scroll>
+      <div class="dish__head">
+        <div class="dish__img">
+          <img src="./images/temp/dish-img.png" alt="">
+        </div>
+      </div>
+      <div class="dish__body">
+        <div class="dish__wrap">
+          <div class="dish__rating">
+            <div class="dish__rating-text">
+              4.8
+            </div>
+            <i class="icon-star-fill"></i>
+          </div>
+          <a class="dish__share" href="/">
+            <i class="icon-share"></i>
+          </a>
+        </div>
 
-    <div class="dish__head" data-popup-head="popupHead">
-      <div class="dish__img">
-        <img src="./images/temp/dish-img.png" alt="">
+        <div class="dish__name">
+          Домашний омлет с моцареллой и чоризо
+        </div>
+
+        <div class="dish__weight">
+          380/30 Г
+        </div>
+
+        <div class="dish__time">
+          <i class="icon-clock"></i>
+          <p>
+            Специальное новогоднее предложение до 01.01.2026
+          </p>
+        </div>
+      </div>
+      <div class="dish__content">
+        <div class="dish__price">
+          1500 ₽
+        </div>
+
+        <div class="dish__item">
+          <div class="dish__title">
+            Состав:
+          </div>
+          <p>
+            Котлета из мраморной говядины, луковая карамель, сыр чеддер, маринованный огурец, томат, лист салата, соус
+            «сырный», соус «bbq»
+          </p>
+        </div>
+
+        <div class="dish__item">
+          <div class="dish__title">
+            КБЖУ на 100 г
+          </div>
+          <div class="dish__values">
+            <div class="dish__value">
+              <i class="icon-calories"></i>
+              <div class="dish__value-text">
+                120 Ккал
+              </div>
+            </div>
+            <div class="dish__value">
+              <i class="icon-protein"></i>
+              <div class="dish__value-text">
+                Б-10г
+              </div>
+            </div>
+            <div class="dish__value">
+              <i class="icon-fat"></i>
+              <div class="dish__value-text">
+                Ж-10г
+              </div>
+            </div>
+            <div class="dish__value">
+              <i class="icon-carbohydrates"></i>
+              <div class="dish__value-text">
+                У-65г
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dish__item">
+          <div class="dish__title">
+            Дополнительно:
+          </div>
+          <ul>
+            <li>
+              Ломтик сыра - <b>100 ₽</b>
+            </li>
+            <li>
+              Халапеньо - <b>30 ₽</b>
+            </li>
+            <li>
+              Двойная котлета - <b>250 ₽</b>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dish__item">
+          <div class="dish__title">
+            Можно убрать:
+          </div>
+          <ul>
+            <li>
+              Картофель
+            </li>
+            <li>
+              Томаты
+            </li>
+            <li>
+              Листья салата
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="dish__body">
-      <div class="dish__wrap">
-        <div class="dish__rating">
-          <div class="dish__rating-text">
-            4.8
-          </div>
-          <i class="icon-star-fill"></i>
-        </div>
-        <a class="dish__share" href="/">
-          <i class="icon-share"></i>
-        </a>
-      </div>
-
-      <div class="dish__name">
-        Домашний омлет с моцареллой и чоризо
-      </div>
-
-      <div class="dish__weight">
-        380/30 Г
-      </div>
-
-      <div class="dish__time">
-        <i class="icon-clock"></i>
-        <p>
-          Специальное новогоднее предложение до 01.01.2026
-        </p>
-      </div>
-    </div>
-
-    <div class="dish__content">
-      <div class="dish__price">
-        1500 ₽
-      </div>
-
-      <div class="dish__item">
-        <div class="dish__title">
-          Состав:
-        </div>
-        <p>
-          Котлета из мраморной говядины, луковая карамель, сыр чеддер, маринованный огурец, томат, лист салата, соус
-          «сырный», соус «bbq»
-        </p>
-      </div>
-
-      <div class="dish__item">
-        <div class="dish__title">
-          КБЖУ на 100 г
-        </div>
-        <div class="dish__values">
-          <div class="dish__value">
-            <i class="icon-calories"></i>
-            <div class="dish__value-text">
-              120 Ккал
-            </div>
-          </div>
-          <div class="dish__value">
-            <i class="icon-protein"></i>
-            <div class="dish__value-text">
-              Б-10г
-            </div>
-          </div>
-          <div class="dish__value">
-            <i class="icon-fat"></i>
-            <div class="dish__value-text">
-              Ж-10г
-            </div>
-          </div>
-          <div class="dish__value">
-            <i class="icon-carbohydrates"></i>
-            <div class="dish__value-text">
-              У-65г
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dish__item">
-        <div class="dish__title">
-          Дополнительно:
-        </div>
-        <ul>
-          <li>
-            Ломтик сыра - <b>100 ₽</b>
-          </li>
-          <li>
-            Халапеньо - <b>30 ₽</b>
-          </li>
-          <li>
-            Двойная котлета - <b>250 ₽</b>
-          </li>
-        </ul>
-      </div>
-
-      <div class="dish__item">
-        <div class="dish__title">
-          Можно убрать:
-        </div>
-        <ul>
-          <li>
-            Картофель
-          </li>
-          <li>
-            Томаты
-          </li>
-          <li>
-            Листья салата
-          </li>
-        </ul>
-      </div>
-    </div>
-
   </div>
 </div>
-    <main class="main">
+    <!-- Фильтр -->
+    <div id="filter" class="filter popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="container">
+    <div class="popup__inner">
+      <div class="filter__inner">
+        <div class="filter__head">
+          <div class="layout__title">
+            <h2 class="h2">
+              Фильтр
+            </h2>
+          </div>
+        </div>
+        <div class="filter__body">
+          <div class="filter__items">
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Топчик
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub2">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Островато
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub3">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Вега
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub4">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Любовь шефа
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+          </div>
+        </div>
+        <div class="filter__body">
+          <div class="layout__title">
+            <h4 class="h4">
+              Меню
+            </h4>
+          </div>
+          <div class="filter__items">
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Кальяны
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Сезонные предложения
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Завтраки
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Ланч
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Салаты
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Горячее
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Гарниры
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Паста
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Супы
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+            <label class="filter__item">
+              <input type="checkbox" name="sub1">
+              <span class="filter__check"></span>
+              <div class="filter__item-text">
+                Напитки
+              </div>
+              <i class="icon-chevron"></i>
+            </label>
+          </div>
+        </div>
+        <button class="filter__btn btn btn--green">
+          Показать
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Филиал -->
+    <div id="branch" class="branch popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="container">
+    <div class="popup__inner">
+      <div class="branch__inner">
+        <div class="branch__head">
+          <div class="layout__title">
+            <h2 class="h2">
+              Выбрать филиал
+            </h2>
+          </div>
+        </div>
+        <div class="branch__body">
+          <div class="branch__wrap">
+            <div class="layout__title">
+              <h4 class="h4">
+                Новосибирск
+              </h4>
+            </div>
+            <div class="branch__block">
+              <div class="branch__text">
+                <h5>
+                  ​Советская улица, 33
+                  <a href="/">
+                    Выбрать
+                  </a>
+                </h5>
+                <p>
+                  Этот филиал в 4 км от тебя
+                </p>
+              </div>
+              <div class="branch__text">
+                <h5>
+                  ​Красный проспект, 11
+                  <a href="/">
+                    Выбрать
+                  </a>
+                </h5>
+                <p>
+                  Этот филиал в 3 км от тебя
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="branch__wrap">
+            <div class="layout__title">
+              <h4 class="h4">
+                Томск
+              </h4>
+            </div>
+            <div class="branch__block">
+              <div class="branch__text">
+                <h5>
+                  ​Проспект Ленина, 77а
+                  <a href="/">
+                    Выбрать
+                  </a>
+                </h5>
+                <p>
+                  Этот филиал в 340 км от тебя
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="branch__wrap">
+            <div class="layout__title">
+              <h4 class="h4">
+                Шерегеш
+              </h4>
+            </div>
+            <div class="branch__block">
+              <div class="branch__text">
+                <h5>
+                  ​Советская улица, 8Б, пгт Шерегеш, Таштагольский муниципальный район, Кемеровская область — Кузбасс
+                  <a href="/">
+                    Выбрать
+                  </a>
+                </h5>
+                <p>
+                  Этот филиал в 500 км от тебя
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="branch__wrap">
+            <div class="branch__map">
+              <img src="./images/temp/branch-map.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Отзывы -->
+    <div id="reviews" class="reviews popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="container">
+    <div class="popup__inner">
+      <div class="reviews__inner" data-popup-scroll>
+        <div class="reviews__head">
+          <div class="reviews__cover">
+            <img src="./images/temp/dish-img.png" alt="">
+          </div>
+          <div class="reviews__btn btn">
+            Оставить отзыв
+          </div>
+          <div class="layout__title">
+            <h2 class="h2">
+              Отзывы
+            </h2>
+          </div>
+          <div class="reviews__wrap">
+            <div class="reviews__rating">
+              <div class="reviews__rating-text">
+                4.8
+              </div>
+              <i class="icon-star-fill"></i>
+            </div>
+            <div class="reviews__counts">
+              Отзывы: <span>200</span>
+            </div>
+          </div>
+          <div class="reviews__name">
+            <h4 class="h4">
+              Домашний омлет с моцареллой и чоризо
+            </h4>
+          </div>
+        </div>
+        <div class="reviews__body">
+          <div class="reviews__items">
+            <div class="reviews__item">
+              <div class="reviews__item-wrap">
+                <div class="reviews__item-name">
+                  Василий Петров
+                </div>
+                <div class="reviews__item-date">
+                  12.10.2025
+                </div>
+                <div class="reviews__item-rating">
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                </div>
+              </div>
+              <div class="reviews__item-text">
+                <p>
+                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
+                  и
+                  Бифштекс с яйцом просто шикарный!
+                </p>
+              </div>
+              <div class="reviews__item-imgs">
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="reviews__item">
+              <div class="reviews__item-wrap">
+                <div class="reviews__item-name">
+                  Василий Петров
+                </div>
+                <div class="reviews__item-date">
+                  12.10.2025
+                </div>
+                <div class="reviews__item-rating">
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                </div>
+              </div>
+              <div class="reviews__item-text">
+                <p>
+                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
+                  и
+                  Бифштекс с яйцом просто шикарный!
+                </p>
+              </div>
+              <div class="reviews__item-imgs">
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="reviews__item">
+              <div class="reviews__item-wrap">
+                <div class="reviews__item-name">
+                  Василий Петров
+                </div>
+                <div class="reviews__item-date">
+                  12.10.2025
+                </div>
+                <div class="reviews__item-rating">
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                  <i class="icon-star-fill"></i>
+                </div>
+              </div>
+              <div class="reviews__item-text">
+                <p>
+                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
+                  и
+                  Бифштекс с яйцом просто шикарный!
+                </p>
+              </div>
+              <div class="reviews__item-imgs">
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+                <div class="reviews__item-img">
+                  <img src="./images/temp/reviews-img-1.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Написать отзыв -->
+    <div id="reviewsWrite" class="reviews reviews-write popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="container">
+    <div class="popup__inner">
+      <div class="reviews__inner" data-popup-scroll>
+
+        <div class="reviews__head">
+          <div class="layout__title">
+            <h2 class="h2">
+              Написать отзыв
+            </h2>
+          </div>
+        </div>
+
+        <div class="reviews__body">
+          <div class="layout__title">
+            <h4 class="h4">
+              Как вам наш бургер?
+            </h4>
+          </div>
+          <div class="reviews-write__rating">
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+            <i class="icon-star"></i>
+          </div>
+
+          <div class="reviews__form">
+            <div class="form-group">
+              <label class="form-label">
+                Имя*
+                <input class="form-input" type="text" name="name" placeholder="Ваше имя">
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                Поделитесь мнением*
+                <textarea class="form-textarea" name="comment" rows="7"></textarea>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <span class="form-label">
+                Добавьте фото
+                <label class="form-file">
+                  <input class="form-file-input" type="file">
+                </label>
+              </span>
+            </div>
+
+            <div class="filter__items">
+              <label class="filter__item">
+                <input type="checkbox" name="sub1">
+                <span class="filter__check"></span>
+                <div class="filter__item-text">
+                  Очень круто
+                </div>
+                <i class="icon-chevron"></i>
+              </label>
+              <label class="filter__item">
+                <input type="checkbox" name="sub1">
+                <span class="filter__check"></span>
+                <div class="filter__item-text">
+                  Вкусно
+                </div>
+                <i class="icon-chevron"></i>
+              </label>
+              <label class="filter__item">
+                <input type="checkbox" name="sub1">
+                <span class="filter__check"></span>
+                <div class="filter__item-text">
+                  Островато
+                </div>
+                <i class="icon-chevron"></i>
+              </label>
+              <label class="filter__item">
+                <input type="checkbox" name="sub1">
+                <span class="filter__check"></span>
+                <div class="filter__item-text">
+                  Сладковато
+                </div>
+                <i class="icon-chevron"></i>
+              </label>
+              <label class="filter__item">
+                <input type="checkbox" name="sub1">
+                <span class="filter__check"></span>
+                <div class="filter__item-text">
+                  Не понравилось
+                </div>
+                <i class="icon-chevron"></i>
+              </label>
+            </div>
+
+            <div class="reviews__btn btn btn--green">
+              Оставить отзыв
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main id="main" class="main">
 
       <section id="hero" class="hero">
         <div class="container">
@@ -2763,31 +3251,31 @@
     <div class="panel__inner">
 
       <div class="panel__btns">
-        <a class="panel__btn" href="#hero">
+        <a class="panel__btn" href="#main">
           <i class="icon-up"></i>
           <span>
             Наверх
           </span>
         </a>
-        <button class="panel__btn">
+        <button class="panel__btn" data-popup-target="filter">
           <i class="icon-filter"></i>
           <span>
             Фильтр
           </span>
         </button>
-        <button class="panel__btn panel__btn--mid">
+        <button class="panel__btn panel__btn--mid" data-popup-target="reviewsWrite">
           <i class="icon-like"></i>
           <span>
             По-кайфу
           </span>
         </button>
-        <button class="panel__btn">
+        <button class="panel__btn" data-popup-target="branch">
           <i class="icon-login"></i>
           <span>
             Войти
           </span>
         </button>
-        <button class="panel__btn">
+        <button class="panel__btn" data-popup-target="reviews">
           <i class="icon-meatballs"></i>
           <span>
             Ещё

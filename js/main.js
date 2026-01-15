@@ -165,7 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Инициализация попапов ---
   const popups = {
     menu: new BottomPopup(document.getElementById('menu'), window.lenis),
-    dish: new BottomPopup(document.getElementById('dish'), window.lenis)
+    dish: new BottomPopup(document.getElementById('dish'), window.lenis),
+    filter: new BottomPopup(document.getElementById('filter'), window.lenis),
+    branch: new BottomPopup(document.getElementById('branch'), window.lenis),
+    reviews: new BottomPopup(document.getElementById('reviews'), window.lenis),
+    reviewsWrite: new BottomPopup(document.getElementById('reviewsWrite'), window.lenis)
   };
 
   for (let key in popups) {
