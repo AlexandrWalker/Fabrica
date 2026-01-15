@@ -1,45 +1,11 @@
 @use './../mixins' as *;
 
 .menu {
-  width: 100%;
-  height: calc(100dvh - var(--wrapper-padding));
-  z-index: 600;
-  border-radius: 1.6rem 1.6rem 0 0;
-  border: 0.1rem solid var(--beige);
-  overflow: hidden;
-  background-color: var(--white);
-  background-image: url(./../../images/temp/menu-bg.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  transition: all 0.5s ease-in-out;
-  transform: translateY(100%);
-  touch-action: none;
-  will-change: transform;
 
-  position: fixed;
-  bottom: 0;
-
-  .menu--open & {
-    transform: translateY(0);
-  }
-
-  &::before {
-    content: "";
-    width: 5.6rem;
-    height: 0.6rem;
-    border-radius: 0.5rem;
-    background-color: var(--green-50);
-
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &__inner {}
-
-  &__head {
-    padding: 3.6rem 0 0;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   &__items {

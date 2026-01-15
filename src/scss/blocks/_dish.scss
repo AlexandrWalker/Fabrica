@@ -1,51 +1,13 @@
 @use './../mixins' as *;
 
 .dish {
-  width: 100%;
-  height: calc(100dvh - var(--wrapper-padding));
-  border-radius: 1.6rem 1.6rem 0 0;
-  border: 0.1rem solid var(--beige);
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: var(--white);
-  background-image: url(./../../images/temp/menu-bg.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  transition: all 0.5s ease-in-out;
-  transform: translateY(100%);
-  touch-action: none;
-  will-change: transform;
-
-  position: fixed;
-  bottom: 0;
-  z-index: 600;
-
-  .menu--open & {
-    transform: translateY(0);
-  }
-
-  &::before {
-    content: "";
-    width: 5.6rem;
-    height: 0.6rem;
-    border-radius: 0.5rem;
-    background-color: var(--green-50);
-
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 
   &__inner {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 3.6rem 0;
     height: fit-content;
   }
-
-  &__head {}
 
   &__img {
     border-radius: 1.6rem;
