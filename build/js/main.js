@@ -22,22 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   class BottomPopup {
-    constructor(popupEl, lenisInstance) {
+    constructor(popupEl, lenis) {
       if (!popupEl) return;
-      this.popup = popupEl;
-      this.lenis = lenisInstance;
 
+      this.popup = popupEl;
+      this.lenis = lenis;
+
+      this.head = popupEl.querySelector('[data-popup-head]');
       this.startY = 0;
       this.lastY = 0;
-      this.startTime = 0;
       this.isDragging = false;
-      this.popupHeight = 0;
-      this.activePopup = null;
-      this.scrollable = null;
+      this.startTime = 0;
 
-      document.addEventListener('touchstart', this.onStart.bind(this), { passive: false });
-      document.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-      document.addEventListener('touchend', this.onEnd.bind(this));
+      this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+      this.head.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+      this.head.addEventListener('touchend', this.onEnd.bind(this));
     }
 
     isOpen() {
@@ -75,71 +74,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     onStart(e) {
-      const openPopup = BottomPopup.getOpen();
-      if (!openPopup) return;
-
-      this.activePopup = openPopup.popup;
-      this.scrollable = this.activePopup.querySelector('[data-popup-scroll]');
-
-      const canSwipe = !this.scrollable || this.scrollable.scrollTop === 0;
-      this.isDragging = canSwipe;
-
       this.startY = e.touches[0].clientY;
       this.lastY = this.startY;
       this.startTime = Date.now();
-      if (this.activePopup) this.activePopup.style.transition = 'none';
+      this.isDragging = true;
+
+      this.popup.style.transition = 'none';
     }
 
     onMove(e) {
-      if (!this.activePopup) return;
-      const touchY = e.touches[0].clientY;
-      let delta = touchY - this.startY;
-
-      // Скролл внутри
-      if (this.scrollable) {
-        const atTop = this.scrollable.scrollTop === 0;
-        const atBottom = this.scrollable.scrollHeight - this.scrollable.scrollTop === this.scrollable.clientHeight;
-
-        if ((delta > 0 && !atTop) || (delta < 0 && !atBottom)) {
-          this.isDragging = false;
-          return; // скроллим контент, не попап
-        }
-      }
-
       if (!this.isDragging) return;
+
+      const y = e.touches[0].clientY;
+      let delta = y - this.startY;
 
       if (delta < 0) delta = 0;
 
-      // добавляем "резиновость" при маленьком смещении
-      const resistance = delta > 100 ? 100 + (delta - 100) * 0.5 : delta;
-      this.activePopup.style.transform = `translateY(${resistance}px)`;
-      this.lastY = touchY;
+      const resistance =
+        delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+
+      this.popup.style.transform = `translateY(${resistance}px)`;
+      this.lastY = y;
 
       e.preventDefault();
     }
 
     onEnd() {
-      if (!this.isDragging || !this.activePopup) return;
-      this.isDragging = false;
+      if (!this.isDragging) return;
 
-      const delta = (this.lastY || this.startY) - this.startY;
-      const time = Math.max(Date.now() - this.startTime, 1);
-      const velocity = delta / time; // px/ms
+      const delta = this.lastY - this.startY;
+      const velocity = delta / Math.max(Date.now() - this.startTime, 1);
 
-      // инерционный расчёт: учитываем текущую позицию + скорость
-      const predicted = delta + velocity * 150; // множитель для инерции
+      const shouldClose =
+        delta > this.popup.offsetHeight * 0.3 ||
+        velocity > 0.6;
 
-      const shouldClose = predicted > this.activePopup.offsetHeight * 0.25 || velocity > 0.5;
+      this.popup.style.transition =
+        'transform 0.35s cubic-bezier(0.25, 1, 0.3, 1)';
 
       if (shouldClose) {
-        // быстрее закрытие при быстром flick
-        let duration = Math.max(0.05, Math.min(0.25, 0.25 - velocity));
-        this.close(duration);
+        this.close();
       } else {
-        // возвращаем на место с плавной анимацией
-        this.activePopup.style.transition = 'transform 0.3s cubic-bezier(0.25,0.8,0.25,1)';
-        this.activePopup.style.transform = 'translateY(0)';
+        this.popup.style.transform = 'translateY(0)';
       }
+
+      this.isDragging = false;
     }
 
     static register(key, instance) {

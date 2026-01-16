@@ -1,5 +1,6 @@
 <div id="dish" class="dish popup" data-lenis-prevent>
-  <div class="popup__area" data-popup-head="popupHead"></div>
+  <div class="popup__area" data-popup-head></div>
+
   <div class="popup__inner">
     <div class="dish__inner" data-popup-scroll>
       <div class="dish__head">
@@ -39,7 +40,6 @@
         <div class="dish__price">
           1500 ₽
         </div>
-
         <div class="dish__item">
           <div class="dish__title">
             Состав:
@@ -49,7 +49,6 @@
             «сырный», соус «bbq»
           </p>
         </div>
-
         <div class="dish__item">
           <div class="dish__title">
             КБЖУ на 100 г
@@ -81,7 +80,6 @@
             </div>
           </div>
         </div>
-
         <div class="dish__item">
           <div class="dish__title">
             Дополнительно:
@@ -98,7 +96,6 @@
             </li>
           </ul>
         </div>
-
         <div class="dish__item">
           <div class="dish__title">
             Можно убрать:
@@ -114,6 +111,53 @@
               Листья салата
             </li>
           </ul>
+        </div>
+        <div class="dish__btns">
+          <button class="dish__btn btn btn--green">
+            <i class="icon-like"></i>
+            По-кайфу!
+          </button>
+          <button class="dish__btn btn">
+            Оставить отзыв
+          </button>
+        </div>
+      </div>
+      <div class="banner">
+        <div class="container">
+          <div class="banner__inner">
+            <div class="layout__head">
+              <div class="layout__title">
+                <h2>
+                  Выгодное комбо
+                </h2>
+              </div>
+            </div>
+            <div class="layout__body">
+              <a class="banner__link" href="/">
+                <img src="./../../images/temp/banner-1.png" alt="">
+                <i class="icon-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="likeit">
+        <div class="container">
+          <div class="likeit__inner">
+
+            <div class="likeit__head">
+              <div class="likeit__title">
+                <h2>
+                  Рекомендуем к этому блюду
+                </h2>
+              </div>
+            </div>
+
+            <div class="likeit__items">
+              @@loop('./../elements/card-item.html', './data/card-items.json')
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

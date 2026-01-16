@@ -124,6 +124,14 @@ li::before {
 @font-face {
   font-family: Inter;
   font-display: swap;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
   src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
@@ -134,14 +142,6 @@ li::before {
   font-display: swap;
   src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
   font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
-  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
-  font-weight: 700;
   font-style: normal;
 }
 
@@ -162,18 +162,18 @@ li::before {
 }
 
 @font-face {
-  font-family: LeagueSpartan;
-  font-display: swap;
-  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
   font-family: Inter;
   font-display: swap;
   src: url("../fonts/Inter-Thin.woff2") format("woff2"), url("../fonts/Inter-Thin.woff") format("woff");
   font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -372,16 +372,16 @@ li::before {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Heavy.woff2") format("woff2"), url("../fonts/SFPro-Heavy.woff") format("woff");
-  font-weight: 800;
+  src: url("../fonts/SFPro-Bold.woff2") format("woff2"), url("../fonts/SFPro-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Bold.woff2") format("woff2"), url("../fonts/SFPro-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/SFPro-Heavy.woff2") format("woff2"), url("../fonts/SFPro-Heavy.woff") format("woff");
+  font-weight: 800;
   font-style: normal;
 }
 
@@ -420,16 +420,16 @@ li::before {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
-  font-weight: 200;
+  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
-  font-weight: 600;
+  src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
+  font-weight: 200;
   font-style: normal;
 }
 
@@ -495,6 +495,24 @@ li::before {
   src: url("../fonts/SofiaPro-UltraLight.woff2") format("woff2"), url("../fonts/SofiaPro-UltraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
+}
+
+[data-popup-scroll] {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+  overscroll-behavior: contain;
+  padding-bottom: 4rem;
+}
+
+[data-popup-scroll]::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Reset and base styles  */
@@ -1592,6 +1610,20 @@ p {
   color: var(--green);
 }
 
+.dish__btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.dish__btn {
+  gap: 0.8rem;
+}
+
+.dish__btn i {
+  font-size: 2.4rem;
+}
+
 .filter.popup {
   background-image: url(./../images/temp/full-bg.png);
 }
@@ -1955,8 +1987,12 @@ p {
   -ms-touch-action: none;
   touch-action: none;
   will-change: transform;
+  inset: 0;
   position: fixed;
+  top: auto;
   bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .popup--open .popup {
@@ -1966,23 +2002,33 @@ p {
 }
 
 .popup__inner {
-  overflow-y: auto;
-  padding-bottom: 4rem;
-  height: calc(100dvh - var(--wrapper-padding) - 3.6rem);
-}
-
-.popup__inner::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  padding: 0;
-  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: calc(100% - 3.6rem);
+  overflow: hidden;
 }
 
 .popup__area {
-  width: 100%;
-  height: 3.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+  width: 100%;
+  height: 3.6rem;
+  cursor: -webkit-grab;
+  cursor: grab;
   position: relative;
 }
 
@@ -2302,6 +2348,37 @@ p {
   position: absolute;
   bottom: 2.8rem;
   left: 2rem;
+}
+
+.banner__link {
+  display: block;
+  width: 100%;
+  height: 17.8rem;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner__link img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.banner__link i {
+  background-color: var(--white);
+  border-radius: 50%;
+  font-size: 3rem;
+  color: var(--green);
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.banner__link:hover i {
+  background-color: var(--green);
+  color: var(--white);
 }
 
 .hero__inner {
