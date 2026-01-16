@@ -27,21 +27,23 @@
   <div class="wrapper">
     <!-- Шапка -->
     <header id="header" class="header">
-  <div class="container">
-    <div class="header__inner">
+  <div class="header__wrap">
+    <div class="container">
+      <div class="header__inner">
 
-      <div class="header__content">
-        <button id="burger-btn" class="burger-btn" data-popup-target="menu">
-          Меню
-        </button>
-        <a class="logo" href="/">
-          <img src="./images/logo/logo.svg" alt="">
-        </a>
-        <button class="header__points">
-          1500
-        </button>
+        <div class="header__content">
+          <button id="burger-btn" class="burger-btn" data-popup-target="menu">
+            Меню
+          </button>
+          <a class="logo" href="/">
+            <img src="./images/logo/logo.svg" alt="">
+          </a>
+          <button class="header__points">
+            1500
+          </button>
+        </div>
+
       </div>
-
     </div>
   </div>
 </header>
@@ -801,9 +803,9 @@
     <!-- Отзывы -->
     <div id="reviews" class="reviews popup" data-lenis-prevent>
   <div class="popup__area" data-popup-head></div>
-  <div class="container">
-    <div class="popup__inner">
-      <div class="reviews__inner" data-popup-scroll>
+  <div class="popup__inner">
+    <div class="reviews__inner" data-popup-scroll>
+      <div class="container">
         <div class="reviews__head">
           <div class="reviews__cover">
             <img src="./images/temp/dish-img.png" alt="">
@@ -833,6 +835,8 @@
             </h4>
           </div>
         </div>
+      </div>
+      <div class="container">
         <div class="reviews__body">
           <div class="reviews__items">
             <div class="reviews__item">
@@ -1046,82 +1050,95 @@
 
     <main id="main" class="main">
 
-      <section id="hero" class="hero">
+      <section class="layout layout--first">
         <div class="container">
-          <div class="hero__inner">
-
+          <div class="layout__inner">
             <button class="btn btn--beige btn--arrow">
               Кнопка
               <i class="icon-chevron-right"></i>
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="hero" class="hero">
+        <div class="container">
+          <div class="hero__inner">
 
             <div class="hero__items">
-              <div class="hero__item">
+              <a href="#hookahs" data-id="hookahs" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/hookahs.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Кальяны
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#lunch" data-id="lunch" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/breakfast.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Завтрак
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#business-lunch" data-id="business-lunch" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/lunch.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Ланч
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#salads" data-id="salads" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/salads.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Салаты
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#osnovnoe" data-id="osnovnoe" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/hookahs.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Кальяны
+                  Горячее
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#zakuski" data-id="zakuski" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/breakfast.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Завтрак
+                  Закуски
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#napitki" data-id="napitki" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/lunch.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Ланч
+                  Напитки
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#napitki" data-id="napitki" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./images/temp/salads.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Салаты
+                  Напитки
                 </span>
-              </div>
+              </a>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section class="banners">
+        <div class="container">
+          <div class="banners__inner">
             <div class="hero__banners">
               <a class="hero__banners-link" href="/">
                 <img src="./images/temp/hero-banner-1.png" alt="">
@@ -1136,7 +1153,6 @@
                 <i class="icon-chevron-right"></i>
               </a>
             </div>
-
           </div>
         </div>
       </section>
@@ -1748,7 +1764,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="hookahs">
         <div class="container">
           <div class="layout__inner">
 
@@ -1928,7 +1944,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="lunch">
         <div class="container">
           <div class="layout__inner">
 
@@ -2082,7 +2098,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="business-lunch">
         <div class="container">
           <div class="layout__inner">
 
@@ -2364,7 +2380,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="salads">
         <div class="container">
           <div class="layout__inner">
 
@@ -2640,7 +2656,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="osnovnoe">
         <div class="container">
           <div class="layout__inner">
 
@@ -2651,32 +2667,23 @@
                 </h2>
               </div>
               <div class="layout__nav">
-                <div class="layout__nav-item active">
+                <button class="layout__nav-item active" type="button" data-nav="hot">
                   Горячее
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="pasta">
                   Паста
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="sides">
                   Гарниры
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="soups">
                   Супы
-                </div>
-                <div class="layout__nav-item">
-                  Паста
-                </div>
-                <div class="layout__nav-item">
-                  Гарниры
-                </div>
-                <div class="layout__nav-item">
-                  Супы
-                </div>
+                </button>
               </div>
             </div>
 
             <div class="layout__items">
-              <div class="card" data-popup-target="dish">
+              <div class="card" data-popup-target="dish" data-dish="hot">
   <div class="card__head">
     <div class="card__tags">
       <div class="card__tags-item card__tags-top">
@@ -2740,7 +2747,7 @@
       </div>
     </div>
   </div>
-</div><div class="card" data-popup-target="dish">
+</div><div class="card" data-popup-target="dish" data-dish="hot">
   <div class="card__head">
     <div class="card__tags">
       <div class="card__tags-item card__tags-top">
@@ -2804,7 +2811,7 @@
       </div>
     </div>
   </div>
-</div><div class="card" data-popup-target="dish">
+</div><div class="card" data-popup-target="dish" data-dish="pasta">
   <div class="card__head">
     <div class="card__tags">
       <div class="card__tags-item card__tags-top">
@@ -2868,7 +2875,263 @@
       </div>
     </div>
   </div>
-</div><div class="card" data-popup-target="dish">
+</div><div class="card" data-popup-target="dish" data-dish="pasta">
+  <div class="card__head">
+    <div class="card__tags">
+      <div class="card__tags-item card__tags-top">
+        Топчик
+      </div>
+      <div class="card__tags-item card__tags-hot">
+        Островато
+      </div>
+    </div>
+    <div class="card__img">
+      <img src="./images/temp/salads-4.png" alt="">
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__content">
+      <div class="card__rating">
+        <div class="card__rating-text">
+          4.8
+        </div>
+        <i class="icon-star-fill"></i>
+      </div>
+      <div class="card__name">
+        Домашний омлет с моцареллой и чоризо
+      </div>
+      <div class="card__weight">
+        380/30 Г
+      </div>
+      <div class="card__items">
+        <div class="card__item">
+          <i class="icon-calories"></i>
+          <div class="card__item-text">
+            120 Ккал
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-protein"></i>
+          <div class="card__item-text">
+            Б-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-fat"></i>
+          <div class="card__item-text">
+            Ж-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-carbohydrates"></i>
+          <div class="card__item-text">
+            У-65г
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__foot">
+      <div class="card__price">
+        500 ₽
+      </div>
+      <div class="card__like" onclick="event.stopPropagation(); alert('Вы добавили в понравившееся!'); return false;">
+        <i class="icon-like"></i>
+      </div>
+    </div>
+  </div>
+</div><div class="card" data-popup-target="dish" data-dish="sides">
+  <div class="card__head">
+    <div class="card__tags">
+      <div class="card__tags-item card__tags-top">
+        Топчик
+      </div>
+      <div class="card__tags-item card__tags-hot">
+        Островато
+      </div>
+    </div>
+    <div class="card__img">
+      <img src="./images/temp/salads-1.png" alt="">
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__content">
+      <div class="card__rating">
+        <div class="card__rating-text">
+          4.8
+        </div>
+        <i class="icon-star-fill"></i>
+      </div>
+      <div class="card__name">
+        Домашний омлет с моцареллой и чоризо
+      </div>
+      <div class="card__weight">
+        380/30 Г
+      </div>
+      <div class="card__items">
+        <div class="card__item">
+          <i class="icon-calories"></i>
+          <div class="card__item-text">
+            120 Ккал
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-protein"></i>
+          <div class="card__item-text">
+            Б-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-fat"></i>
+          <div class="card__item-text">
+            Ж-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-carbohydrates"></i>
+          <div class="card__item-text">
+            У-65г
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__foot">
+      <div class="card__price">
+        500 ₽
+      </div>
+      <div class="card__like" onclick="event.stopPropagation(); alert('Вы добавили в понравившееся!'); return false;">
+        <i class="icon-like"></i>
+      </div>
+    </div>
+  </div>
+</div><div class="card" data-popup-target="dish" data-dish="sides">
+  <div class="card__head">
+    <div class="card__tags">
+      <div class="card__tags-item card__tags-top">
+        Топчик
+      </div>
+      <div class="card__tags-item card__tags-hot">
+        Островато
+      </div>
+    </div>
+    <div class="card__img">
+      <img src="./images/temp/salads-2.png" alt="">
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__content">
+      <div class="card__rating">
+        <div class="card__rating-text">
+          4.8
+        </div>
+        <i class="icon-star-fill"></i>
+      </div>
+      <div class="card__name">
+        Домашний омлет с моцареллой и чоризо
+      </div>
+      <div class="card__weight">
+        380/30 Г
+      </div>
+      <div class="card__items">
+        <div class="card__item">
+          <i class="icon-calories"></i>
+          <div class="card__item-text">
+            120 Ккал
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-protein"></i>
+          <div class="card__item-text">
+            Б-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-fat"></i>
+          <div class="card__item-text">
+            Ж-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-carbohydrates"></i>
+          <div class="card__item-text">
+            У-65г
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__foot">
+      <div class="card__price">
+        500 ₽
+      </div>
+      <div class="card__like" onclick="event.stopPropagation(); alert('Вы добавили в понравившееся!'); return false;">
+        <i class="icon-like"></i>
+      </div>
+    </div>
+  </div>
+</div><div class="card" data-popup-target="dish" data-dish="soups">
+  <div class="card__head">
+    <div class="card__tags">
+      <div class="card__tags-item card__tags-top">
+        Топчик
+      </div>
+      <div class="card__tags-item card__tags-hot">
+        Островато
+      </div>
+    </div>
+    <div class="card__img">
+      <img src="./images/temp/salads-3.png" alt="">
+    </div>
+  </div>
+  <div class="card__body">
+    <div class="card__content">
+      <div class="card__rating">
+        <div class="card__rating-text">
+          4.8
+        </div>
+        <i class="icon-star-fill"></i>
+      </div>
+      <div class="card__name">
+        Домашний омлет с моцареллой и чоризо
+      </div>
+      <div class="card__weight">
+        380/30 Г
+      </div>
+      <div class="card__items">
+        <div class="card__item">
+          <i class="icon-calories"></i>
+          <div class="card__item-text">
+            120 Ккал
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-protein"></i>
+          <div class="card__item-text">
+            Б-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-fat"></i>
+          <div class="card__item-text">
+            Ж-10г
+          </div>
+        </div>
+        <div class="card__item">
+          <i class="icon-carbohydrates"></i>
+          <div class="card__item-text">
+            У-65г
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__foot">
+      <div class="card__price">
+        500 ₽
+      </div>
+      <div class="card__like" onclick="event.stopPropagation(); alert('Вы добавили в понравившееся!'); return false;">
+        <i class="icon-like"></i>
+      </div>
+    </div>
+  </div>
+</div><div class="card" data-popup-target="dish" data-dish="soups">
   <div class="card__head">
     <div class="card__tags">
       <div class="card__tags-item card__tags-top">
@@ -2939,7 +3202,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="zakuski">
         <div class="container">
           <div class="layout__inner">
 
@@ -3223,7 +3486,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="napitki">
         <div class="container">
           <div class="layout__inner">
 
@@ -3373,7 +3636,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="napitki">
         <div class="container">
           <div class="layout__inner">
 

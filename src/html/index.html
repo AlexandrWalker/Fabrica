@@ -21,82 +21,95 @@
 
     <main id="main" class="main">
 
-      <section id="hero" class="hero">
+      <section class="layout layout--first">
         <div class="container">
-          <div class="hero__inner">
-
+          <div class="layout__inner">
             <button class="btn btn--beige btn--arrow">
               Кнопка
               <i class="icon-chevron-right"></i>
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="hero" class="hero">
+        <div class="container">
+          <div class="hero__inner">
 
             <div class="hero__items">
-              <div class="hero__item">
+              <a href="#hookahs" data-id="hookahs" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/hookahs.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Кальяны
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#lunch" data-id="lunch" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/breakfast.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Завтрак
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#business-lunch" data-id="business-lunch" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/lunch.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Ланч
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#salads" data-id="salads" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/salads.svg" alt="">
                 </div>
                 <span class="hero__item-text">
                   Салаты
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#osnovnoe" data-id="osnovnoe" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/hookahs.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Кальяны
+                  Горячее
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#zakuski" data-id="zakuski" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/breakfast.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Завтрак
+                  Закуски
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#napitki" data-id="napitki" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/lunch.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Ланч
+                  Напитки
                 </span>
-              </div>
-              <div class="hero__item">
+              </a>
+              <a href="#napitki" data-id="napitki" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/salads.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Салаты
+                  Напитки
                 </span>
-              </div>
+              </a>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section class="banners">
+        <div class="container">
+          <div class="banners__inner">
             <div class="hero__banners">
               <a class="hero__banners-link" href="/">
                 <img src="./../images/temp/hero-banner-1.png" alt="">
@@ -111,7 +124,6 @@
                 <i class="icon-chevron-right"></i>
               </a>
             </div>
-
           </div>
         </div>
       </section>
@@ -211,7 +223,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="hookahs">
         <div class="container">
           <div class="layout__inner">
 
@@ -231,7 +243,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="lunch">
         <div class="container">
           <div class="layout__inner">
 
@@ -257,7 +269,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="business-lunch">
         <div class="container">
           <div class="layout__inner">
 
@@ -283,7 +295,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="salads">
         <div class="container">
           <div class="layout__inner">
 
@@ -303,7 +315,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="osnovnoe">
         <div class="container">
           <div class="layout__inner">
 
@@ -314,39 +326,30 @@
                 </h2>
               </div>
               <div class="layout__nav">
-                <div class="layout__nav-item active">
+                <button class="layout__nav-item active" type="button" data-nav="hot">
                   Горячее
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="pasta">
                   Паста
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="sides">
                   Гарниры
-                </div>
-                <div class="layout__nav-item">
+                </button>
+                <button class="layout__nav-item" type="button" data-nav="soups">
                   Супы
-                </div>
-                <div class="layout__nav-item">
-                  Паста
-                </div>
-                <div class="layout__nav-item">
-                  Гарниры
-                </div>
-                <div class="layout__nav-item">
-                  Супы
-                </div>
+                </button>
               </div>
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items-salads.json')
+              @@loop('./elements/card-item-osnovnoe.html', './data/card-items-osnovnoe.json')
             </div>
 
           </div>
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="zakuski">
         <div class="container">
           <div class="layout__inner">
 
@@ -374,7 +377,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="napitki">
         <div class="container">
           <div class="layout__inner">
 
@@ -402,7 +405,7 @@
         </div>
       </section>
 
-      <section class="layout">
+      <section class="layout" id="napitki">
         <div class="container">
           <div class="layout__inner">
 
