@@ -2,61 +2,16 @@
 
 .branch {
 
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  .layout {
 
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+    &__block {
 
-  &__wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+      &-text {
 
-  &__block {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  &__text {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 36rem;
-
-    a {
-      font-weight: 900;
-      font-size: 1.4rem;
-      line-height: 120%;
-      color: var(--green);
-      text-decoration: underline;
-      margin-left: 0.5rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      color: var(--green);
-    }
-  }
-
-  &__map {
-    border-radius: 1.2rem;
-    overflow: hidden;
-    width: 100%;
-    height: 35rem;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+        p {
+          color: var(--green);
+        }
+      }
     }
   }
 }

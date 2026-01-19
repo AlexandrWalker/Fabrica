@@ -1,0 +1,22 @@
+@use './../mixins' as *;
+
+.contacts {
+
+  .layout {
+
+    &__block {
+
+      &-text {
+
+        span {
+          font-size: 1rem;
+        }
+
+        a {
+          margin: 0;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

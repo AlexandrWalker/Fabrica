@@ -1,0 +1,19 @@
+@use './../mixins' as *;
+
+.rules {
+
+  .layout {
+
+    &__inner {
+      gap: 1.5rem;
+    }
+
+    &__head {
+      gap: 2rem;
+    }
+
+    &__body {
+      gap: 1.5rem;
+    }
+  }
+}

@@ -166,7 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
       filter: new BottomPopup(document.getElementById('filter'), window.lenis),
       branch: new BottomPopup(document.getElementById('branch'), window.lenis),
       reviews: new BottomPopup(document.getElementById('reviews'), window.lenis),
-      reviewsWrite: new BottomPopup(document.getElementById('reviewsWrite'), window.lenis)
+      reviewsWrite: new BottomPopup(document.getElementById('reviewsWrite'), window.lenis),
+      rules: new BottomPopup(document.getElementById('rules'), window.lenis),
+      loyalty: new BottomPopup(document.getElementById('loyalty'), window.lenis),
+      catering: new BottomPopup(document.getElementById('catering'), window.lenis),
+      seating: new BottomPopup(document.getElementById('seating'), window.lenis),
+      slang: new BottomPopup(document.getElementById('slang'), window.lenis),
+      contacts: new BottomPopup(document.getElementById('contacts'), window.lenis)
     };
 
     for (let key in popups) {

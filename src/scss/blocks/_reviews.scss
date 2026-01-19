@@ -2,82 +2,23 @@
 
 .reviews {
 
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  .layout {
 
-  &__head {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+    &__head {
+      gap: 2rem;
 
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  &__cover {
-    width: 100vw;
-    margin-left: calc(var(--container-padding) * -1);
-    border-radius: 1.6rem;
-    overflow: hidden;
-  }
-
-  &__btn {
-    font-weight: 700;
-  }
-
-  &__wrap {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  &__rating {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
-    padding: 0 1.5rem;
-    width: fit-content;
-    height: 3rem;
-    border-radius: 1.6rem;
-    background-color: var(--orange-light);
-
-    color: var(--white);
-
-    &-text {
-      font-weight: 700;
-      font-size: 1.2rem;
-      line-height: 100%;
-    }
-
-    i {
-      font-size: 1.2rem;
+      &-cover {
+        width: 100vw;
+        height: 26.8rem;
+        margin-left: calc(var(--container-padding) * -1);
+      }
     }
   }
 
-  &__counts {
+  &__items {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
-    padding: 0 1.5rem;
-    width: fit-content;
-    height: 3rem;
-    border-radius: 1.6rem;
-    background-color: var(--bg);
-
-    font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 100%;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   &__item {
@@ -92,9 +33,10 @@
     }
 
     &-name {
-      font-weight: 700;
-      font-size: 1.4rem;
-      line-height: 120%;
+
+      * {
+        font-weight: 700;
+      }
     }
 
     &-rating {
@@ -115,7 +57,7 @@
 
     &-text {
 
-      p {
+      * {
         font-size: 1.4rem;
       }
     }
@@ -145,20 +87,10 @@
     flex-direction: column;
     gap: 2rem;
   }
+}
 
-  &-write {
-    background-image: none;
+.reviews-write {
+  background-image: none;
 
-    &__rating {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1rem;
-
-      i {
-        font-size: 3rem;
-        color: var(--orange-light);
-      }
-    }
-  }
+  .layout {}
 }

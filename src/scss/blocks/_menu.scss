@@ -2,9 +2,7 @@
 
 .menu {
 
-  &__inner {
-    display: flex;
-    flex-direction: column;
+  .layout__inner {
     gap: 1.5rem;
   }
 

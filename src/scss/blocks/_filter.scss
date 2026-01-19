@@ -4,20 +4,6 @@
     background-image: url(./../../images/temp/full-bg.png);
   }
 
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-bottom: 4rem;
-    height: fit-content;
-  }
-
-  &__body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
   &__items {
     display: flex;
     flex-direction: column;
@@ -73,9 +59,5 @@
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
-  }
-
-  &__btn {
-    margin-top: 1rem;
   }
 }

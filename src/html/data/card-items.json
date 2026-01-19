@@ -1,6 +1,5 @@
 [
   {
-    "link": "/",
     "img": "./../../images/temp/card-burger.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -18,7 +17,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/card-burger.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -36,7 +34,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/card-burger.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -54,7 +51,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/card-burger.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",

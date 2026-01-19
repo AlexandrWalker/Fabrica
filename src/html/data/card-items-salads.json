@@ -1,6 +1,5 @@
 [
   {
-    "link": "/",
     "img": "./../../images/temp/salads-1.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -15,7 +14,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/salads-2.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -30,7 +28,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/salads-3.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -45,7 +42,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/salads-4.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",

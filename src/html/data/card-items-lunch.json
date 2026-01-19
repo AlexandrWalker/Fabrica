@@ -1,6 +1,5 @@
 [
   {
-    "link": "/",
     "img": "./../../images/temp/lunch-1.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",
@@ -18,7 +17,6 @@
     "price": "500 ₽"
   },
   {
-    "link": "/",
     "img": "./../../images/temp/lunch-2.png",
     "tags-top": "Топчик",
     "tags-hot": "Островато",

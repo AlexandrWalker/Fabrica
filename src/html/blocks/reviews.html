@@ -1,140 +1,52 @@
 <div id="reviews" class="reviews popup" data-lenis-prevent>
   <div class="popup__area" data-popup-head></div>
   <div class="popup__inner">
-    <div class="reviews__inner" data-popup-scroll>
+
+    <div class="layout" data-popup-scroll>
       <div class="container">
-        <div class="reviews__head">
-          <div class="reviews__cover">
-            <img src="./../../images/temp/dish-img.png" alt="">
-          </div>
-          <div class="reviews__btn btn">
-            Оставить отзыв
-          </div>
-          <div class="layout__title">
-            <h2 class="h2">
-              Отзывы
-            </h2>
-          </div>
-          <div class="reviews__wrap">
-            <div class="reviews__rating">
-              <div class="reviews__rating-text">
-                4.8
-              </div>
-              <i class="icon-star-fill"></i>
+        <div class="layout__inner">
+
+          <div class="layout__head">
+            <div class="layout__head-cover">
+              <img src="./../../images/temp/dish-img.png" alt="">
             </div>
-            <div class="reviews__counts">
-              Отзывы: <span>200</span>
+            <div class="layout__btn btn">
+              Оставить отзыв
             </div>
-          </div>
-          <div class="reviews__name">
-            <h4 class="h4">
-              Домашний омлет с моцареллой и чоризо
-            </h4>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="reviews__body">
-          <div class="reviews__items">
-            <div class="reviews__item">
-              <div class="reviews__item-wrap">
-                <div class="reviews__item-name">
-                  Василий Петров
-                </div>
-                <div class="reviews__item-date">
-                  12.10.2025
-                </div>
-                <div class="reviews__item-rating">
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                </div>
-              </div>
-              <div class="reviews__item-text">
-                <p>
-                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
-                  и
-                  Бифштекс с яйцом просто шикарный!
-                </p>
-              </div>
-              <div class="reviews__item-imgs">
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
-              </div>
+            <div class="layout__head-title">
+              <h2 class="h2">
+                Отзывы
+              </h2>
             </div>
-            <div class="reviews__item">
-              <div class="reviews__item-wrap">
-                <div class="reviews__item-name">
-                  Василий Петров
+            <div class="layout__content">
+              <div class="layout__content-wrap">
+                <div class="layout__rating">
+                  <div class="layout__rating-text">
+                    4.8
+                  </div>
+                  <i class="icon-star-fill"></i>
                 </div>
-                <div class="reviews__item-date">
-                  12.10.2025
-                </div>
-                <div class="reviews__item-rating">
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
+                <div class="layout__counts">
+                  Отзывы: <span>200</span>
                 </div>
               </div>
-              <div class="reviews__item-text">
-                <p>
-                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
-                  и
-                  Бифштекс с яйцом просто шикарный!
-                </p>
-              </div>
-              <div class="reviews__item-imgs">
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
-              </div>
-            </div>
-            <div class="reviews__item">
-              <div class="reviews__item-wrap">
-                <div class="reviews__item-name">
-                  Василий Петров
-                </div>
-                <div class="reviews__item-date">
-                  12.10.2025
-                </div>
-                <div class="reviews__item-rating">
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                  <i class="icon-star-fill"></i>
-                </div>
-              </div>
-              <div class="reviews__item-text">
-                <p>
-                  Лучшая кальянная в городе, все супер - сервис, еда, персонал, уже стали как друзья❤️🤗 Греческий салат
-                  и
-                  Бифштекс с яйцом просто шикарный!
-                </p>
-              </div>
-              <div class="reviews__item-imgs">
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
-                <div class="reviews__item-img">
-                  <img src="./../../images/temp/reviews-img-1.png" alt="">
-                </div>
+              <div class="layout__content-name">
+                <h4>
+                  Домашний омлет с моцареллой и чоризо
+                </h4>
               </div>
             </div>
           </div>
+
+          <div class="layout__body">
+            <div class="reviews__items">
+              @@loop('./../elements/reviews-item.html', './data/reviews-items.json')
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+
   </div>
 </div>

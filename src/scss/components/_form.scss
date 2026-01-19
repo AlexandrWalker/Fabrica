@@ -70,4 +70,16 @@
       display: none;
     }
   }
+
+  &-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    i {
+      font-size: 3rem;
+      color: var(--orange-light);
+    }
+  }
 }
