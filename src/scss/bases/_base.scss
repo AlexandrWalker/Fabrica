@@ -11,6 +11,10 @@ html {
   @include domd {
     --refRes: 1920;
   }
+
+  &.popup-open {
+    overflow: hidden;
+  }
 }
 
 body {

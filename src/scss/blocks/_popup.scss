@@ -23,6 +23,10 @@
   left: 0;
   right: 0;
 
+  &.is-under {
+    pointer-events: none;
+  }
+
   .popup--open & {
     transform: translateY(0);
   }
