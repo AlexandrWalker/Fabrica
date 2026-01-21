@@ -18,6 +18,7 @@
   line-height: 120%;
   text-align: center;
   color: var(--btn-color);
+  pointer-events: all;
 
   i {
     font-size: var(--btn-icon-size);
@@ -55,5 +56,15 @@
 
     justify-content: space-between;
     padding: 1rem 1rem 1rem 1.5rem;
+  }
+
+  &--remove {
+    --btn-color: var(--red);
+  }
+
+  &:disabled {
+    --btn-background: var(--green-50);
+
+    pointer-events: none;
   }
 }

@@ -1,0 +1,84 @@
+#profile {
+
+  .layout {
+
+    &__head {
+
+      &-title {
+
+        * {
+
+          .login & {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.profile {
+
+  .layout {
+
+    &__head {
+
+      &-content {
+        display: none;
+
+        .login & {
+          display: flex;
+        }
+      }
+    }
+
+    &__btns {
+      grid-template-columns: 1fr;
+    }
+
+    &__notice {
+
+      .login & {
+        display: none;
+      }
+    }
+  }
+
+  .menu {
+
+    &__item {
+      pointer-events: none;
+
+      .login & {
+        pointer-events: all;
+      }
+
+      &-icon {
+
+        i::before {
+          opacity: 0.5;
+
+          .login & {
+            opacity: 1;
+          }
+        }
+      }
+
+      &-title {
+
+        * {
+          opacity: 0.5;
+          color: var(--black);
+
+          .login & {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    font-weight: 700;
+  }
+}

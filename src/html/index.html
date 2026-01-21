@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="">
 @@include('blocks/head.html', {"title": "Фабрика"})
 
 <body>
@@ -30,6 +30,36 @@
     @@include('./blocks/slang.html')
     <!-- Контакты -->
     @@include('./blocks/contacts.html')
+    <!-- Персональные предложения -->
+    @@include('./blocks/offers.html')
+    <!-- Персональные предложения -->
+    @@include('./blocks/offers-inner.html')
+    <!-- Акции -->
+    @@include('./blocks/shares.html')
+    <!-- Профиль -->
+    @@include('./blocks/profile.html')
+    <!-- Профиль -->
+    @@include('./blocks/profile-card.html')
+    <!-- Мои данные -->
+    @@include('./blocks/profile-details.html')
+    <!-- Регистрация -->
+    @@include('./blocks/reg.html')
+    <!-- Регистрация, ввод кода -->
+    @@include('./blocks/reg-code.html')
+    <!-- Карты -->
+    @@include('./blocks/cards.html')
+    <!-- Добавить карту -->
+    @@include('./blocks/cards-add.html')
+    <!-- Выбрать филиал -->
+    @@include('./blocks/branch-select.html')
+    <!-- Добавить адрес -->
+    @@include('./blocks/address-add.html')
+    <!-- Редактировать адрес -->
+    @@include('./blocks/address-edit.html')
+    <!-- Афиша -->
+    @@include('./blocks/afisha.html')
+    <!-- По кайфу! -->
+    @@include('./blocks/favorite.html')
     <!-- main -->
     <main id="main" class="main">
 
@@ -123,18 +153,18 @@
         <div class="container">
           <div class="banners__inner">
             <div class="hero__banners">
-              <a class="hero__banners-link" href="/">
+              <div class="hero__banners-link" data-popup-target="offersInner">
                 <img src="./../images/temp/hero-banner-1.png" alt="">
                 <i class="icon-chevron-right"></i>
-              </a>
-              <a class="hero__banners-link" href="/">
+              </div>
+              <div class="hero__banners-link" data-popup-target="offersInner">
                 <img src="./../images/temp/hero-banner-2.png" alt="">
                 <i class="icon-chevron-right"></i>
-              </a>
-              <a class="hero__banners-link" href="/">
+              </div>
+              <div class="hero__banners-link" data-popup-target="offersInner">
                 <img src="./../images/temp/hero-banner-3.png" alt="">
                 <i class="icon-chevron-right"></i>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -153,7 +183,7 @@
             </div>
 
             <div class="afisha__items">
-              <div class="afisha__item">
+              <div class="afisha__item" data-popup-target="afisha">
                 <div class="afisha__item-img">
                   <img src="./../images/temp/afisha-1.png" alt="">
                 </div>
@@ -162,7 +192,7 @@
                 </div>
                 <i class="icon-chevron-right"></i>
               </div>
-              <div class="afisha__item">
+              <div class="afisha__item" data-popup-target="afisha">
                 <div class="afisha__item-img">
                   <img src="./../images/temp/afisha-2.png" alt="">
                 </div>
@@ -171,7 +201,7 @@
                 </div>
                 <i class="icon-chevron-right"></i>
               </div>
-              <div class="afisha__item">
+              <div class="afisha__item" data-popup-target="afisha">
                 <div class="afisha__item-img">
                   <img src="./../images/temp/afisha-1.png" alt="">
                 </div>
@@ -180,7 +210,7 @@
                 </div>
                 <i class="icon-chevron-right"></i>
               </div>
-              <div class="afisha__item">
+              <div class="afisha__item" data-popup-target="afisha">
                 <div class="afisha__item-img">
                   <img src="./../images/temp/afisha-2.png" alt="">
                 </div>

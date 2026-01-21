@@ -1,0 +1,11 @@
+@use './../mixins' as *;
+
+.address {
+
+  .form {
+
+    &-foot {
+      gap: 0.8rem;
+    }
+  }
+}

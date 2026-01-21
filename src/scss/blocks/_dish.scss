@@ -15,6 +15,16 @@
 
     &__block {
       gap: 2rem;
+
+      &-title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+
+        p {
+          font-size: 1rem;
+        }
+      }
     }
   }
 }

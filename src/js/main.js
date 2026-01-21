@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return this.popup?.dataset?.open === 'true';
       }
 
+      // --- Запуск попапа ---
       open() {
         if (!this.popup || this.isOpen()) return;
 
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      // --- Закрытие попапа ---
       close(duration = 0.3) {
         if (!this.popup || !this.isOpen()) return;
 
@@ -114,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      // --- Закрытие попапа повторным нажатием ---
       toggle() {
         if (this.isOpen()) this.close();
         else this.open();
@@ -253,7 +256,22 @@ document.addEventListener('DOMContentLoaded', () => {
       catering: new BottomPopup(document.getElementById('catering'), window.lenis),
       seating: new BottomPopup(document.getElementById('seating'), window.lenis),
       slang: new BottomPopup(document.getElementById('slang'), window.lenis),
-      contacts: new BottomPopup(document.getElementById('contacts'), window.lenis)
+      contacts: new BottomPopup(document.getElementById('contacts'), window.lenis),
+      offers: new BottomPopup(document.getElementById('offers'), window.lenis),
+      offersInner: new BottomPopup(document.getElementById('offersInner'), window.lenis),
+      shares: new BottomPopup(document.getElementById('shares'), window.lenis),
+      profile: new BottomPopup(document.getElementById('profile'), window.lenis),
+      profileCard: new BottomPopup(document.getElementById('profileCard'), window.lenis),
+      profileDetails: new BottomPopup(document.getElementById('profileDetails'), window.lenis),
+      reg: new BottomPopup(document.getElementById('reg'), window.lenis),
+      regCode: new BottomPopup(document.getElementById('regCode'), window.lenis),
+      cards: new BottomPopup(document.getElementById('cards'), window.lenis),
+      cardsAdd: new BottomPopup(document.getElementById('cardsAdd'), window.lenis),
+      branchSelect: new BottomPopup(document.getElementById('branchSelect'), window.lenis),
+      addressAdd: new BottomPopup(document.getElementById('addressAdd'), window.lenis),
+      addressEdit: new BottomPopup(document.getElementById('addressEdit'), window.lenis),
+      afisha: new BottomPopup(document.getElementById('afisha'), window.lenis),
+      favorite: new BottomPopup(document.getElementById('favorite'), window.lenis)
     };
 
     for (let key in popups) BottomPopup.register(key, popups[key]);
@@ -287,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
+  /**
+   * Фиксация главной навигации страницы
+   */
   (() => {
     const wrapper = document.querySelector('.hero__items');
     const items = [...wrapper.querySelectorAll('.hero__item[data-id]')];
@@ -341,6 +362,86 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     sections.forEach(section => observer.observe(section));
+  })();
+
+  /**
+   * Меняет класс у тега html на login
+   */
+  (() => {
+    const loginBtn = document.querySelector('[data-log="login"]');
+    const logoutBtn = document.querySelector('[data-log="logout"]');
+
+    loginBtn.addEventListener('click', () => {
+      document.documentElement.classList.remove('logout');
+      document.documentElement.classList.add(loginBtn.dataset.log);
+    })
+
+    logoutBtn.addEventListener('click', () => {
+      document.documentElement.classList.remove('login');
+      document.documentElement.classList.add(logoutBtn.dataset.log);
+    })
+  })();
+
+  /**
+   * Шагово меняем фокус у инпута при вводе кода при регистрации
+   */
+  (() => {
+    const regCode = document.getElementById('regCode');
+    const inputs = regCode.querySelectorAll('.form-code');
+    const btn = regCode.querySelector('.btn');
+
+    // Функция для проверки, все ли поля заполнены
+    const checkInputs = () => {
+      const allFilled = Array.from(inputs).every(input => input.value.length > 0);
+      btn.disabled = !allFilled;
+    };
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        // Ограничиваем ввод только одной цифрой (на случай ошибок или автозаполнения)
+        if (e.target.value.length > 1) {
+          e.target.value = e.target.value.slice(-1);
+        }
+
+        if (e.target.value) {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          } else {
+            btn.focus();
+          }
+        }
+
+        checkInputs(); // Проверяем состояние кнопки при каждом вводе
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+        // Вызываем проверку после нажатия клавиши (с небольшой задержкой, чтобы значение обновилось)
+        setTimeout(checkInputs, 0);
+      });
+
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const data = e.clipboardData.getData('text').trim().slice(0, inputs.length);
+        if (data) {
+          data.split('').forEach((char, i) => {
+            if (inputs[i]) inputs[i].value = char;
+          });
+
+          if (data.length === inputs.length) {
+            btn.focus();
+          } else {
+            inputs[data.length].focus();
+          }
+        }
+        checkInputs(); // Проверяем состояние после вставки
+      });
+    });
+
+    // Инициализация: проверяем состояние кнопки при загрузке (если поля вдруг предзаполнены)
+    checkInputs();
   })();
 
 });

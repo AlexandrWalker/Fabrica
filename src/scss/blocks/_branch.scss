@@ -8,8 +8,36 @@
 
       &-text {
 
-        p {
+        span {
           color: var(--green);
+        }
+      }
+    }
+  }
+}
+
+#branchSelect {
+
+  .layout {
+
+    &__content {
+
+      .layout__block-text {
+
+        * {
+          font-weight: 700;
+          color: var(--green);
+        }
+      }
+    }
+
+    &__block {
+
+      &-text {
+
+        * {
+          font-weight: 500;
+          font-size: 1.4rem;
         }
       }
     }

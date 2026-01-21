@@ -2,6 +2,10 @@
 
 .menu {
 
+  &.popup {
+    background-image: url(./../../images/temp/menu-bg.png);
+  }
+
   .layout__inner {
     gap: 1.5rem;
   }
@@ -23,12 +27,10 @@
       height: 5rem;
       background-color: var(--bg);
       border-radius: 5rem;
+      flex-shrink: 0;
 
       font-size: 5rem;
-
-      i {
-        color: var(--green);
-      }
+      color: var(--green);
     }
 
     &-title {
