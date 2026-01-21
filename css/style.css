@@ -109,24 +109,8 @@ li:last-child {
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-Black.woff2") format("woff2"), url("../fonts/Inter-Black.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
   src: url("../fonts/Inter-ExtraBold.woff2") format("woff2"), url("../fonts/Inter-ExtraBold.woff") format("woff");
   font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
-  src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
-  font-weight: 300;
   font-style: normal;
 }
 
@@ -141,24 +125,8 @@ li:last-child {
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
   src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
   font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter;
-  font-display: swap;
-  src: url("../fonts/Inter-Regular.woff2") format("woff2"), url("../fonts/Inter-Regular.woff") format("woff");
-  font-weight: 400;
   font-style: normal;
 }
 
@@ -179,10 +147,26 @@ li:last-child {
 }
 
 @font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Regular.woff2") format("woff2"), url("../fonts/Inter-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
-  font-weight: 900;
+  src: url("../fonts/LeagueSpartan-ExtraBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraBold.woff") format("woff");
+  font-weight: 800;
   font-style: normal;
 }
 
@@ -199,22 +183,6 @@ li:last-child {
   font-display: swap;
   src: url("../fonts/LeagueSpartan-ExtraLight.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraLight.woff") format("woff");
   font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: LeagueSpartan;
-  font-display: swap;
-  src: url("../fonts/LeagueSpartan-ExtraBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: LeagueSpartan;
-  font-display: swap;
-  src: url("../fonts/LeagueSpartan-Light.woff2") format("woff2"), url("../fonts/LeagueSpartan-Light.woff") format("woff");
-  font-weight: 300;
   font-style: normal;
 }
 
@@ -243,14 +211,6 @@ li:last-child {
 }
 
 @font-face {
-  font-family: LeagueSpartan;
-  font-display: swap;
-  src: url("../fonts/LeagueSpartan-Thin.woff2") format("woff2"), url("../fonts/LeagueSpartan-Thin.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
   font-family: PlayfairDisplay;
   font-display: swap;
   src: url("../fonts/PlayfairDisplay-Black.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Black.woff") format("woff");
@@ -259,18 +219,42 @@ li:last-child {
 }
 
 @font-face {
-  font-family: PlayfairDisplay;
+  font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/PlayfairDisplay-ExtraBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-ExtraBold.woff") format("woff");
-  font-weight: 800;
+  src: url("../fonts/LeagueSpartan-Black.woff2") format("woff2"), url("../fonts/LeagueSpartan-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: PlayfairDisplay;
+  font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
+  src: url("../fonts/LeagueSpartan-Light.woff2") format("woff2"), url("../fonts/LeagueSpartan-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LeagueSpartan;
+  font-display: swap;
+  src: url("../fonts/LeagueSpartan-Thin.woff2") format("woff2"), url("../fonts/LeagueSpartan-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src: url("../fonts/Inter-Black.woff2") format("woff2"), url("../fonts/Inter-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -291,14 +275,6 @@ li:last-child {
 }
 
 @font-face {
-  font-family: PlayfairDisplay;
-  font-display: swap;
-  src: url("../fonts/PlayfairDisplay-SemiBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-SemiBold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
   font-family: SFCompact;
   font-display: swap;
   src: url("../fonts/SFCompact-Black.woff2") format("woff2"), url("../fonts/SFCompact-Black.woff") format("woff");
@@ -307,9 +283,9 @@ li:last-child {
 }
 
 @font-face {
-  font-family: SFCompact;
+  font-family: PlayfairDisplay;
   font-display: swap;
-  src: url("../fonts/SFCompact-Bold.woff2") format("woff2"), url("../fonts/SFCompact-Bold.woff") format("woff");
+  src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
@@ -325,16 +301,32 @@ li:last-child {
 @font-face {
   font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFCompact-Light.woff2") format("woff2"), url("../fonts/SFCompact-Light.woff") format("woff");
-  font-weight: 300;
+  src: url("../fonts/SFCompact-Medium.woff2") format("woff2"), url("../fonts/SFCompact-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-ExtraBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-ExtraBold.woff") format("woff");
+  font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFCompact-Medium.woff2") format("woff2"), url("../fonts/SFCompact-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../fonts/SFCompact-Light.woff2") format("woff2"), url("../fonts/SFCompact-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  font-display: swap;
+  src: url("../fonts/PlayfairDisplay-SemiBold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -357,14 +349,6 @@ li:last-child {
 @font-face {
   font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: SFCompact;
-  font-display: swap;
   src: url("../fonts/SFCompact-UltraLight.woff2") format("woff2"), url("../fonts/SFCompact-UltraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
@@ -379,18 +363,18 @@ li:last-child {
 }
 
 @font-face {
-  font-family: SFPro;
+  font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFPro-Bold.woff2") format("woff2"), url("../fonts/SFPro-Bold.woff") format("woff");
+  src: url("../fonts/SFCompact-Bold.woff2") format("woff2"), url("../fonts/SFCompact-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: SFPro;
+  font-family: SFCompact;
   font-display: swap;
-  src: url("../fonts/SFPro-Heavy.woff2") format("woff2"), url("../fonts/SFPro-Heavy.woff") format("woff");
-  font-weight: 800;
+  src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -421,16 +405,24 @@ li:last-child {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
-  font-weight: 600;
+  src: url("../fonts/SFPro-Bold.woff2") format("woff2"), url("../fonts/SFPro-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
-  font-weight: 100;
+  src: url("../fonts/SFPro-Heavy.woff2") format("woff2"), url("../fonts/SFPro-Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFPro;
+  font-display: swap;
+  src: url("../fonts/SFPro-SemiBold.woff2") format("woff2"), url("../fonts/SFPro-SemiBold.woff") format("woff");
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -445,16 +437,16 @@ li:last-child {
 @font-face {
   font-family: SofiaPro;
   font-display: swap;
-  src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
-  font-weight: 900;
+  src: url("../fonts/SofiaPro-Bold.woff2") format("woff2"), url("../fonts/SofiaPro-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
-  font-family: SofiaPro;
+  font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SofiaPro-Bold.woff2") format("woff2"), url("../fonts/SofiaPro-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -463,6 +455,14 @@ li:last-child {
   font-display: swap;
   src: url("../fonts/SofiaPro-ExtraLight.woff2") format("woff2"), url("../fonts/SofiaPro-ExtraLight.woff") format("woff");
   font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  font-display: swap;
+  src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -727,6 +727,7 @@ body {
   line-height: 120%;
   text-align: center;
   color: var(--btn-color);
+  pointer-events: all;
 }
 
 .btn i {
@@ -765,7 +766,23 @@ body {
   padding: 1rem 1rem 1rem 1.5rem;
 }
 
+.btn--remove {
+  --btn-color: var(--red);
+}
+
+.btn:disabled {
+  --btn-background: var(--green-50);
+  pointer-events: none;
+}
+
+.form-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+}
+
 .form-input {
+  width: 100%;
   height: 5rem;
   padding: 0 2rem;
   border-radius: 0.4rem;
@@ -806,12 +823,14 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 120%;
 }
 
 .form-textarea {
+  width: 100%;
   padding: 1.6rem 2rem;
   border-radius: 0.4rem;
   border: 0.1rem solid var(--beige);
@@ -891,6 +910,184 @@ body {
   color: var(--orange-light);
 }
 
+.form-foot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-text {
+  color: var(--green);
+}
+
+.form-text a {
+  font-weight: 700;
+}
+
+.form-code {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 2.4rem 1rem 2.3rem;
+  border-radius: 0.4rem;
+  border: 0.1rem solid var(--beige);
+  background-color: var(--bg);
+  outline: none;
+  font-family: var(--second-family);
+  font-weight: 900;
+  font-size: 4rem;
+  line-height: 120%;
+  text-align: center;
+}
+
+.form-code::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--black);
+  text-align: center;
+}
+
+.form-code::-moz-placeholder {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--black);
+  text-align: center;
+}
+
+.form-code:-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--black);
+  text-align: center;
+}
+
+.form-code::-ms-input-placeholder {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--black);
+  text-align: center;
+}
+
+.form-code::placeholder {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 120%;
+  color: var(--black);
+  text-align: center;
+}
+
+.form-code-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 0.8rem;
+}
+
+.form-code-wrap * {
+  width: calc(20% - 0.64rem);
+}
+
+.form-radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.form-radio-icon {
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--bg);
+  border-radius: 5rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  font-size: 5rem;
+  color: var(--green);
+}
+
+.form-radio-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.6rem 1rem 2rem;
+  background-color: var(--bg);
+  border-radius: 5rem;
+}
+
+.form-radio-title * {
+  font-family: var(--third-family);
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.form-radio-input {
+  display: grid;
+  place-content: center;
+  width: 2rem;
+  height: 2rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border: 0.1rem solid var(--green);
+  border-radius: 50%;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-radio-input::before {
+  content: "";
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  background-color: var(--green);
+}
+
+.form-radio-input:checked::before {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
 /* Стили для иконок */
 
 [class^=icon-],
@@ -949,6 +1146,43 @@ body {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+}
+
+.layout__head-banner {
+  border-radius: 1.6rem;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+
+.layout__head-banner img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.layout__head-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.layout__head-content a,
+.layout__head-content button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--green);
+}
+
+.layout__head-tel {
+  font-weight: 700 !important;
 }
 
 .layout__rating {
@@ -1088,6 +1322,17 @@ body {
   margin-top: 1rem;
 }
 
+.layout__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .layout__block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1170,6 +1415,25 @@ body {
 .layout__block-value p {
   font-weight: 500;
   font-size: 1.4rem;
+}
+
+.layout__block-btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.layout__block-btns .btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 3rem;
+  padding: 0 2rem;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .layout__list li {
@@ -1317,6 +1581,21 @@ body {
   font-size: 2.4rem;
 }
 
+.login .layout__btn--reg,
+.login .layout__btn--login {
+  display: none;
+}
+
+.layout__btn--logout {
+  display: none;
+}
+
+.login .layout__btn--logout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .layout__banner {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1360,6 +1639,240 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 2rem;
+}
+
+.layout__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.layout__card-block {
+  width: 100%;
+  height: 20.7rem;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  padding: 2.4rem 2rem 2rem 2rem;
+  border: 0.1rem solid var(--beige);
+  background-color: var(--bg);
+  background-image: url(./../images/temp/profile-card-bg-light.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  pointer-events: none;
+}
+
+.login .layout__card-block {
+  background-color: var(--green);
+  background-image: url(./../../images/temp/profile-card-bg-green.png);
+  pointer-events: all;
+}
+
+.layout__card-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 2rem;
+  height: 100%;
+}
+
+.login .layout__card-content {
+  color: var(--white);
+}
+
+.layout__card-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.layout__card-title {
+  font-weight: 900;
+  font-size: 1.4rem;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.layout__card-col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.layout__card-guess {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background-color: var(--white);
+  font-size: 2.3rem;
+}
+
+.login .layout__card-guess {
+  color: var(--green);
+}
+
+.layout__card-qr {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  border-radius: 1.6rem;
+  overflow: hidden;
+}
+
+.layout__card-qr img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.layout__notice {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 3rem;
+  background: var(--bg);
+  border: 0.1rem solid var(--beige);
+  border-radius: 3rem;
+}
+
+.layout__notice-text {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 120%;
+}
+
+.layout__notice-text a,
+.layout__notice-text button {
+  font-weight: 700;
+}
+
+.layout__cashback {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 2.2rem;
+  padding: 2rem;
+  background-color: var(--bg);
+  border-radius: 1.6rem;
+  position: relative;
+}
+
+.login .layout__cashback {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.layout__cashback-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.layout__cashback-progressbar {
+  width: 100%;
+  height: 0.8rem;
+}
+
+.layout__cashback-progressbar progress {
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: var(--green);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.layout__cashback-progressbar progress::-webkit-progress-bar {
+  background-color: var(--green);
+  border-radius: 0.4rem;
+}
+
+.layout__cashback-progressbar progress::-webkit-progress-value {
+  background-color: var(--aqua);
+  border-radius: 0.4rem;
+}
+
+.layout__cashback-progressbar progress::-moz-progress-bar {
+  background-color: var(--aqua);
+  border-radius: 0.4rem;
+}
+
+.layout__cashback i {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: var(--white);
+  border-radius: 50%;
+  font-size: 2.4rem;
+  color: var(--green);
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
 }
 
 h1,
@@ -1427,8 +1940,22 @@ p {
 
 /* Blocks */
 
-.branch .layout__block-text p {
+.address .form-foot {
+  gap: 0.8rem;
+}
+
+.branch .layout__block-text span {
   color: var(--green);
+}
+
+#branchSelect .layout__content .layout__block-text * {
+  font-weight: 700;
+  color: var(--green);
+}
+
+#branchSelect .layout__block-text * {
+  font-weight: 500;
+  font-size: 1.4rem;
 }
 
 .card {
@@ -1684,6 +2211,18 @@ p {
   font-size: 1.8rem;
 }
 
+.cards .form-body {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cards .form-group:nth-child(1) {
+  grid-column: 1/3;
+}
+
+.cards .form-foot {
+  gap: 0.8rem;
+}
+
 .contacts .layout__block-text span {
   font-size: 1rem;
 }
@@ -1703,8 +2242,23 @@ p {
   gap: 2rem;
 }
 
+.dish .layout__block-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.dish .layout__block-title p {
+  font-size: 1rem;
+}
+
 .filter.popup {
-  background-image: url(./../images/temp/full-bg.png);
+  background-image: url(./../../images/temp/full-bg.png);
 }
 
 .filter__items {
@@ -1857,6 +2411,10 @@ p {
   filter: drop-shadow(0rem 0rem 1.5rem var(--aqua-light));
 }
 
+.menu.popup {
+  background-image: url(./../images/temp/menu-bg.png);
+}
+
 .menu .layout__inner {
   gap: 1.5rem;
 }
@@ -1890,10 +2448,9 @@ p {
   height: 5rem;
   background-color: var(--bg);
   border-radius: 5rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   font-size: 5rem;
-}
-
-.menu__item-icon i {
   color: var(--green);
 }
 
@@ -1915,6 +2472,18 @@ p {
   font-weight: 800;
   line-height: 100%;
   color: var(--green);
+}
+
+.offers .layout__banner-link {
+  grid-column: 1/3;
+}
+
+.offers .layout__banner-link:nth-child(1) {
+  grid-column: 1/2;
+}
+
+.offers .layout__banner-link:nth-child(2) {
+  grid-column: 2/3;
 }
 
 .panel {
@@ -2022,7 +2591,6 @@ p {
   border: 0.1rem solid var(--beige);
   overflow: hidden;
   background-color: var(--white);
-  background-image: url(./../images/temp/menu-bg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   -webkit-transition: all 0.5s ease-in-out;
@@ -2094,6 +2662,57 @@ p {
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+
+.login #profile .layout__head-title * {
+  font-size: 2rem;
+}
+
+.profile .layout__head-content {
+  display: none;
+}
+
+.login .profile .layout__head-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile .layout__btns {
+  grid-template-columns: 1fr;
+}
+
+.login .profile .layout__notice {
+  display: none;
+}
+
+.profile .menu__item {
+  pointer-events: none;
+}
+
+.login .profile .menu__item {
+  pointer-events: all;
+}
+
+.profile .menu__item-icon i::before {
+  opacity: 0.5;
+}
+
+.login .profile .menu__item-icon i::before {
+  opacity: 1;
+}
+
+.profile .menu__item-title * {
+  opacity: 0.5;
+  color: var(--black);
+}
+
+.login .profile .menu__item-title * {
+  opacity: 1;
+}
+
+.profile .btn {
+  font-weight: 700;
 }
 
 .reviews .layout__head {
