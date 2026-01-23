@@ -455,12 +455,11 @@ document.addEventListener('DOMContentLoaded', () => {
    * - Горизонтальные layout (layout--carousel): прокрутка контейнера layout__items по горизонтали
    */
   (function () {
-    /**
-     * Обработчик клика по кнопкам навигации
-     */
+    const OFFSET_REM = 26;
+
     document.addEventListener('click', (e) => {
       const navBtn = e.target.closest('.layout__nav-item');
-      if (!navBtn) return; // Если клик не по кнопке nav — игнорируем
+      if (!navBtn) return;
 
       const layout = navBtn.closest('.layout');
       if (!layout) return;
@@ -471,24 +470,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const navItems = nav.querySelectorAll('.layout__nav-item');
       const targetKey = navBtn.dataset.nav;
 
-      // Все карточки внутри layout с data-dish
       const cards = layout.querySelectorAll('.card[data-dish]');
       if (!cards.length) return;
 
       const isCarousel = layout.classList.contains('layout--carousel');
 
       if (isCarousel) {
-        // --- Горизонтальная прокрутка (carousel) ---
+        // Горизонтальный scroll
         const container = layout.querySelector('.layout__items');
         const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
         if (!targetCard) return;
 
-        // Вычисляем положение карточки относительно контейнера
         const cardLeft = targetCard.offsetLeft;
         const cardWidth = targetCard.offsetWidth;
         const containerWidth = container.clientWidth;
 
-        // Прокручиваем так, чтобы карточка оказалась по центру
         const scrollTarget = cardLeft - (containerWidth / 2 - cardWidth / 2);
 
         container.scrollTo({
@@ -496,12 +492,14 @@ document.addEventListener('DOMContentLoaded', () => {
           behavior: 'smooth'
         });
       } else {
-        // --- Вертикальная прокрутка ---
+        // Вертикальный scroll
         const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
         if (!targetCard) return;
 
-        // Позиция относительно документа, с учётом offset (например, шапка)
-        const cardTop = targetCard.getBoundingClientRect().top + window.scrollY - 260;
+        // offset в rem переводим в px для JS
+        const offsetPx = OFFSET_REM * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+        const cardTop = targetCard.getBoundingClientRect().top + window.scrollY - offsetPx;
 
         if (lenis && lenis.scrollTo) {
           lenis.scrollTo(cardTop, {
@@ -513,14 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // --- Подсветка активной кнопки ---
       navItems.forEach(btn => btn.classList.remove('active'));
       navBtn.classList.add('active');
     });
 
-    /**
-     * Автоматическое обновление active кнопки при скролле
-     */
     const layouts = document.querySelectorAll('.layout');
 
     layouts.forEach(layout => {
@@ -537,11 +531,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentCard = null;
 
         if (isCarousel) {
-          // --- Горизонтальный scroll ---
           const container = layout.querySelector('.layout__items');
-          const scrollPos = container.scrollLeft + container.clientWidth / 2; // центр контейнера
+          const scrollPos = container.scrollLeft + container.clientWidth / 2;
 
-          // Находим карточку, которая находится в центре видимой области
           for (const card of cards) {
             const cardLeft = card.offsetLeft;
             const cardRight = cardLeft + card.offsetWidth;
@@ -552,10 +544,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         } else {
-          // --- Вертикальный scroll ---
-          const scrollPos = window.scrollY + 260; // offset от шапки
+          const offsetPx = OFFSET_REM * parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const scrollPos = window.scrollY + offsetPx;
 
-          // Последняя карточка, которая прошла offset
           for (const card of cards) {
             const cardTop = card.getBoundingClientRect().top + window.scrollY;
             if (scrollPos >= cardTop) {
@@ -570,12 +561,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const targetKey = currentCard.dataset.dish;
 
-        // Обновляем активную кнопку
         navItems.forEach(btn => {
           const isActive = btn.dataset.nav === targetKey;
           btn.classList.toggle('active', isActive);
 
-          // Горизонтальная прокрутка nav, чтобы активная кнопка была видна
           if (isActive) {
             const btnLeft = btn.offsetLeft;
             const btnRight = btnLeft + btn.offsetWidth;
@@ -592,22 +581,180 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       };
 
-      // --- Подписка на события scroll ---
       if (isCarousel) {
-        // Горизонтальный контейнер скроллит сам
         const container = layout.querySelector('.layout__items');
         container.addEventListener('scroll', updateActiveNav);
       } else {
-        // Вертикальная прокрутка страницы
         window.addEventListener('scroll', updateActiveNav);
         if (lenis && lenis.on) {
           lenis.on('scroll', updateActiveNav);
         }
       }
 
-      // --- Установка active при загрузке страницы ---
       updateActiveNav();
     });
   })();
+
+  /**
+ * Универсальная навигация по layout__nav для вертикальных и горизонтальных layout
+ * - Вертикальные layout: прокрутка страницы с помощью Lenis или window.scrollTo
+ * - Горизонтальные layout (layout--carousel): прокрутка контейнера layout__items по горизонтали
+ */
+  // (function () {
+  //   /**
+  //    * Обработчик клика по кнопкам навигации
+  //    */
+  //   document.addEventListener('click', (e) => {
+  //     const navBtn = e.target.closest('.layout__nav-item');
+  //     if (!navBtn) return; // Если клик не по кнопке nav — игнорируем
+
+  //     const layout = navBtn.closest('.layout');
+  //     if (!layout) return;
+
+  //     const nav = layout.querySelector('.layout__nav');
+  //     if (!nav) return;
+
+  //     const navItems = nav.querySelectorAll('.layout__nav-item');
+  //     const targetKey = navBtn.dataset.nav;
+
+  //     // Все карточки внутри layout с data-dish
+  //     const cards = layout.querySelectorAll('.card[data-dish]');
+  //     if (!cards.length) return;
+
+  //     const isCarousel = layout.classList.contains('layout--carousel');
+
+  //     if (isCarousel) {
+  //       // --- Горизонтальная прокрутка (carousel) ---
+  //       const container = layout.querySelector('.layout__items');
+  //       const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
+  //       if (!targetCard) return;
+
+  //       // Вычисляем положение карточки относительно контейнера
+  //       const cardLeft = targetCard.offsetLeft;
+  //       const cardWidth = targetCard.offsetWidth;
+  //       const containerWidth = container.clientWidth;
+
+  //       // Прокручиваем так, чтобы карточка оказалась по центру
+  //       const scrollTarget = cardLeft - (containerWidth / 2 - cardWidth / 2);
+
+  //       container.scrollTo({
+  //         left: scrollTarget,
+  //         behavior: 'smooth'
+  //       });
+  //     } else {
+  //       // --- Вертикальная прокрутка ---
+  //       const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
+  //       if (!targetCard) return;
+
+  //       // Позиция относительно документа, с учётом offset (например, шапка)
+  //       const cardTop = targetCard.getBoundingClientRect().top + window.scrollY - 260;
+
+  //       if (lenis && lenis.scrollTo) {
+  //         lenis.scrollTo(cardTop, {
+  //           duration: 1.1,
+  //           easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  //         });
+  //       } else {
+  //         window.scrollTo({ top: cardTop, behavior: 'smooth' });
+  //       }
+  //     }
+
+  //     // --- Подсветка активной кнопки ---
+  //     navItems.forEach(btn => btn.classList.remove('active'));
+  //     navBtn.classList.add('active');
+  //   });
+
+  //   /**
+  //    * Автоматическое обновление active кнопки при скролле
+  //    */
+  //   const layouts = document.querySelectorAll('.layout');
+
+  //   layouts.forEach(layout => {
+  //     const nav = layout.querySelector('.layout__nav');
+  //     if (!nav) return;
+
+  //     const navItems = nav.querySelectorAll('.layout__nav-item');
+  //     const cards = layout.querySelectorAll('.card[data-dish]');
+  //     if (!cards.length) return;
+
+  //     const isCarousel = layout.classList.contains('layout--carousel');
+
+  //     const updateActiveNav = () => {
+  //       let currentCard = null;
+
+  //       if (isCarousel) {
+  //         // --- Горизонтальный scroll ---
+  //         const container = layout.querySelector('.layout__items');
+  //         const scrollPos = container.scrollLeft + container.clientWidth / 2; // центр контейнера
+
+  //         // Находим карточку, которая находится в центре видимой области
+  //         for (const card of cards) {
+  //           const cardLeft = card.offsetLeft;
+  //           const cardRight = cardLeft + card.offsetWidth;
+
+  //           if (scrollPos >= cardLeft && scrollPos <= cardRight) {
+  //             currentCard = card;
+  //             break;
+  //           }
+  //         }
+  //       } else {
+  //         // --- Вертикальный scroll ---
+  //         const scrollPos = window.scrollY + 260; // offset от шапки
+
+  //         // Последняя карточка, которая прошла offset
+  //         for (const card of cards) {
+  //           const cardTop = card.getBoundingClientRect().top + window.scrollY;
+  //           if (scrollPos >= cardTop) {
+  //             currentCard = card;
+  //           } else {
+  //             break;
+  //           }
+  //         }
+  //       }
+
+  //       if (!currentCard) return;
+
+  //       const targetKey = currentCard.dataset.dish;
+
+  //       // Обновляем активную кнопку
+  //       navItems.forEach(btn => {
+  //         const isActive = btn.dataset.nav === targetKey;
+  //         btn.classList.toggle('active', isActive);
+
+  //         // Горизонтальная прокрутка nav, чтобы активная кнопка была видна
+  //         if (isActive) {
+  //           const btnLeft = btn.offsetLeft;
+  //           const btnRight = btnLeft + btn.offsetWidth;
+  //           const navScrollLeft = nav.scrollLeft;
+  //           const navRightEdge = navScrollLeft + nav.clientWidth;
+
+  //           if (btnLeft < navScrollLeft || btnRight > navRightEdge) {
+  //             nav.scrollTo({
+  //               left: btnLeft - nav.clientWidth / 2 + btn.offsetWidth / 2,
+  //               behavior: 'smooth'
+  //             });
+  //           }
+  //         }
+  //       });
+  //     };
+
+  //     // --- Подписка на события scroll ---
+  //     if (isCarousel) {
+  //       // Горизонтальный контейнер скроллит сам
+  //       const container = layout.querySelector('.layout__items');
+  //       container.addEventListener('scroll', updateActiveNav);
+  //     } else {
+  //       // Вертикальная прокрутка страницы
+  //       window.addEventListener('scroll', updateActiveNav);
+  //       if (lenis && lenis.on) {
+  //         lenis.on('scroll', updateActiveNav);
+  //       }
+  //     }
+
+  //     // --- Установка active при загрузке страницы ---
+  //     updateActiveNav();
+  //   });
+  // })();
+
 
 });
