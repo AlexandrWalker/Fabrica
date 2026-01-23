@@ -16,38 +16,42 @@
           <div class="layout__body">
             <div class="layout__block">
 
-              <div class="likeit">
-                <div class="likeit__head">
-                  <div class="layout__nav">
-                    <button class="layout__nav-item active" type="button" data-nav="hot">
-                      Горячее
-                    </button>
-                    <button class="layout__nav-item" type="button" data-nav="pasta">
-                      Паста
-                    </button>
-                    <button class="layout__nav-item" type="button" data-nav="sides">
-                      Гарниры
-                    </button>
-                    <button class="layout__nav-item" type="button" data-nav="soups">
-                      Супы
-                    </button>
+              <div class="layout layout--carousel">
+                <div class="layout__inner">
+                  <div class="layout__head">
+                    <div class="layout__nav">
+                      <button class="layout__nav-item active" type="button" data-nav="hot">
+                        Горячее
+                      </button>
+                      <button class="layout__nav-item" type="button" data-nav="pasta">
+                        Паста
+                      </button>
+                      <button class="layout__nav-item" type="button" data-nav="sides">
+                        Гарниры
+                      </button>
+                      <button class="layout__nav-item" type="button" data-nav="soups">
+                        Супы
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div class="likeit__items">
-                  @@loop('./../elements/card-item.html', './data/card-items.json')
+                  <div class="layout__items">
+                    @@loop('./../elements/card-item-osnovnoe.html', './data/card-items-osnovnoe.json')
+                  </div>
                 </div>
               </div>
 
-              <div class="likeit">
-                <div class="likeit__head">
-                  <div class="likeit__title">
-                    <h2>
-                      Вам понравится
-                    </h2>
+              <div class="layout layout--carousel">
+                <div class="layout__inner">
+                  <div class="layout__head">
+                    <div class="layout__title">
+                      <h2>
+                        Вам понравится
+                      </h2>
+                    </div>
                   </div>
-                </div>
-                <div class="likeit__items">
-                  @@loop('./../elements/card-item.html', './data/card-items.json')
+                  <div class="layout__items">
+                    @@loop('./../elements/card-item.html', './data/card-items.json')
+                  </div>
                 </div>
               </div>
 

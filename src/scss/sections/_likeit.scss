@@ -1,35 +1,3 @@
 @use './../mixins' as *;
 
-.likeit {
-
-  &__head {
-    margin-bottom: 1.5rem;
-  }
-
-  &__items {
-    display: flex;
-    flex-direction: row;
-    gap: 0.8rem;
-
-    overflow-x: auto;
-    /* опционально, для «приклеивания» к элементам */
-    scroll-snap-type: x mandatory;
-    /* плавный инерционный скролл на iOS */
-    -webkit-overflow-scrolling: touch;
-
-    padding: 0 var(--container-padding);
-    margin-left: calc(var(--container-padding) * -1);
-    width: 100vw;
-
-    &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-      padding: 0;
-      margin: 0;
-    }
-  }
-
-  .card {
-    width: 14.4rem;
-  }
-}
+.likeit {}

@@ -163,20 +163,21 @@
                 </div>
               </div>
             </div>
-            <div class="likeit">
-              <div class="likeit__head">
-                <div class="likeit__title">
-                  <h2>
-                    Рекомендуем к этому блюду
-                  </h2>
+            <div class="layout layout--carousel">
+              <div class="layout__inner">
+                <div class="layout__head">
+                  <div class="layout__title">
+                    <h2>
+                      Вам понравится
+                    </h2>
+                  </div>
                 </div>
-              </div>
-              <div class="likeit__items">
-                @@loop('./../elements/card-item.html', './data/card-items.json')
+                <div class="layout__items">
+                  @@loop('./../elements/card-item.html', './data/card-items.json')
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

@@ -135,12 +135,12 @@
                   Напитки
                 </span>
               </a>
-              <a href="#napitki" data-id="napitki" class="hero__item">
+              <a href="#cocktail" data-id="cocktail" class="hero__item">
                 <div class="hero__item-img">
                   <img src="./../images/temp/salads.svg" alt="">
                 </div>
                 <span class="hero__item-text">
-                  Напитки
+                  Фабричные коктейли
                 </span>
               </a>
             </div>
@@ -225,19 +225,19 @@
         </div>
       </section>
 
-      <section class="likeit">
+      <section class="layout layout--carousel">
         <div class="container">
-          <div class="likeit__inner">
+          <div class="layout__inner">
 
-            <div class="likeit__head">
-              <div class="likeit__title">
+            <div class="layout__head">
+              <div class="layout__title">
                 <h2>
                   Вам понравится
                 </h2>
               </div>
             </div>
 
-            <div class="likeit__items">
+            <div class="layout__items">
               @@loop('./elements/card-item.html', './data/card-items.json')
             </div>
 
@@ -265,6 +265,7 @@
         </div>
       </section>
 
+      <!-- Каталог блюд -->
       <section class="layout" id="hookahs">
         <div class="container">
           <div class="layout__inner">
@@ -304,7 +305,7 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items-lunch.json')
+              @@loop('./elements/card-item-lunch.html', './data/card-items-lunch.json')
             </div>
 
           </div>
@@ -330,7 +331,7 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items-business-lunch.json')
+              @@loop('./elements/card-item-business-lunch.html', './data/card-items-business-lunch.json')
             </div>
 
           </div>
@@ -350,13 +351,14 @@
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items-salads.json')
+              @@loop('./elements/card-item-salads.html', './data/card-items-salads.json')
             </div>
 
           </div>
         </div>
       </section>
 
+      <!-- Фиксированные навигации по блюдам внутри контейнера -->
       <section class="layout" id="osnovnoe">
         <div class="container">
           <div class="layout__inner">
@@ -367,20 +369,21 @@
                   Горячее
                 </h2>
               </div>
-              <div class="layout__nav">
-                <button class="layout__nav-item active" type="button" data-nav="hot">
-                  Горячее
-                </button>
-                <button class="layout__nav-item" type="button" data-nav="pasta">
-                  Паста
-                </button>
-                <button class="layout__nav-item" type="button" data-nav="sides">
-                  Гарниры
-                </button>
-                <button class="layout__nav-item" type="button" data-nav="soups">
-                  Супы
-                </button>
-              </div>
+            </div>
+
+            <div class="layout__nav">
+              <button class="layout__nav-item active" type="button" data-nav="hot">
+                Горячее
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="pasta">
+                Паста
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="sides">
+                Гарниры
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="soups">
+                Супы
+              </button>
             </div>
 
             <div class="layout__items">
@@ -401,18 +404,19 @@
                   Закуски
                 </h2>
               </div>
-              <div class="layout__nav">
-                <div class="layout__nav-item active">
-                  Горячие закуски 
-                </div>
-                <div class="layout__nav-item">
-                  Холодные закуски
-                </div>
-              </div>
+            </div>
+
+            <div class="layout__nav">
+              <button class="layout__nav-item active" type="button" data-nav="hot-zakuski">
+                Горячие закуски 
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="cold-zakuski">
+                Холодные закуски
+              </button>
             </div>
 
             <div class="layout__items">
-              @@loop('./elements/card-item.html', './data/card-items-salads.json')
+              @@loop('./elements/card-item-zakuski.html', './data/card-items-zakuski.json')
             </div>
 
           </div>
@@ -429,14 +433,15 @@
                   Напитки
                 </h2>
               </div>
-              <div class="layout__nav">
-                <div class="layout__nav-item active">
-                  Горячие
-                </div>
-                <div class="layout__nav-item">
-                  Холодные
-                </div>
-              </div>
+            </div>
+
+            <div class="layout__nav">
+              <button class="layout__nav-item active" type="button" data-nav="hot-napitki">
+                Горячие
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="cold-napitki">
+                Холодные
+              </button>
             </div>
 
             <div class="layout__items">
@@ -447,27 +452,28 @@
         </div>
       </section>
 
-      <section class="layout" id="napitki">
+      <section class="layout" id="cocktail">
         <div class="container">
           <div class="layout__inner">
 
             <div class="layout__head">
               <div class="layout__title">
                 <h2>
-                  Напитки
+                  Фабричные коктейли
                 </h2>
               </div>
-              <div class="layout__nav">
-                <div class="layout__nav-item active">
-                  Безалкогольные
-                </div>
-                <div class="layout__nav-item">
-                  Фабричный алкоголь
-                </div>
-                <div class="layout__nav-item">
-                  Настойки и вино ту го 
-                </div>
-              </div>
+            </div>
+
+            <div class="layout__nav">
+              <button class="layout__nav-item active" type="button" data-nav="aclo-cocktail">
+                Безалкогольные
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="fabric-cocktail">
+                Фабричный алкоголь
+              </button>
+              <button class="layout__nav-item" type="button" data-nav="togo-cocktail">
+                Настойки и вино ту го 
+              </button>
             </div>
 
             <div class="layout__items">
@@ -477,7 +483,7 @@
           </div>
         </div>
       </section>
-
+      <!-- ./Каталог блюд -->
     </main>
     <!-- Панель -->
     @@include('blocks/panel.html')
