@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
       constructor(popupEl, lenis) {
         if (!popupEl) return;
 
+        this.startHeight = 0;
+
         this.popup = popupEl;
         this.lenis = lenis;
 
@@ -99,7 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.popup.style.transition =
           `transform ${duration}s cubic-bezier(0.25,0.8,0.25,1)`;
-        this.popup.style.transform = 'translateY(100%)';
+
+        // закрываем на фиксированную высоту
+        const h = this.startHeight || this.popup.offsetHeight;
+        this.popup.style.transform = `translateY(${h}px)`;
+
         this.popup.dataset.open = 'false';
 
         const prev = stack[stack.length - 1];
@@ -177,6 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
         this.isDragging = true;
         this.startTarget = e.target;
 
+        // фиксируем высоту попапа на старте жеста
+        this.startHeight = this.popup.offsetHeight;
+
         this.popup.style.transition = 'none';
       }
 
@@ -197,9 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else return; // свайп вверх не трогаем
 
         if (delta < 0) delta = 0;
-        const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+        const resistance = delta > 120
+          ? 120 + (delta - 120) * 0.35
+          : delta;
 
-        this.popup.style.transform = `translateY(${resistance}px)`;
+        // не даём уехать дальше стартовой высоты
+        const translate = Math.min(resistance, this.startHeight);
+
+        this.popup.style.transform = `translateY(${translate}px)`;
         this.lastY = y;
 
         if (e.cancelable) {
@@ -213,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const delta = this.lastY - this.startY;
         const velocity = delta / Math.max(Date.now() - this.startTime, 1);
 
-        const shouldClose = delta > this.popup.offsetHeight * 0.3 || velocity > 0.6;
+        const shouldClose = delta > this.startHeight * 0.3 || velocity > 0.6;
 
         if (shouldClose) this.close();
         else {
@@ -222,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         this.isDragging = false;
+        this.startHeight = 0;
       }
 
       // --- Статические методы ---
