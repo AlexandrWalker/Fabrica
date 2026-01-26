@@ -1,5 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
+
+  let vhRAF = null;
+
+  function setVh() {
+    if (vhRAF) cancelAnimationFrame(vhRAF);
+
+    vhRAF = requestAnimationFrame(() => {
+      const height = window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+      const vh = height * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }
+
+  setVh();
+  window.addEventListener('resize', setVh);
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setVh);
+    window.visualViewport.addEventListener('scroll', setVh);
+  }
+
+  if (window.visualViewport) {
+    const onViewportChange = () => {
+      isViewportChanging = true;
+
+      // временно стопаем Lenis, чтобы он не пересчитывал scroll
+      if (window.lenis && !window.lenis.isStopped) {
+        window.lenis.stop();
+      }
+
+      if (viewportRAF) cancelAnimationFrame(viewportRAF);
+
+      viewportRAF = requestAnimationFrame(() => {
+        isViewportChanging = false;
+
+        // обновляем размеры
+        setVh();
+
+        // возобновляем Lenis ТОЛЬКО если нет popup
+        if (
+          window.lenis &&
+          window.lenis.isStopped &&
+          !document.documentElement.classList.contains('popup-open')
+        ) {
+          window.lenis.start();
+        }
+      });
+    };
+
+    visualViewport.addEventListener('resize', onViewportChange);
+    visualViewport.addEventListener('scroll', onViewportChange);
+  }
+
   const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
 
   /**
@@ -17,12 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
-  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  window.lenis = lenis;
+
+  let isViewportChanging = false;
+  let viewportRAF = null;
+
+  function raf(time) {
+    if (!isViewportChanging) {
+      lenis.raf(time);
+    }
+    requestAnimationFrame(raf);
+  }
+
   requestAnimationFrame(raf);
+
+  lenis.on('scroll', () => {
+    if (document.documentElement.classList.contains('popup-open')) {
+      lenis.stop();
+    }
+  });
 
   /**
    * Попапы
    */
+
   (function () {
     class BottomPopup {
       static stack = [];
@@ -30,8 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       constructor(popupEl, lenis) {
         if (!popupEl) return;
-
-        this.startHeight = 0;
 
         this.popup = popupEl;
         this.lenis = lenis;
@@ -64,6 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return this.popup?.dataset?.open === 'true';
       }
 
+      static scrollY = 0;
+
       // --- Запуск попапа ---
       open() {
         if (!this.popup || this.isOpen()) return;
@@ -79,7 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
         this.popup.style.transform = 'translateY(0)';
         this.popup.dataset.open = 'true';
 
-        if (this.lenis && stack.length === 1) this.lenis.stop();
+        if (this.lenis && stack.length === 1 && !this.lenis.isStopped) {
+          this.lenis.stop();
+        }
+        BottomPopup.scrollY = window.scrollY;
+
         document.documentElement.classList.add('popup-open');
 
         // --- history для back button ---
@@ -101,19 +180,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         this.popup.style.transition =
           `transform ${duration}s cubic-bezier(0.25,0.8,0.25,1)`;
-
-        // закрываем на фиксированную высоту
-        const h = this.startHeight || this.popup.offsetHeight;
-        this.popup.style.transform = `translateY(${h}px)`;
-
+        this.popup.style.transform = 'translateY(100%)';
         this.popup.dataset.open = 'false';
 
         const prev = stack[stack.length - 1];
         if (prev) prev.popup.classList.remove('is-under');
 
         if (stack.length === 0) {
-          document.documentElement.classList.remove('popup-open');
-          if (this.lenis) this.lenis.start();
+          const scrollY = BottomPopup.scrollY;
+
+          if (window.lenis) {
+            window.lenis.scrollTo(scrollY, { immediate: true });
+          } else {
+            window.scrollTo(0, scrollY);
+          }
+
+          requestAnimationFrame(() => {
+            document.documentElement.classList.remove('popup-open');
+          });
+
+          if (
+            this.lenis &&
+            this.lenis.isStopped &&
+            !isViewportChanging
+          ) {
+            this.lenis.start();
+          }
+
         }
 
         // важно: флаг только при НЕ popstate
@@ -159,7 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
           else p.popup.classList.remove('is-under');
         });
 
-        if (this.lenis && stack.length === 1) this.lenis.stop();
+        if (
+          this.lenis &&
+          stack.length === 1 &&
+          !this.lenis.isStopped
+        ) {
+          this.lenis.stop();
+        }
       }
 
       // --- Toggle + Reopen для кнопок ---
@@ -183,9 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
         this.isDragging = true;
         this.startTarget = e.target;
 
-        // фиксируем высоту попапа на старте жеста
-        this.startHeight = this.popup.offsetHeight;
-
         this.popup.style.transition = 'none';
       }
 
@@ -206,17 +302,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else return; // свайп вверх не трогаем
 
         if (delta < 0) delta = 0;
-        const resistance = delta > 120
-          ? 120 + (delta - 120) * 0.35
-          : delta;
+        const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
 
-        // не даём уехать дальше стартовой высоты
-        const translate = Math.min(resistance, this.startHeight);
-
-        this.popup.style.transform = `translateY(${translate}px)`;
+        this.popup.style.transform = `translateY(${resistance}px)`;
         this.lastY = y;
 
-        if (e.cancelable) {
+        if (!isIOS && e.cancelable) {
           e.preventDefault();
         }
       }
@@ -227,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const delta = this.lastY - this.startY;
         const velocity = delta / Math.max(Date.now() - this.startTime, 1);
 
-        const shouldClose = delta > this.startHeight * 0.3 || velocity > 0.6;
+        const shouldClose = delta > this.popup.offsetHeight * 0.3 || velocity > 0.6;
 
         if (shouldClose) this.close();
         else {
@@ -236,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         this.isDragging = false;
-        this.startHeight = 0;
       }
 
       // --- Статические методы ---
@@ -770,6 +860,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //     updateActiveNav();
   //   });
   // })();
-
+  console.log(window.lenis);
 
 });
