@@ -145,20 +145,49 @@ document.addEventListener('DOMContentLoaded', () => {
         basePadding + keyboardHeight + 'px';
     }
 
+    function scrollInputIntoView(input) {
+      const scroll = input.closest('[data-popup-scroll]');
+      if (!scroll) return;
+
+      // абсолютная позиция input внутри scroll
+      const inputRect = input.getBoundingClientRect();
+      const scrollRect = scroll.getBoundingClientRect();
+
+      // верхний оффсет, с учётом клавиатуры
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
+
+      // высота видимой области scroll
+      const visibleHeight = scroll.clientHeight - keyboardHeight;
+
+      // если input не полностью виден — скроллим
+      const offsetTop = inputRect.top - scrollRect.top + scroll.scrollTop;
+
+      if (offsetTop < scroll.scrollTop) {
+        scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      } else if (offsetTop + inputRect.height > scroll.scrollTop + visibleHeight) {
+        scroll.scrollTo({
+          top: offsetTop - visibleHeight + inputRect.height,
+          behavior: 'smooth',
+        });
+      }
+    }
+
     document.addEventListener('focusin', (e) => {
-      const input = e.target.closest('input, textarea');
+      const input = e.target.closest('input, textarea, [contenteditable]');
       if (!input) return;
 
       const scroll = input.closest('[data-popup-scroll]');
       if (!scroll) return;
 
       activeScroll = scroll;
-
-      basePadding = parseFloat(
-        getComputedStyle(scroll).paddingBottom
-      ) || 0;
+      basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
 
       updateKeyboardOffset();
+      scrollInputIntoView(input);
 
       visualViewport.addEventListener('resize', updateKeyboardOffset);
       visualViewport.addEventListener('scroll', updateKeyboardOffset);
