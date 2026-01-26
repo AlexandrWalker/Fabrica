@@ -50,6 +50,10 @@ section {
   margin-bottom: 2rem;
 
   position: relative;
+
+  @include domd {
+    margin-bottom: 3rem;
+  }
 }
 
 a {

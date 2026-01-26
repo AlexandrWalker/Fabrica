@@ -16,16 +16,21 @@
         gap: 0.8rem;
 
         overflow-x: auto;
-        /* опционально, для «приклеивания» к элементам */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         scroll-snap-type: x mandatory;
-        /* плавный инерционный скролл на iOS */
         -webkit-overflow-scrolling: touch;
 
         padding: 0 var(--container-padding);
         margin-left: calc(var(--container-padding) * -1);
-        width: 100vw;
+        width: calc(100% + (var(--container-padding) * 2));
+
+        @include domd {
+          gap: 2rem;
+        }
 
         &::-webkit-scrollbar {
+          display: none;
           width: 0;
           height: 0;
           padding: 0;
@@ -36,16 +41,20 @@
 
     .card {
       width: 14.4rem;
-    }
-  }
 
-  .container {
-    height: fit-content;
+      @include domd {
+        width: calc(25% - (6rem / 4));
+      }
+    }
   }
 
   &--first {
     padding-top: 1.5rem;
     margin-bottom: 0;
+  }
+
+  .container {
+    height: fit-content;
   }
 
   &__inner {
@@ -58,6 +67,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    position: relative;
 
     &-title {
 
@@ -77,6 +87,45 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+    }
+
+    &-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+
+      position: absolute;
+      top: 1.5rem;
+      left: 0;
+      z-index: 1;
+    }
+
+    &-tag {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      padding: 0.5rem 1rem;
+      border-radius: 1.6rem;
+
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 100%;
+      color: var(--white);
+
+      i {
+        font-size: 2rem;
+      }
+
+      &.tags-top {
+        background-color: var(--green-light);
+      }
+
+      &.tags-hot {
+        background-color: var(--red);
       }
     }
 
@@ -354,20 +403,26 @@
     flex-direction: row;
     align-items: center;
     gap: 0.8rem;
+
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+
     background-color: var(--white);
     padding: 0.5rem var(--container-padding);
     margin-top: -0.5rem;
     margin-left: calc(var(--container-padding) * -1);
     width: 100vw;
+    width: calc(100% + (var(--container-padding) * 2));
 
     position: sticky;
     top: 20.5rem;
     z-index: 2;
 
     &::-webkit-scrollbar {
+      display: none;
       width: 0;
       height: 0;
       padding: 0;
@@ -409,6 +464,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
     z-index: 1;
+
+    @include domd {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
   }
 
   &__btns {

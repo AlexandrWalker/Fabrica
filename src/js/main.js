@@ -126,6 +126,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lockLenisDuringPopup();
 
+  (function () {
+    if (!window.visualViewport) return;
+
+    let activeScroll = null;
+    let basePadding = 0;
+
+    function updateKeyboardOffset() {
+      if (!activeScroll) return;
+
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
+
+      activeScroll.style.paddingBottom =
+        basePadding + keyboardHeight + 'px';
+    }
+
+    document.addEventListener('focusin', (e) => {
+      const input = e.target.closest('input, textarea');
+      if (!input) return;
+
+      const scroll = input.closest('[data-popup-scroll]');
+      if (!scroll) return;
+
+      activeScroll = scroll;
+
+      basePadding = parseFloat(
+        getComputedStyle(scroll).paddingBottom
+      ) || 0;
+
+      updateKeyboardOffset();
+
+      visualViewport.addEventListener('resize', updateKeyboardOffset);
+      visualViewport.addEventListener('scroll', updateKeyboardOffset);
+    });
+
+    document.addEventListener('focusout', () => {
+      if (!activeScroll) return;
+
+      activeScroll.style.paddingBottom = basePadding + 'px';
+
+      visualViewport.removeEventListener('resize', updateKeyboardOffset);
+      visualViewport.removeEventListener('scroll', updateKeyboardOffset);
+
+      activeScroll = null;
+    });
+  })();
+
   /**
    * Попапы
    */

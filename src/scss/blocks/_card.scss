@@ -102,6 +102,10 @@
     font-weight: 700;
     font-size: 1.2rem;
     line-height: 120%;
+
+    @include domd {
+      font-size: 1.4rem;
+    }
   }
 
   &__weight {

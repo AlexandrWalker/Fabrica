@@ -4,6 +4,7 @@
   width: 100%;
   // height: calc(100dvh - var(--wrapper-padding));
   height: calc(var(--vh) * 100 - var(--wrapper-padding));
+  
   z-index: 600;
   border-radius: 1.6rem 1.6rem 0 0;
   border: 0.1rem solid var(--beige);
@@ -30,10 +31,6 @@
 
   .popup--open & {
     transform: translateY(0);
-  }
-
-  .container {
-    // overflow: auto;
   }
 
   &__inner {
