@@ -3,8 +3,8 @@
 [data-popup-scroll] {
   flex: 1 1 auto;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+    -ms-scroll-chaining: none;
   padding-bottom: 4rem;
 
   &::-webkit-scrollbar {

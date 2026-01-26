@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
   let vhRAF = null;
 
   function setVh() {
@@ -93,6 +91,40 @@ document.addEventListener('DOMContentLoaded', () => {
       lenis.stop();
     }
   });
+
+  // iOS Safari safe
+  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
+
+  function lockLenisDuringPopup() {
+    if (!isIOS) return;
+
+    const update = () => {
+      if (document.documentElement.classList.contains('popup-open')) {
+        // полностью блокируем Lenis
+        if (window.lenis && !window.lenis.isStopped) window.lenis.stop();
+      } else {
+        if (window.lenis && window.lenis.isStopped) window.lenis.start();
+      }
+    };
+
+    // слушаем visualViewport
+    if (window.visualViewport) {
+      visualViewport.addEventListener('resize', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
+      visualViewport.addEventListener('scroll', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
+    }
+
+    // на случай, если popup открыли/закрыли без resize
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  lockLenisDuringPopup();
 
   /**
    * Попапы
