@@ -22,6 +22,13 @@
 @font-face {
 	font-family: Inter;
 	font-display: swap;
+	src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: Inter;
+	font-display: swap;
 	src: url("../fonts/Inter-Light.woff2") format("woff2"), url("../fonts/Inter-Light.woff") format("woff");
 	font-weight: 300;
 	font-style: normal;
@@ -31,13 +38,6 @@
 	font-display: swap;
 	src: url("../fonts/Inter-Medium.woff2") format("woff2"), url("../fonts/Inter-Medium.woff") format("woff");
 	font-weight: 500;
-	font-style: normal;
-}
-@font-face {
-	font-family: Inter;
-	font-display: swap;
-	src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
-	font-weight: 700;
 	font-style: normal;
 }
 @font-face {
@@ -141,13 +141,6 @@
 @font-face {
 	font-family: PlayfairDisplay;
 	font-display: swap;
-	src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-}
-@font-face {
-	font-family: PlayfairDisplay;
-	font-display: swap;
 	src: url("../fonts/PlayfairDisplay-Medium.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Medium.woff") format("woff");
 	font-weight: 500;
 	font-style: normal;
@@ -171,6 +164,13 @@
 	font-display: swap;
 	src: url("../fonts/SFCompact-Black.woff2") format("woff2"), url("../fonts/SFCompact-Black.woff") format("woff");
 	font-weight: 900;
+	font-style: normal;
+}
+@font-face {
+	font-family: PlayfairDisplay;
+	font-display: swap;
+	src: url("../fonts/PlayfairDisplay-Bold.woff2") format("woff2"), url("../fonts/PlayfairDisplay-Bold.woff") format("woff");
+	font-weight: 700;
 	font-style: normal;
 }
 @font-face {
