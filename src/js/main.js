@@ -205,35 +205,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-  (function () {
-    if (!window.visualViewport) return;
+  // (function () {
+  //   if (!window.visualViewport) return;
 
-    const POPUP_SELECTOR =
-      '.popup[data-open="true"]:not(.is-under)';
+  //   const POPUP_SELECTOR =
+  //     '.popup[data-open="true"]:not(.is-under)';
 
-    let keyboardOpened = false;
+  //   let keyboardOpened = false;
 
-    function updatePopupHeight() {
-      const vv = window.visualViewport;
+  //   function updatePopupHeight() {
+  //     const vv = window.visualViewport;
 
-      const keyboardVisible =
-        vv.height + vv.offsetTop < window.innerHeight - 10;
+  //     const keyboardVisible =
+  //       vv.height + vv.offsetTop < window.innerHeight - 10;
 
-      if (keyboardVisible === keyboardOpened) return;
-      keyboardOpened = keyboardVisible;
+  //     if (keyboardVisible === keyboardOpened) return;
+  //     keyboardOpened = keyboardVisible;
 
-      document.querySelectorAll(POPUP_SELECTOR).forEach((popup) => {
-        if (keyboardVisible) {
-          popup.style.height = 'calc(var(--vh) * 100)';
-        } else {
-          popup.style.height =
-            'calc(var(--vh) * 100 - var(--wrapper-padding))';
-        }
-      });
-    }
+  //     document.querySelectorAll(POPUP_SELECTOR).forEach((popup) => {
+  //       if (keyboardVisible) {
+  //         popup.style.height = 'calc(var(--vh) * 100)';
+  //       } else {
+  //         popup.style.height =
+  //           'calc(var(--vh) * 100 - var(--wrapper-padding))';
+  //       }
+  //     });
+  //   }
 
-    visualViewport.addEventListener('resize', updatePopupHeight);
-  })();
+  //   visualViewport.addEventListener('resize', updatePopupHeight);
+  // })();
 
   // document.addEventListener('popup:close', (e) => {
   //   const popup = e.target.closest('.popup');
