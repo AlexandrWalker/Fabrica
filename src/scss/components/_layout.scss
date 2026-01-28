@@ -49,8 +49,20 @@
   }
 
   &--first {
-    padding-top: 1.5rem;
+    padding-top: 0.8rem;
     margin-bottom: 0;
+
+    .btn {
+      height: 3rem;
+      padding: 0.3rem 0.3rem 0.3rem 1.5rem;
+
+      font-weight: 500;
+      font-size: 1.2rem;
+
+      a {
+
+      }
+    }
   }
 
   .container {
@@ -60,7 +72,8 @@
   &__inner {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    // gap: 2rem;
+    gap: 1.5rem;
   }
 
   &__head {
@@ -211,7 +224,8 @@
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    // gap: 2rem;
+    gap: 1.5rem;
   }
 
   &__content {
@@ -254,7 +268,34 @@
   }
 
   &__foot {
-    margin-top: 1rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 12rem;
+      background: linear-gradient(0deg, #0A2533 22.45%, rgba(255, 255, 255, 0) 86.33%);
+      pointer-events: none;
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    &-inner {
+      display: flex;
+      flex-direction: row;
+      gap: 0.8rem;
+      padding: 1.5rem;
+      border-radius: 1.6rem 1.6rem 0 0;
+      background-color: var(--white);
+    }
   }
 
   &__wrap {
@@ -418,7 +459,9 @@
     width: calc(100% + (var(--container-padding) * 2));
 
     position: sticky;
-    top: 20.5rem;
+    // top: 20.5rem;
+    // top: 16.5rem;
+    top: 10rem;
     z-index: 2;
 
     &::-webkit-scrollbar {
@@ -528,9 +571,12 @@
       }
 
       &:hover i {
-        background-color: var(--green);
 
-        color: var(--white);
+        @include domd {
+          background-color: var(--green);
+
+          color: var(--white);
+        }
       }
     }
   }
@@ -554,15 +600,34 @@
       padding: 2.4rem 2rem 2rem 2rem;
       border: 0.1rem solid var(--beige);
       background-color: var(--bg);
-      background-image: url(./../../images/temp/profile-card-bg-light.png);
-      background-repeat: no-repeat;
-      background-size: 100%;
+      // background-image: url(./../images/temp/profile-card-bg-light.png);
+      // background-repeat: no-repeat;
+      // background-size: 100%;
       pointer-events: none;
+
+      position: relative;
 
       .login & {
         background-color: var(--green);
-        background-image: url(./../../images/temp/profile-card-bg-green.png);
+        // background-image: url(./../images/temp/profile-card-bg-green.png);
         pointer-events: all;
+      }
+    }
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
 
@@ -572,6 +637,9 @@
       justify-content: space-between;
       gap: 2rem;
       height: 100%;
+
+      position: relative;
+      z-index: 3;
 
       .login & {
         color: var(--white);

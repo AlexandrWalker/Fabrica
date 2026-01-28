@@ -2,6 +2,10 @@
 
   .layout {
 
+    &__inner {
+      padding-bottom: 8rem;
+    }
+
     &__head {
 
       &-title {
@@ -14,6 +18,13 @@
         }
       }
     }
+  }
+}
+
+#profileCard {
+
+  .layout__body {
+    padding-top: 1rem;
   }
 }
 
@@ -60,6 +71,14 @@
 
           .login & {
             opacity: 1;
+          }
+        }
+
+        .btn--count {
+          display: none;
+
+          .login & {
+            display: block;
           }
         }
       }

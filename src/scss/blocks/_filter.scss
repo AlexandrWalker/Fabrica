@@ -1,13 +1,21 @@
 .filter {
 
+  .layout {
+
+    &__inner {
+      padding-bottom: 8rem;
+    }
+  }
+
   &.popup {
-    background-image: url(./../../images/temp/full-bg.png);
+    background-image: url(./../images/temp/full-bg.png);
   }
 
   &__items {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    gap: 1rem;
   }
 
   &__item {

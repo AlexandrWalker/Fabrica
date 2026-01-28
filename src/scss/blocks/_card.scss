@@ -170,8 +170,11 @@
     color: var(--aqua);
 
     &:hover {
-      background-color: var(--green);
-      color: var(--white);
+
+      @include domd {
+        background-color: var(--green);
+        color: var(--white);
+      }
     }
   }
 
@@ -187,8 +190,11 @@
     color: var(--white);
 
     &:hover {
-      background-color: var(--white);
-      color: var(--green);
+
+      @include domd {
+        background-color: var(--white);
+        color: var(--green);
+      }
     }
 
     i {

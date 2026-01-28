@@ -60,9 +60,12 @@
     }
 
     &:hover i {
-      background-color: var(--green);
 
-      color: var(--white);
+      @include domd {
+        background-color: var(--green);
+
+        color: var(--white);
+      }
     }
 
     &-img {

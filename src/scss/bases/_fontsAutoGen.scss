@@ -204,13 +204,6 @@
 @font-face {
 	font-family: SFCompact;
 	font-display: swap;
-	src: url("../fonts/SFCompact-Regular.woff2") format("woff2"), url("../fonts/SFCompact-Regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-}
-@font-face {
-	font-family: SFCompact;
-	font-display: swap;
 	src: url("../fonts/SFCompact-SemiBold.woff2") format("woff2"), url("../fonts/SFCompact-SemiBold.woff") format("woff");
 	font-weight: 600;
 	font-style: normal;
@@ -220,6 +213,13 @@
 	font-display: swap;
 	src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
 	font-weight: 100;
+	font-style: normal;
+}
+@font-face {
+	font-family: SFCompact;
+	font-display: swap;
+	src: url("../fonts/SFCompact-Regular.woff2") format("woff2"), url("../fonts/SFCompact-Regular.woff") format("woff");
+	font-weight: 400;
 	font-style: normal;
 }
 @font-face {
@@ -274,8 +274,8 @@
 @font-face {
 	font-family: SFPro;
 	font-display: swap;
-	src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
-	font-weight: 100;
+	src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
+	font-weight: 200;
 	font-style: normal;
 }
 @font-face {
@@ -286,17 +286,17 @@
 	font-style: normal;
 }
 @font-face {
-	font-family: SFPro;
-	font-display: swap;
-	src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
-	font-weight: 200;
-	font-style: normal;
-}
-@font-face {
 	font-family: SofiaPro;
 	font-display: swap;
 	src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
 	font-weight: 900;
+	font-style: normal;
+}
+@font-face {
+	font-family: SFPro;
+	font-display: swap;
+	src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+	font-weight: 100;
 	font-style: normal;
 }
 @font-face {

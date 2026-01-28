@@ -5,10 +5,15 @@
   top: var(--header-height);
   z-index: 10;
 
-  margin-bottom: 0.5rem;
-  padding-top: 1.5rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
   background-color: var(--white);
+  transition: top 0.8s ease;
+
+  .header-out & {
+    top: 0;
+  }
 
   &__inner {
     display: flex;
@@ -55,9 +60,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
     width: calc(25% - (2.4rem / 4));
-    height: 10.9rem;
+    height: 8.4rem;
     border-radius: 1.6rem;
     flex-shrink: 0;
     scroll-snap-align: center;
@@ -70,10 +75,15 @@
       width: calc((100% / 6) - (10rem / 6));
     }
 
-    &.is-active,
-    &:hover {
-      // background: var(--green-dark);
+    &.is-active {
       background: #041818;
+    }
+
+    &:hover {
+
+      @include domd {
+        background: #041818;
+      }
     }
 
     &-img {
@@ -91,7 +101,7 @@
     }
 
     &-icon {
-      font-size: 6rem;
+      font-size: 4.8rem;
       color: var(--white);
       flex-shrink: 0;
 
@@ -102,7 +112,7 @@
 
     &-text {
       font-weight: 1000;
-      font-size: 1.2rem;
+      font-size: 1rem;
       line-height: 120%;
       text-align: center;
     }
@@ -160,9 +170,12 @@
       }
 
       &:hover i {
-        background-color: var(--green);
 
-        color: var(--white);
+        @include domd {
+          background-color: var(--green);
+
+          color: var(--white);
+        }
       }
     }
   }

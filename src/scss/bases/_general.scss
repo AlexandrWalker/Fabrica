@@ -21,3 +21,17 @@
     margin: 0;
   }
 }
+
+.login {
+
+  .layout__card-img {
+
+    [data-color="light"] {
+      display: none;
+    }
+
+    [data-color="dark"] {
+      display: block;
+    }
+  }
+}

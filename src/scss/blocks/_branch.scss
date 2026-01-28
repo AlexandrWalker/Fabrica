@@ -20,6 +20,10 @@
 
   .layout {
 
+    &__inner {
+      padding-bottom: 8rem;
+    }
+
     &__content {
 
       .layout__block-text {

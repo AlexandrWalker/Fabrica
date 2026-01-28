@@ -3,8 +3,9 @@
 .panel {
   display: flex;
   align-items: flex-end;
-  width: 100%;
+  width: calc(100% + 0.2rem);
   height: var(--panel-height);
+  margin-left: -0.1rem;
 
   position: fixed;
   right: 0;
@@ -16,8 +17,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, #0A2533 25%, transparent 75%);
-    backdrop-filter: blur(2px);
+    background: linear-gradient(0deg, #0A2533 22.45%, rgba(255, 255, 255, 0) 86.33%);
     pointer-events: none;
 
     position: absolute;
@@ -64,23 +64,6 @@
       font-weight: 700;
       font-size: 1rem;
       line-height: 120%;
-    }
-
-    &-count {
-      padding: 0.4rem 0.3rem;
-      border-radius: 50%;
-      background-color: var(--red);
-
-      font-family: var(--third-family);
-      font-weight: 800;
-      font-size: 1rem;
-      line-height: 100%;
-      color: var(--bg);
-
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
     }
 
     &--mid {

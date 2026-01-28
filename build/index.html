@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#114349">
   <!-- noindex -->
   <meta name="robots" content="noindex, nofollow" />
   <!-- format -->
@@ -32,9 +33,6 @@
       <div class="header__inner">
 
         <div class="header__content">
-          <button id="burger-btn" class="burger-btn" data-popup-target="menu">
-            Меню
-          </button>
           <a class="logo" href="/Fabrica">
             <svg width="61" height="59" viewBox="0 0 61 59" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -84,7 +82,10 @@
                 fill="#FDF6EC" />
             </svg>
           </a>
-          <button class="header__points" data-popup-target="profile">
+          <button id="burger-btn" class="burger-btn" data-popup-target="menu">
+            Меню
+          </button>
+          <button class="header__points" data-popup-target="search">
             1500
           </button>
         </div>
@@ -714,7 +715,7 @@
                     <input type="checkbox" name="sub1">
                     <span class="filter__check"></span>
                     <div class="filter__item-text">
-                      Кальяны
+                      Кальяны (12)
                     </div>
                     <i class="icon-chevron"></i>
                   </label>
@@ -746,7 +747,7 @@
                     <input type="checkbox" name="sub1">
                     <span class="filter__check"></span>
                     <div class="filter__item-text">
-                      Салаты
+                      Салаты (6)
                     </div>
                     <i class="icon-chevron"></i>
                   </label>
@@ -762,7 +763,7 @@
                     <input type="checkbox" name="sub1">
                     <span class="filter__check"></span>
                     <div class="filter__item-text">
-                      Гарниры
+                      Гарниры (3)
                     </div>
                     <i class="icon-chevron"></i>
                   </label>
@@ -795,9 +796,11 @@
             </div>
           </div>
           <div class="layout__foot">
-            <button class="btn btn--green">
-              Показать
-            </button>
+            <div class="layout__foot-inner">
+              <button class="btn btn--green">
+                Показать (10)
+              </button>
+            </div>
           </div>
 
         </div>
@@ -1869,6 +1872,10 @@
                 </div>
               </div>
               <div class="layout__card-block" data-popup-target="profileCard">
+                <div class="layout__card-img">
+                  <img src="./images/temp/profile-card-bg-light.png" data-color="light" alt="">
+                  <img src="./images/temp/profile-card-bg-green.png" data-color="dark" alt="">
+                </div>
                 <div class="layout__card-content">
                   <div class="layout__card-wrap">
                     <div class="layout__card-title">
@@ -1919,6 +1926,9 @@
               <div class="menu__item" data-popup-target="favorite">
                 <div class="menu__item-icon">
                   <i class="icon-menu-like"></i>
+                  <div class="btn--count">
+                    5
+                  </div>
                 </div>
                 <div class="menu__item-title">
                   <h6>
@@ -1929,6 +1939,9 @@
               <div class="menu__item" data-popup-target="offers">
                 <div class="menu__item-icon">
                   <i class="icon-menu-personal-offers"></i>
+                  <div class="btn--count">
+                    20
+                  </div>
                 </div>
                 <div class="menu__item-title">
                   <h6>
@@ -1957,8 +1970,9 @@
                 </div>
               </div>
             </div>
-
-            <div class="layout__btns">
+          </div>
+          <div class="layout__foot">
+            <div class="layout__foot-inner">
               <button class="btn btn--green layout__btn--login" data-log="login">
                 Войти
               </button>
@@ -1986,47 +2000,8 @@
       <div class="container">
         <div class="layout__inner">
 
-          <div class="layout__head">
-            <div class="layout__head-title">
-              <h2>
-                Профиль
-              </h2>
-            </div>
-            <div class="layout__head-content">
-              <h2>
-                Иван Петров
-              </h2>
-              <a class="layout__head-tel h6" href="tel:+71234567890">
-                +7 (123) 456-78-90
-              </a>
-              <button class="layout__head-change h6" data-popup-target="profileDetails">
-                Изменить номер
-              </button>
-            </div>
-          </div>
           <div class="layout__body">
-
             <div class="layout__card">
-              <div class="layout__card-block">
-                <div class="layout__card-content">
-                  <div class="layout__card-wrap">
-                    <div class="layout__card-title">
-                      карта лояльности
-                    </div>
-                    <div class="layout__card-value h2">
-                      <span>200</span> Б
-                    </div>
-                  </div>
-                  <div class="layout__card-col">
-                    <div class="layout__card-title">
-                      кэшбэк 1%
-                    </div>
-                    <a class="layout__card-guess" href="/">
-                      <i class="icon-question-mark"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
               <div class="layout__card-qr">
                 <img src="./images/temp/profile-card-qr.png" alt="">
               </div>
@@ -2081,9 +2056,6 @@
               </div>
               <div class="form-group">
                 <input class="form-input" type="text" name="details_telegram" placeholder="Telegram">
-              </div>
-              <div class="form-group">
-                <input class="form-input" type="text" name="details_whatsapp" placeholder="What's App">
               </div>
 
               <div class="layout__btns">
@@ -2397,9 +2369,11 @@
             </div>
           </div>
           <div class="layout__foot">
-            <button class="btn btn--green" data-popup-target="addressAdd">
-              Добавить адрес
-            </button>
+            <div class="layout__foot-inner">
+              <button class="btn btn--green" data-popup-target="addressAdd">
+                Добавить адрес
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -3371,6 +3345,61 @@
 
   </div>
 </div>
+    <!-- По кайфу! -->
+    <div id="search" class="search popup" data-lenis-prevent>
+  <div class="popup__area" data-popup-head></div>
+  <div class="popup__inner">
+
+    <div class="layout" data-popup-scroll>
+      <div class="container">
+        <div class="layout__inner">
+
+          <div class="layout__head">
+            <div class="layout__head-title">
+              <h2>
+                Поиск
+              </h2>
+            </div>
+          </div>
+          <div class="layout__body">
+            <div class="layout__block">
+              <form action="#" class="layout__form">
+                <div class="form-group">
+                  <input class="form-input" type="text" name="search_input" placeholder="Введите название блюда">
+                </div>
+                <div class="form-results">
+                  <ul>
+                    <li>
+                      Бургер острый
+                    </li>
+                    <li>
+                      Бургер острый с курицей и беконом
+                    </li>
+                    <li>
+                      Бургер с мясом
+                    </li>
+                    <li>
+                      Бургеры с рыбой
+                    </li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="layout__foot">
+            <div class="layout__foot-inner">
+              <button class="btn btn--green">
+                Показать результат
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
     <!-- main -->
     <main id="main" class="main">
 
@@ -3378,7 +3407,10 @@
         <div class="container">
           <div class="layout__inner">
             <button class="btn btn--beige btn--arrow" data-popup-target="branch">
-              Кнопка
+              <!-- Выберите ресторан -->
+              <div class="btn__text">
+                ​Советская улица, 33 <a href="javascript: void(0)">Изменить</a>
+              </div>
               <i class="icon-chevron-right"></i>
             </button>
           </div>
@@ -3451,7 +3483,7 @@
                   <i class="icon-salads"></i>
                 </div>
                 <span class="hero__item-text">
-                  Фабричные коктейли
+                  Коктейли
                 </span>
               </a>
             </div>
@@ -6164,9 +6196,9 @@
       <button class="panel__btn panel__btn--mid" data-popup-target="favorite">
         <i class="icon-like"></i>
         <span>
-          По-кайфу
+          Нравится
         </span>
-        <div class="panel__btn-count">
+        <div class="btn--count">
           20
         </div>
       </button>
