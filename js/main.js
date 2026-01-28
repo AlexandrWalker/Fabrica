@@ -68,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const lenis = new Lenis({
     anchors: {
-      offset: -210,
+      // offset: -210,
+      // offset: -165,
+      offset: -100,
     },
   });
 
@@ -203,6 +205,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeScroll = null;
     });
+  })();
+
+  /**
+   * Управляет поведением хедера
+   */
+  (function headerFunc() {
+    const html = document.documentElement;
+    const header = document.getElementById('header');
+    const firstSection = document.querySelector('section');
+    let lastScrollTop = 1;
+    const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
+
+    window.addEventListener('scroll', () => {
+      if (scrollPosition() > lastScrollTop && scrollPosition() > firstSection.offsetHeight) {
+        html.classList.add('header-out');
+      } else {
+        html.classList.remove('header-out');
+      }
+      lastScrollTop = scrollPosition();
+    })
   })();
 
   // (function () {
@@ -527,7 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
       addressAdd: new BottomPopup(document.getElementById('addressAdd'), window.lenis),
       addressEdit: new BottomPopup(document.getElementById('addressEdit'), window.lenis),
       afisha: new BottomPopup(document.getElementById('afisha'), window.lenis),
-      favorite: new BottomPopup(document.getElementById('favorite'), window.lenis)
+      favorite: new BottomPopup(document.getElementById('favorite'), window.lenis),
+      search: new BottomPopup(document.getElementById('search'), window.lenis)
     };
 
     for (let key in popups) BottomPopup.register(key, popups[key]);
@@ -1008,6 +1031,34 @@ document.addEventListener('DOMContentLoaded', () => {
   //     updateActiveNav();
   //   });
   // })();
+
   console.log(window.lenis);
+
+  const form = document.querySelector('form');
+  if (form) {
+    const inputElements = document.querySelectorAll('.form-input');
+    const textareaElements = document.querySelectorAll('.form-textarea');
+    const className = 'filled';
+
+    inputElements.forEach(element => {
+      element.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+          element.classList.add(className);
+        } else {
+          element.classList.remove(className);
+        }
+      });
+    });
+
+    textareaElements.forEach(element => {
+      element.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+          element.classList.add(className);
+        } else {
+          element.classList.remove(className);
+        }
+      });
+    });
+  }
 
 });
