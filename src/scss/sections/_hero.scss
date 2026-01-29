@@ -9,8 +9,9 @@
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   background-color: var(--white);
-  transition: top 0.8s linear;
+  transition: top 0.5s linear;
   will-change: top;
+  overflow: hidden;
 
   .header-out & {
     top: 0;

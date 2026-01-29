@@ -3,7 +3,7 @@
 .header {
   background-color: var(--white);
   height: var(--header-height);
-  transition: top 0.8s linear;
+  transition: top 0.5s linear;
   will-change: top;
 
   position: fixed;

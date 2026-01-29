@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
+
   let vhRAF = null;
 
   function setVh() {
@@ -55,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     visualViewport.addEventListener('scroll', onViewportChange);
   }
 
-  const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
-
   /**
    * Подключение ScrollTrigger
    * Подключение SplitText
@@ -68,8 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const lenis = new Lenis({
     anchors: {
-      // offset: -210,
-      // offset: -165,
       offset: -100,
     },
   });
@@ -93,6 +91,35 @@ document.addEventListener('DOMContentLoaded', () => {
       lenis.stop();
     }
   });
+
+  /**
+   * Смена верхней границы крепления блоков при смене позции якоря Lenis
+   */
+  (function syncLenisAnchorOffset() {
+    const html = document.documentElement;
+
+    let lastOffset = -100;
+
+    function updateOffset() {
+      const hasHeaderOut = html.classList.contains('header-out');
+      const nextOffset = hasHeaderOut ? -165 : -100;
+
+      if (nextOffset === lastOffset) return;
+
+      lastOffset = nextOffset;
+      lenis.options.anchors.offset = nextOffset;
+    }
+
+    // начальное состояние
+    updateOffset();
+
+    // следим за изменением класса html
+    const observer = new MutationObserver(updateOffset);
+    observer.observe(html, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  })();
 
   // iOS Safari safe
   const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
@@ -128,6 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lockLenisDuringPopup();
 
+  /**
+   * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
+   */
   (function () {
     if (!window.visualViewport) return;
 
@@ -267,7 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Попапы
    */
-
   (function () {
     class BottomPopup {
       static stack = [];
@@ -587,64 +616,64 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Фиксация главной навигации страницы
    */
-  (() => {
-    const wrapper = document.querySelector('.nav');
+  // (() => {
+  //   const wrapper = document.querySelector('.nav');
 
-    if(!wrapper) return;
+  //   if (!wrapper) return;
 
-    const items = [...wrapper.querySelectorAll('.nav__item[data-id]')];
-    const sections = [...document.querySelectorAll('section[id]')]; // секции с id
+  //   const items = [...wrapper.querySelectorAll('.nav__item[data-id]')];
+  //   const sections = [...document.querySelectorAll('section[id]')]; // секции с id
 
-    // Мапа: data-id hero__item → сам элемент
-    const itemMap = new Map(
-      items.map(item => [item.dataset.id, item])
-    );
+  //   // Мапа: data-id hero__item → сам элемент
+  //   const itemMap = new Map(
+  //     items.map(item => [item.dataset.id, item])
+  //   );
 
-    let activeId = null;
+  //   let activeId = null;
 
-    const activateItem = (id) => {
-      if (activeId === id) return;
-      activeId = id;
+  //   const activateItem = (id) => {
+  //     if (activeId === id) return;
+  //     activeId = id;
 
-      // Класс для активного hero__item
-      items.forEach(i => i.classList.toggle('is-active', i.dataset.id === id));
+  //     // Класс для активного hero__item
+  //     items.forEach(i => i.classList.toggle('is-active', i.dataset.id === id));
 
-      const item = itemMap.get(id);
-      if (item) centerItem(item);
-    };
+  //     const item = itemMap.get(id);
+  //     if (item) centerItem(item);
+  //   };
 
-    const centerItem = (item) => {
-      const wrapRect = wrapper.getBoundingClientRect();
-      const itemRect = item.getBoundingClientRect();
+  //   const centerItem = (item) => {
+  //     const wrapRect = wrapper.getBoundingClientRect();
+  //     const itemRect = item.getBoundingClientRect();
 
-      const delta =
-        itemRect.left -
-        wrapRect.left -
-        (wrapRect.width / 2 - itemRect.width / 2);
+  //     const delta =
+  //       itemRect.left -
+  //       wrapRect.left -
+  //       (wrapRect.width / 2 - itemRect.width / 2);
 
-      wrapper.scrollBy({
-        left: delta,
-        behavior: 'smooth'
-      });
-    };
+  //     wrapper.scrollBy({
+  //       left: delta,
+  //       behavior: 'smooth'
+  //     });
+  //   };
 
-    // IntersectionObserver для секций
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const sectionId = entry.target.id; // берем id секции
-          activateItem(sectionId);
-        });
-      },
-      {
-        rootMargin: '-30% 0px -70% 0px', // активируем, когда секция почти у верхней границы
-        threshold: 0
-      }
-    );
+  //   // IntersectionObserver для секций
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach(entry => {
+  //         if (!entry.isIntersecting) return;
+  //         const sectionId = entry.target.id; // берем id секции
+  //         activateItem(sectionId);
+  //       });
+  //     },
+  //     {
+  //       rootMargin: '-30% 0px -70% 0px', // активируем, когда секция почти у верхней границы
+  //       threshold: 0
+  //     }
+  //   );
 
-    sections.forEach(section => observer.observe(section));
-  })();
+  //   sections.forEach(section => observer.observe(section));
+  // })();
 
   /**
    * Меняет класс у тега html на login
@@ -1035,8 +1064,9 @@ document.addEventListener('DOMContentLoaded', () => {
   //   });
   // })();
 
-  console.log(window.lenis);
-
+  /**
+   * Присваиваем класс у заполненного инпута
+   */
   const form = document.querySelector('form');
   if (form) {
     const inputElements = document.querySelectorAll('.form-input');
@@ -1065,16 +1095,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * swiper
+   * Инициализация swiper
    */
   if (document.querySelector('.swiper')) {
 
-    const navSlider = new Swiper(".nav__slider", {
+    const swiper = new Swiper(".nav__slider", {
       slidesPerGroup: 1,
       slidesPerView: 'auto',
       spaceBetween: 8,
       grabCursor: true,
-      speed: 500,
+
+      speed: 180,
+      touchRatio: 1.6,
+      resistanceRatio: 0.65,
+
       centeredSlides: false,
       centeredSlidesBounds: true,
       centerInsufficientSlides: true,
@@ -1083,22 +1117,201 @@ document.addEventListener('DOMContentLoaded', () => {
       loop: false,
       simulateTouch: true,
       watchOverflow: true,
+
+      direction: 'horizontal',
+      touchStartPreventDefault: true,
+      touchMoveStopPropagation: true,
+      threshold: 8,
+      touchAngle: 25, // ключевой параметр
+
       freeMode: {
         enabled: true,
         momentum: true,
-        momentumBounce: true,
-        sticky: true,
+        momentumRatio: 0.85, // меньше инерции
+        momentumVelocityRatio: 1,
+        momentumBounce: false, // убрать bounce
+        sticky: false // убрать залипание
       },
+
       mousewheel: {
         forceToAxis: true,
         sensitivity: 1,
         releaseOnEdges: true
       },
-      touchEvents: {
-        prevent: true
-      },
     });
-    
+
+    swiper.on('touchStart', () => {
+      if (window.lenis && !window.lenis.isStopped) {
+        window.lenis.stop();
+      }
+    });
+
+    swiper.on('touchEnd', () => {
+      if (window.lenis && window.lenis.isStopped) {
+        window.lenis.start();
+      }
+    });
+
   }
+
+  (() => {
+    const sliderEl = document.querySelector('.nav__slider');
+    if (!sliderEl || !window.lenis) return;
+
+    const swiper = sliderEl.swiper;
+    if (!swiper) return;
+
+    const items = [...sliderEl.querySelectorAll('.nav__item[data-id]')];
+    const sections = items
+      .map(i => document.getElementById(i.dataset.id))
+      .filter(Boolean);
+
+    const itemMap = new Map(items.map(i => [i.dataset.id, i]));
+
+    let activeId = null;
+    let isAutoSliding = false;
+    let isClickActivation = false;
+
+    /* =======================
+       Активный пункт
+    ======================= */
+    function setActive(id) {
+      if (activeId === id) return;
+      activeId = id;
+
+      for (const item of items) {
+        if (item.dataset.id === id) item.classList.add('is-active');
+        else item.classList.remove('is-active');
+      }
+
+      const item = itemMap.get(id);
+      if (item) ensureVisible(item);
+    }
+
+    /* =======================
+       Центрирование слайда
+    ======================= */
+    function ensureVisible(item) {
+      // кликом НИКОГДА не двигаем swiper
+      if (isClickActivation) return;
+
+      const slide = item.closest('.swiper-slide');
+      if (!slide) return;
+
+      const slideIndex = swiper.slides.indexOf(slide);
+      if (slideIndex === -1) return;
+
+      const maxIndex = swiper.slides.length - 1;
+
+      // жёсткий лок крайних
+      if (slideIndex === 0 || slideIndex === maxIndex) {
+        return;
+      }
+
+      const slideRect = slide.getBoundingClientRect();
+      const wrapRect = swiper.el.getBoundingClientRect();
+
+      // если уже виден — ничего не делаем
+      if (
+        slideRect.left >= wrapRect.left &&
+        slideRect.right <= wrapRect.right
+      ) {
+        return;
+      }
+
+      const currentTranslate = swiper.getTranslate();
+
+      const targetTranslate =
+        currentTranslate -
+        (
+          slideRect.left -
+          wrapRect.left -
+          (wrapRect.width / 2 - slideRect.width / 2)
+        );
+
+      // ограничиваем translate, чтобы не уехать за края
+      const minTranslate = swiper.maxTranslate();
+      const maxTranslate = swiper.minTranslate();
+
+      const clampedTranslate = Math.max(
+        minTranslate,
+        Math.min(maxTranslate, targetTranslate)
+      );
+
+      isAutoSliding = true;
+
+      swiper.setTransition(220);
+      swiper.setTranslate(clampedTranslate);
+
+      setTimeout(() => {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }, 230);
+    }
+
+    /* =======================
+       Клик по навигации
+    ======================= */
+    items.forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+
+        isClickActivation = true;
+
+        const id = item.dataset.id;
+        const section = document.getElementById(id);
+        if (!section) return;
+
+        setActive(id);
+
+        window.lenis.scrollTo(section, {
+          offset: -100,
+          duration: 1.1,
+          easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+
+        requestAnimationFrame(() => {
+          isClickActivation = false;
+        });
+      });
+    });
+
+    /* =======================
+       IntersectionObserver
+       30% viewport
+    ======================= */
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          setActive(entry.target.id);
+        });
+      },
+      {
+        threshold: 0.3
+      }
+    );
+
+    sections.forEach(sec => observer.observe(sec));
+
+    /* =======================
+       Прерывание автоскролла
+       при касании
+    ======================= */
+    swiper.on('touchStart', () => {
+      if (isAutoSliding) {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }
+    });
+
+    swiper.on('touchStart', () => {
+      if (isAutoSliding) {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }
+    });
+
+  })();
 
 });
