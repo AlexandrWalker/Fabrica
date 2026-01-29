@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'FabricaIconFont';
-  src:  url('fonts/FabricaIconFont.eot?nn5z2i');
-  src:  url('fonts/FabricaIconFont.eot?nn5z2i#iefix') format('embedded-opentype'),
-    url('fonts/FabricaIconFont.ttf?nn5z2i') format('truetype'),
-    url('fonts/FabricaIconFont.woff?nn5z2i') format('woff'),
-    url('fonts/FabricaIconFont.svg?nn5z2i#FabricaIconFont') format('svg');
+  src:  url('fonts/FabricaIconFont.eot?4dkim7');
+  src:  url('fonts/FabricaIconFont.eot?4dkim7#iefix') format('embedded-opentype'),
+    url('fonts/FabricaIconFont.ttf?4dkim7') format('truetype'),
+    url('fonts/FabricaIconFont.woff?4dkim7') format('woff'),
+    url('fonts/FabricaIconFont.svg?4dkim7#FabricaIconFont') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,111 +25,135 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-business-lunch:before {
+.icon-deserty:before {
   content: "\e900";
 }
-.icon-calories:before {
+.icon-cocktail:before {
   content: "\e901";
 }
-.icon-carbohydrates:before {
+.icon-napitki:before {
   content: "\e902";
 }
-.icon-chevron-right:before {
+.icon-goryacheye:before {
   content: "\e903";
 }
-.icon-clock:before {
+.icon-zakuski:before {
   content: "\e904";
 }
-.icon-close:before {
+.icon-qr:before {
   content: "\e905";
 }
-.icon-fat:before {
+.icon-points:before {
   content: "\e906";
 }
-.icon-filter:before {
+.icon-search:before {
   content: "\e907";
 }
-.icon-hookah:before {
+.icon-salads:before {
   content: "\e908";
 }
-.icon-hot:before {
+.icon-business-lunch:before {
   content: "\e909";
 }
-.icon-like:before {
+.icon-lunch:before {
   content: "\e90a";
 }
-.icon-login:before {
+.icon-hookah:before {
   content: "\e90b";
 }
-.icon-lunch:before {
+.icon-menu-meatballs:before {
   content: "\e90c";
 }
-.icon-meatballs:before {
+.icon-clock:before {
   content: "\e90d";
 }
-.icon-menu-card:before {
+.icon-menu-personal-offers:before {
   content: "\e90e";
 }
-.icon-menu-catering:before {
+.icon-star:before {
   content: "\e90f";
 }
-.icon-menu-contacts:before {
+.icon-menu-user:before {
   content: "\e910";
 }
-.icon-menu-geo:before {
+.icon-menu-like:before {
   content: "\e911";
 }
-.icon-menu-like:before {
+.icon-menu-geo:before {
   content: "\e912";
 }
-.icon-menu-list:before {
+.icon-menu-card:before {
   content: "\e913";
 }
-.icon-menu-loyalty-system:before {
+.icon-close:before {
   content: "\e914";
 }
-.icon-menu-meatballs:before {
+.icon-user:before {
   content: "\e915";
 }
-.icon-menu-microphone:before {
+.icon-question-mark:before {
   content: "\e916";
 }
-.icon-menu-personal-offers:before {
+.icon-menu-slang:before {
   content: "\e917";
 }
-.icon-menu-rassadka:before {
+.icon-menu-contacts:before {
   content: "\e918";
 }
-.icon-menu-slang:before {
+.icon-menu-loyalty-system:before {
   content: "\e919";
 }
-.icon-menu-user:before {
+.icon-menu-catering:before {
   content: "\e91a";
 }
-.icon-protein:before {
+.icon-menu-rassadka:before {
   content: "\e91b";
 }
-.icon-question-mark:before {
+.icon-menu-list:before {
   content: "\e91c";
 }
-.icon-salads:before {
+.icon-menu-microphone:before {
   content: "\e91d";
 }
-.icon-share:before {
+.icon-meatballs:before {
   content: "\e91e";
 }
-.icon-star:before {
+.icon-login:before {
   content: "\e91f";
 }
-.icon-star-fill:before {
+.icon-filter:before {
   content: "\e920";
 }
-.icon-top:before {
+.icon-up:before {
   content: "\e921";
 }
-.icon-up:before {
+.icon-carbohydrates:before {
   content: "\e922";
 }
-.icon-user:before {
+.icon-protein:before {
   content: "\e923";
+}
+.icon-calories:before {
+  content: "\e924";
+}
+.icon-fat:before {
+  content: "\e925";
+}
+.icon-share:before {
+  content: "\e926";
+}
+.icon-hot:before {
+  content: "\e927";
+}
+.icon-top:before {
+  content: "\e928";
+}
+.icon-star-fill:before {
+  content: "\e929";
+}
+.icon-like:before {
+  content: "\e92a";
+}
+.icon-chevron-right:before {
+  content: "\e92b";
 }

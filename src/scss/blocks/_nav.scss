@@ -1,0 +1,67 @@
+@use './../mixins' as *;
+
+.nav {
+
+  &__slider {
+    overflow: visible;
+  }
+
+  &__slide {
+    width: fit-content;
+    flex-shrink: 0;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    // width: calc(25% - (2.4rem / 4));
+    width: 8.7rem;
+    height: 8.4rem;
+    border-radius: 1.6rem;
+    transition: all 0.5s ease;
+    background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgba(24, 93, 102, 1);
+    scroll-snap-align: center;
+
+    color: var(--white);
+
+    @include domd {
+      width: calc((100% / 6) - (10rem / 6));
+    }
+
+    &.is-active {
+      background: var(--aqua-dark);
+    }
+
+    &:hover {
+
+      @include domd {
+        background: var(--aqua-dark);
+      }
+    }
+
+    &-img {
+      display: flex;
+      justify-content: center;
+      width: 4.8rem;
+      height: 4.8rem;
+      flex-shrink: 0;
+
+      img {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &-text {
+      font-weight: 1000;
+      font-size: 1rem;
+      line-height: 120%;
+      text-align: center;
+    }
+  }
+}

@@ -9,7 +9,8 @@
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   background-color: var(--white);
-  transition: top 0.8s ease;
+  transition: top 0.8s linear;
+  will-change: top;
 
   .header-out & {
     top: 0;
@@ -89,8 +90,8 @@
     &-img {
       display: flex;
       justify-content: center;
-      width: 6rem;
-      height: 6rem;
+      width: 4.8rem;
+      height: 4.8rem;
       flex-shrink: 0;
 
       img {

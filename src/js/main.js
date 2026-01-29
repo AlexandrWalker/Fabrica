@@ -588,8 +588,11 @@ document.addEventListener('DOMContentLoaded', () => {
    * Фиксация главной навигации страницы
    */
   (() => {
-    const wrapper = document.querySelector('.hero__items');
-    const items = [...wrapper.querySelectorAll('.hero__item[data-id]')];
+    const wrapper = document.querySelector('.nav');
+
+    if(!wrapper) return;
+
+    const items = [...wrapper.querySelectorAll('.nav__item[data-id]')];
     const sections = [...document.querySelectorAll('section[id]')]; // секции с id
 
     // Мапа: data-id hero__item → сам элемент
@@ -1059,6 +1062,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+  }
+
+  /**
+   * swiper
+   */
+  if (document.querySelector('.swiper')) {
+
+    const navSlider = new Swiper(".nav__slider", {
+      slidesPerGroup: 1,
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      grabCursor: true,
+      speed: 500,
+      centeredSlides: false,
+      centeredSlidesBounds: true,
+      centerInsufficientSlides: true,
+      slidesOffsetBefore: 0,
+      slidesOffsetAfter: 0,
+      loop: false,
+      simulateTouch: true,
+      watchOverflow: true,
+      freeMode: {
+        enabled: true,
+        momentum: true,
+        momentumBounce: true,
+        sticky: true,
+      },
+      mousewheel: {
+        forceToAxis: true,
+        sensitivity: 1,
+        releaseOnEdges: true
+      },
+      touchEvents: {
+        prevent: true
+      },
+    });
+    
   }
 
 });

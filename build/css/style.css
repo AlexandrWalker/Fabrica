@@ -119,16 +119,16 @@ li:last-child {
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-ExtraLight.woff2") format("woff2"), url("../fonts/Inter-ExtraLight.woff") format("woff");
-  font-weight: 200;
+  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: Inter;
   font-display: swap;
-  src: url("../fonts/Inter-Bold.woff2") format("woff2"), url("../fonts/Inter-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("../fonts/Inter-ExtraLight.woff2") format("woff2"), url("../fonts/Inter-ExtraLight.woff") format("woff");
+  font-weight: 200;
   font-style: normal;
 }
 
@@ -191,16 +191,16 @@ li:last-child {
 @font-face {
   font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/LeagueSpartan-ExtraBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraBold.woff") format("woff");
-  font-weight: 800;
+  src: url("../fonts/LeagueSpartan-ExtraLight.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraLight.woff") format("woff");
+  font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
   font-family: LeagueSpartan;
   font-display: swap;
-  src: url("../fonts/LeagueSpartan-ExtraLight.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraLight.woff") format("woff");
-  font-weight: 200;
+  src: url("../fonts/LeagueSpartan-ExtraBold.woff2") format("woff2"), url("../fonts/LeagueSpartan-ExtraBold.woff") format("woff");
+  font-weight: 800;
   font-style: normal;
 }
 
@@ -327,6 +327,14 @@ li:last-child {
 @font-face {
   font-family: SFCompact;
   font-display: swap;
+  src: url("../fonts/SFCompact-Regular.woff2") format("woff2"), url("../fonts/SFCompact-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: SFCompact;
+  font-display: swap;
   src: url("../fonts/SFCompact-Medium.woff2") format("woff2"), url("../fonts/SFCompact-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
@@ -345,14 +353,6 @@ li:last-child {
   font-display: swap;
   src: url("../fonts/SFCompact-Thin.woff2") format("woff2"), url("../fonts/SFCompact-Thin.woff") format("woff");
   font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: SFCompact;
-  font-display: swap;
-  src: url("../fonts/SFCompact-Regular.woff2") format("woff2"), url("../fonts/SFCompact-Regular.woff") format("woff");
-  font-weight: 400;
   font-style: normal;
 }
 
@@ -415,8 +415,8 @@ li:last-child {
 @font-face {
   font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
-  font-weight: 200;
+  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
+  font-weight: 100;
   font-style: normal;
 }
 
@@ -429,18 +429,18 @@ li:last-child {
 }
 
 @font-face {
-  font-family: SofiaPro;
+  font-family: SFPro;
   font-display: swap;
-  src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
-  font-weight: 900;
+  src: url("../fonts/SFPro-UltraLight.woff2") format("woff2"), url("../fonts/SFPro-UltraLight.woff") format("woff");
+  font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
-  font-family: SFPro;
+  font-family: SofiaPro;
   font-display: swap;
-  src: url("../fonts/SFPro-Thin.woff2") format("woff2"), url("../fonts/SFPro-Thin.woff") format("woff");
-  font-weight: 100;
+  src: url("../fonts/SofiaPro-Black.woff2") format("woff2"), url("../fonts/SofiaPro-Black.woff") format("woff");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -463,16 +463,16 @@ li:last-child {
 @font-face {
   font-family: SofiaPro;
   font-display: swap;
-  src: url("../fonts/SofiaPro-Light.woff2") format("woff2"), url("../fonts/SofiaPro-Light.woff") format("woff");
-  font-weight: 300;
+  src: url("../fonts/SofiaPro-Medium.woff2") format("woff2"), url("../fonts/SofiaPro-Medium.woff") format("woff");
+  font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: SofiaPro;
   font-display: swap;
-  src: url("../fonts/SofiaPro-Medium.woff2") format("woff2"), url("../fonts/SofiaPro-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../fonts/SofiaPro-Light.woff2") format("woff2"), url("../fonts/SofiaPro-Light.woff") format("woff");
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -700,6 +700,7 @@ body {
   --black-50: rgba(10, 37, 51, 0.5);
   --aqua: #06A5AA;
   --aqua-light: #00D0C5;
+  --aqua-dark: #041818;
   --green-dark: #0B3136;
   --green: #185D66;
   --green-50: rgba(24, 93, 102, 0.5);
@@ -1200,6 +1201,10 @@ body {
   width: 14.4rem;
 }
 
+.layout--carousel .card__items {
+  grid-template-columns: 1fr auto;
+}
+
 .layout--first {
   padding-top: 0.8rem;
   margin-bottom: 0;
@@ -1486,7 +1491,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
 }
 
 .layout__foot::before {
@@ -1977,6 +1982,20 @@ body {
   object-fit: contain;
 }
 
+.layout__card-icon {
+  display: none;
+  font-size: 6.3rem;
+  color: var(--white);
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 4;
+}
+
+.login .layout__card-icon {
+  display: block;
+}
+
 .layout__notice {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2149,7 +2168,9 @@ p {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  font-weight: 1000;
+  font-family: var(--fourth-family);
+  font-style: italic;
+  font-weight: 700;
   font-size: 2rem;
   line-height: 120%;
   color: var(--white);
@@ -2331,7 +2352,7 @@ p {
 
 .card__items {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   gap: 0.5rem 1rem;
 }
 
@@ -2557,11 +2578,9 @@ p {
 .header {
   background-color: var(--white);
   height: var(--header-height);
-  -webkit-transition: -webkit-transform 0.8s ease;
-  transition: -webkit-transform 0.8s ease;
-  transition: transform 0.8s ease;
-  transition: transform 0.8s ease, -webkit-transform 0.8s ease;
-  will-change: transform;
+  -webkit-transition: top 0.8s linear;
+  transition: top 0.8s linear;
+  will-change: top;
   position: fixed;
   top: 0;
   right: 0;
@@ -2570,9 +2589,7 @@ p {
 }
 
 .header-out .header {
-  -webkit-transform: translateY(calc(-100% - 0.1rem));
-  -ms-transform: translateY(calc(-100% - 0.1rem));
-  transform: translateY(calc(-100% - 0.1rem));
+  top: calc(var(--header-height) * -1);
 }
 
 .header__wrap {
@@ -2605,8 +2622,44 @@ p {
   -ms-flex-align: center;
   align-items: center;
   padding: 0.7rem 0 1rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+}
+
+.header__left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__search {
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 2.2rem;
+  color: var(--white);
 }
 
 .header__points {
@@ -2623,20 +2676,24 @@ p {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 0.3rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: 3rem;
-  margin-left: auto;
-  padding: 0.5rem 2.2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 10rem;
   background: rgba(255, 255, 255, 0.1);
   -webkit-box-shadow: inset 0px 0px 14.4px rgba(0, 247, 255, 0.29);
   box-shadow: inset 0px 0px 14.4px rgba(0, 247, 255, 0.29);
   font-weight: 700;
   font-size: 1.4rem;
-  line-height: 120%;
+  line-height: 100%;
   color: var(--white);
+}
+
+.header__points i {
+  font-size: 1.6rem;
 }
 
 .logo {
@@ -2658,8 +2715,8 @@ p {
 .logo svg {
   width: 100%;
   height: 100%;
-  -webkit-filter: drop-shadow(0rem 0rem 1.5rem var(--aqua-light));
-  filter: drop-shadow(0rem 0rem 1.5rem var(--aqua-light));
+  -webkit-filter: drop-shadow(0px 0px 9.5px var(--aqua-light));
+  filter: drop-shadow(0px 0px 9.5px var(--aqua-light));
 }
 
 .menu.popup {
@@ -2724,6 +2781,76 @@ p {
   font-weight: 800;
   line-height: 100%;
   color: var(--green);
+}
+
+.nav__slider {
+  overflow: visible;
+}
+
+.nav__slide {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.nav__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.6rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 8.7rem;
+  height: 8.4rem;
+  border-radius: 1.6rem;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: radial-gradient(63.22% 50.92% at 50.57% 31.65%, rgba(6, 165, 170, 0.61) 0%, rgba(11, 49, 54, 0.61) 77.08%), rgb(24, 93, 102);
+  scroll-snap-align: center;
+  color: var(--white);
+}
+
+.nav__item.is-active {
+  background: var(--aqua-dark);
+}
+
+.nav__item-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 4.8rem;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.nav__item-img img {
+  width: auto;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.nav__item-text {
+  font-weight: 1000;
+  font-size: 1rem;
+  line-height: 120%;
+  text-align: center;
 }
 
 .offers .layout__banner-link {
@@ -3223,8 +3350,9 @@ p {
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   background-color: var(--white);
-  -webkit-transition: top 0.8s ease;
-  transition: top 0.8s ease;
+  -webkit-transition: top 0.8s linear;
+  transition: top 0.8s linear;
+  will-change: top;
 }
 
 .header-out .hero {
@@ -3310,8 +3438,8 @@ p {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  width: 6rem;
-  height: 6rem;
+  width: 4.8rem;
+  height: 4.8rem;
   -ms-flex-negative: 0;
   flex-shrink: 0;
 }
@@ -3461,6 +3589,14 @@ p {
     -ms-flex-pack: center;
     justify-content: center;
     height: 100%;
+  }
+
+  .nav__item {
+    width: calc(16.6666666667% - 1.6666666667rem);
+  }
+
+  .nav__item:hover {
+    background: var(--aqua-dark);
   }
 
   .afisha__items {
