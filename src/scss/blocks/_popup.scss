@@ -3,8 +3,9 @@
 .popup {
   width: 100%;
   // height: calc(100dvh - var(--wrapper-padding));
-  height: calc(var(--vh) * 100 - var(--wrapper-padding));
-  
+  // height: calc(var(--vh) * 100 - var(--wrapper-padding));
+  height: calc(100svh - var(--wrapper-padding));
+
   z-index: 600;
   border-radius: 1.6rem 1.6rem 0 0;
   border: 0.1rem solid var(--beige);
@@ -12,7 +13,8 @@
   background-color: var(--white);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  transition: transform 0.3s ease-out, height 0.25s ease;;
+  transition: transform 0.3s ease-out, height 0.25s ease;
+  ;
   transform: translateY(100%);
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
@@ -62,5 +64,12 @@
       left: 50%;
       transform: translateX(-50%);
     }
+  }
+}
+
+/* fallback */
+@supports not (height: 100svh) {
+  .popup {
+    height: calc((var(--vh) * 100 ) - var(--wrapper-padding));
   }
 }
