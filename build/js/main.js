@@ -602,15 +602,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.querySelector('[data-log="login"]');
     const logoutBtn = document.querySelector('[data-log="logout"]');
 
-    loginBtn.addEventListener('click', () => {
-      document.documentElement.classList.remove('logout');
-      document.documentElement.classList.add(loginBtn.dataset.log);
-    })
-
-    logoutBtn.addEventListener('click', () => {
-      document.documentElement.classList.remove('login');
-      document.documentElement.classList.add(logoutBtn.dataset.log);
-    })
+    if (loginBtn || logoutBtn) {
+      loginBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('logout');
+        document.documentElement.classList.add(loginBtn.dataset.log);
+      })
+      logoutBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('login');
+        document.documentElement.classList.add(logoutBtn.dataset.log);
+      })
+    }
   })();
 
   /**
@@ -618,6 +619,8 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   (() => {
     const regCode = document.getElementById('regCode');
+    if (!regCode) return;
+
     const inputs = regCode.querySelectorAll('.form-code');
     const btn = regCode.querySelector('.btn');
 
