@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
 
   let vhRAF = null;
+  let lastVh = 0;
 
   function setVh() {
     if (vhRAF) cancelAnimationFrame(vhRAF);
@@ -12,49 +13,31 @@ document.addEventListener('DOMContentLoaded', () => {
         ? window.visualViewport.height
         : window.innerHeight;
 
-      const vh = height * 0.01;
+      const vh = Math.round(height * 0.01 * 100) / 100;
+
+      // защита от микроресайзов address bar
+      if (Math.abs(vh - lastVh) < 0.5) return;
+
+      lastVh = vh;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     });
   }
-
   setVh();
   window.addEventListener('resize', setVh);
-
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', setVh);
-    window.visualViewport.addEventListener('scroll', setVh);
-  }
 
   if (window.visualViewport) {
     const onViewportChange = () => {
       isViewportChanging = true;
 
-      // временно стопаем Lenis, чтобы он не пересчитывал scroll
-      if (window.lenis && !window.lenis.isStopped) {
-        window.lenis.stop();
-      }
-
       if (viewportRAF) cancelAnimationFrame(viewportRAF);
 
       viewportRAF = requestAnimationFrame(() => {
         isViewportChanging = false;
-
-        // обновляем размеры
         setVh();
-
-        // возобновляем Lenis ТОЛЬКО если нет popup
-        if (
-          window.lenis &&
-          window.lenis.isStopped &&
-          !document.documentElement.classList.contains('popup-open')
-        ) {
-          window.lenis.start();
-        }
       });
     };
 
     visualViewport.addEventListener('resize', onViewportChange);
-    visualViewport.addEventListener('scroll', onViewportChange);
   }
 
   /**
@@ -83,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(raf);
   }
-
   requestAnimationFrame(raf);
 
   lenis.on('scroll', () => {
@@ -614,68 +596,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   /**
-   * Фиксация главной навигации страницы
-   */
-  // (() => {
-  //   const wrapper = document.querySelector('.nav');
-
-  //   if (!wrapper) return;
-
-  //   const items = [...wrapper.querySelectorAll('.nav__item[data-id]')];
-  //   const sections = [...document.querySelectorAll('section[id]')]; // секции с id
-
-  //   // Мапа: data-id hero__item → сам элемент
-  //   const itemMap = new Map(
-  //     items.map(item => [item.dataset.id, item])
-  //   );
-
-  //   let activeId = null;
-
-  //   const activateItem = (id) => {
-  //     if (activeId === id) return;
-  //     activeId = id;
-
-  //     // Класс для активного hero__item
-  //     items.forEach(i => i.classList.toggle('is-active', i.dataset.id === id));
-
-  //     const item = itemMap.get(id);
-  //     if (item) centerItem(item);
-  //   };
-
-  //   const centerItem = (item) => {
-  //     const wrapRect = wrapper.getBoundingClientRect();
-  //     const itemRect = item.getBoundingClientRect();
-
-  //     const delta =
-  //       itemRect.left -
-  //       wrapRect.left -
-  //       (wrapRect.width / 2 - itemRect.width / 2);
-
-  //     wrapper.scrollBy({
-  //       left: delta,
-  //       behavior: 'smooth'
-  //     });
-  //   };
-
-  //   // IntersectionObserver для секций
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach(entry => {
-  //         if (!entry.isIntersecting) return;
-  //         const sectionId = entry.target.id; // берем id секции
-  //         activateItem(sectionId);
-  //       });
-  //     },
-  //     {
-  //       rootMargin: '-30% 0px -70% 0px', // активируем, когда секция почти у верхней границы
-  //       threshold: 0
-  //     }
-  //   );
-
-  //   sections.forEach(section => observer.observe(section));
-  // })();
-
-  /**
    * Меняет класс у тега html на login
    */
   (() => {
@@ -904,167 +824,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   /**
- * Универсальная навигация по layout__nav для вертикальных и горизонтальных layout
- * - Вертикальные layout: прокрутка страницы с помощью Lenis или window.scrollTo
- * - Горизонтальные layout (layout--carousel): прокрутка контейнера layout__items по горизонтали
- */
-  // (function () {
-  //   /**
-  //    * Обработчик клика по кнопкам навигации
-  //    */
-  //   document.addEventListener('click', (e) => {
-  //     const navBtn = e.target.closest('.layout__nav-item');
-  //     if (!navBtn) return; // Если клик не по кнопке nav — игнорируем
-
-  //     const layout = navBtn.closest('.layout');
-  //     if (!layout) return;
-
-  //     const nav = layout.querySelector('.layout__nav');
-  //     if (!nav) return;
-
-  //     const navItems = nav.querySelectorAll('.layout__nav-item');
-  //     const targetKey = navBtn.dataset.nav;
-
-  //     // Все карточки внутри layout с data-dish
-  //     const cards = layout.querySelectorAll('.card[data-dish]');
-  //     if (!cards.length) return;
-
-  //     const isCarousel = layout.classList.contains('layout--carousel');
-
-  //     if (isCarousel) {
-  //       // --- Горизонтальная прокрутка (carousel) ---
-  //       const container = layout.querySelector('.layout__items');
-  //       const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
-  //       if (!targetCard) return;
-
-  //       // Вычисляем положение карточки относительно контейнера
-  //       const cardLeft = targetCard.offsetLeft;
-  //       const cardWidth = targetCard.offsetWidth;
-  //       const containerWidth = container.clientWidth;
-
-  //       // Прокручиваем так, чтобы карточка оказалась по центру
-  //       const scrollTarget = cardLeft - (containerWidth / 2 - cardWidth / 2);
-
-  //       container.scrollTo({
-  //         left: scrollTarget,
-  //         behavior: 'smooth'
-  //       });
-  //     } else {
-  //       // --- Вертикальная прокрутка ---
-  //       const targetCard = Array.from(cards).find(card => card.dataset.dish === targetKey);
-  //       if (!targetCard) return;
-
-  //       // Позиция относительно документа, с учётом offset (например, шапка)
-  //       const cardTop = targetCard.getBoundingClientRect().top + window.scrollY - 260;
-
-  //       if (lenis && lenis.scrollTo) {
-  //         lenis.scrollTo(cardTop, {
-  //           duration: 1.1,
-  //           easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-  //         });
-  //       } else {
-  //         window.scrollTo({ top: cardTop, behavior: 'smooth' });
-  //       }
-  //     }
-
-  //     // --- Подсветка активной кнопки ---
-  //     navItems.forEach(btn => btn.classList.remove('active'));
-  //     navBtn.classList.add('active');
-  //   });
-
-  //   /**
-  //    * Автоматическое обновление active кнопки при скролле
-  //    */
-  //   const layouts = document.querySelectorAll('.layout');
-
-  //   layouts.forEach(layout => {
-  //     const nav = layout.querySelector('.layout__nav');
-  //     if (!nav) return;
-
-  //     const navItems = nav.querySelectorAll('.layout__nav-item');
-  //     const cards = layout.querySelectorAll('.card[data-dish]');
-  //     if (!cards.length) return;
-
-  //     const isCarousel = layout.classList.contains('layout--carousel');
-
-  //     const updateActiveNav = () => {
-  //       let currentCard = null;
-
-  //       if (isCarousel) {
-  //         // --- Горизонтальный scroll ---
-  //         const container = layout.querySelector('.layout__items');
-  //         const scrollPos = container.scrollLeft + container.clientWidth / 2; // центр контейнера
-
-  //         // Находим карточку, которая находится в центре видимой области
-  //         for (const card of cards) {
-  //           const cardLeft = card.offsetLeft;
-  //           const cardRight = cardLeft + card.offsetWidth;
-
-  //           if (scrollPos >= cardLeft && scrollPos <= cardRight) {
-  //             currentCard = card;
-  //             break;
-  //           }
-  //         }
-  //       } else {
-  //         // --- Вертикальный scroll ---
-  //         const scrollPos = window.scrollY + 260; // offset от шапки
-
-  //         // Последняя карточка, которая прошла offset
-  //         for (const card of cards) {
-  //           const cardTop = card.getBoundingClientRect().top + window.scrollY;
-  //           if (scrollPos >= cardTop) {
-  //             currentCard = card;
-  //           } else {
-  //             break;
-  //           }
-  //         }
-  //       }
-
-  //       if (!currentCard) return;
-
-  //       const targetKey = currentCard.dataset.dish;
-
-  //       // Обновляем активную кнопку
-  //       navItems.forEach(btn => {
-  //         const isActive = btn.dataset.nav === targetKey;
-  //         btn.classList.toggle('active', isActive);
-
-  //         // Горизонтальная прокрутка nav, чтобы активная кнопка была видна
-  //         if (isActive) {
-  //           const btnLeft = btn.offsetLeft;
-  //           const btnRight = btnLeft + btn.offsetWidth;
-  //           const navScrollLeft = nav.scrollLeft;
-  //           const navRightEdge = navScrollLeft + nav.clientWidth;
-
-  //           if (btnLeft < navScrollLeft || btnRight > navRightEdge) {
-  //             nav.scrollTo({
-  //               left: btnLeft - nav.clientWidth / 2 + btn.offsetWidth / 2,
-  //               behavior: 'smooth'
-  //             });
-  //           }
-  //         }
-  //       });
-  //     };
-
-  //     // --- Подписка на события scroll ---
-  //     if (isCarousel) {
-  //       // Горизонтальный контейнер скроллит сам
-  //       const container = layout.querySelector('.layout__items');
-  //       container.addEventListener('scroll', updateActiveNav);
-  //     } else {
-  //       // Вертикальная прокрутка страницы
-  //       window.addEventListener('scroll', updateActiveNav);
-  //       if (lenis && lenis.on) {
-  //         lenis.on('scroll', updateActiveNav);
-  //       }
-  //     }
-
-  //     // --- Установка active при загрузке страницы ---
-  //     updateActiveNav();
-  //   });
-  // })();
-
-  /**
    * Присваиваем класс у заполненного инпута
    */
   const form = document.querySelector('form');
@@ -1154,6 +913,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
+  /**
+   * Поведение навигации nav
+   */
   (() => {
     const sliderEl = document.querySelector('.nav__slider');
     if (!sliderEl || !window.lenis) return;
