@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (delta < 0) delta = 0;
         const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
 
-        this.popup.style.transform = `translateY(${resistance}px)`;
+        this.popup.style.transform = `translateY(${resistance / 10}rem)`;
         this.lastY = y;
 
         if (!isIOS && e.cancelable) {

@@ -3,8 +3,9 @@
 .header {
   background-color: var(--white);
   height: var(--header-height);
-  transition: top 0.5s linear;
-  will-change: top;
+  transition: transform 0.5s ease;
+  transform: translateY(0);
+  will-change: transform;
 
   position: fixed;
   top: 0;
@@ -12,8 +13,9 @@
   left: 0;
   z-index: 1000;
 
-  .header-out & {
-    top: calc(var(--header-height) * -1);
+  .header-out:not(.popup-open) & {
+    // top: calc(var(--header-height) * -1);
+    transform: translateY(-100%);
   }
 
   .container {

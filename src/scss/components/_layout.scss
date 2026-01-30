@@ -457,9 +457,8 @@
     padding: 0.5rem var(--container-padding);
     margin-top: -0.5rem;
     margin-left: calc(var(--container-padding) * -1);
-    width: 100vw;
     width: calc(100% + (var(--container-padding) * 2));
-    transition: top 0.8s linear;
+    transition: top 0.5s ease;
 
     position: sticky;
     top: 16.5rem;
