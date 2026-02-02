@@ -2,6 +2,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
 
+  let vhRAF = null;
+  let lastVh = 0;
+
+  function setVh() {
+    if (vhRAF) cancelAnimationFrame(vhRAF);
+
+    vhRAF = requestAnimationFrame(() => {
+      const height = window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+      const vh = Math.round(height * 0.01 * 100) / 100;
+
+      // защита от микроресайзов address bar
+      if (Math.abs(vh - lastVh) < 0.5) return;
+
+      lastVh = vh;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
+
+  if (window.visualViewport) {
+    const onViewportChange = () => {
+      isViewportChanging = true;
+
+      if (viewportRAF) cancelAnimationFrame(viewportRAF);
+
+      viewportRAF = requestAnimationFrame(() => {
+        isViewportChanging = false;
+        setVh();
+      });
+    };
+
+    visualViewport.addEventListener('resize', onViewportChange);
+  }
+
   /**
    * Подключение ScrollTrigger
    * Подключение SplitText
@@ -68,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // iOS Safari safe
   const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
 
-  (function () {
+  function lockLenisDuringPopup() {
     if (!isIOS) return;
 
     const update = () => {
@@ -81,35 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // слушаем visualViewport
-    // if (window.visualViewport) {
-    //   visualViewport.addEventListener('resize', () => {
-    //     if (viewportRAF) cancelAnimationFrame(viewportRAF);
-    //     viewportRAF = requestAnimationFrame(update);
-    //   });
-    //   visualViewport.addEventListener('scroll', () => {
-    //     if (viewportRAF) cancelAnimationFrame(viewportRAF);
-    //     viewportRAF = requestAnimationFrame(update);
-    //   });
-    // }
-
     if (window.visualViewport) {
-      visualViewport.addEventListener(
-        'resize',
-        () => {
-          if (viewportRAF) return;
-          viewportRAF = requestAnimationFrame(() => {
-            update();
-            viewportRAF = null;
-          });
-        },
-        { passive: true }
-      );
+      visualViewport.addEventListener('resize', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
+      visualViewport.addEventListener('scroll', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
     }
 
     // на случай, если popup открыли/закрыли без resize
     const observer = new MutationObserver(update);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-  })();
+  }
+
+  lockLenisDuringPopup();
 
   /**
    * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
@@ -120,39 +146,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeScroll = null;
     let basePadding = 0;
 
-    // function updateKeyboardOffset() {
-    //   if (!activeScroll) return;
-
-    //   const vv = window.visualViewport;
-    //   const keyboardHeight = Math.max(
-    //     0,
-    //     window.innerHeight - vv.height - vv.offsetTop
-    //   );
-
-    //   activeScroll.style.paddingBottom =
-    //     basePadding + keyboardHeight + 'px';
-    // }
-
-    let keyboardRAF = null;
-
-    function updateKeyboardOffsetSafe() {
+    function updateKeyboardOffset() {
       if (!activeScroll) return;
-      if (keyboardRAF) return;
 
-      keyboardRAF = requestAnimationFrame(() => {
-        const vv = window.visualViewport;
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
 
-        // iOS safe: без innerHeight
-        const keyboardHeight = Math.max(
-          0,
-          screen.height - vv.height
-        );
-
-        activeScroll.style.paddingBottom =
-          basePadding + keyboardHeight + 'px';
-
-        keyboardRAF = null;
-      });
+      activeScroll.style.paddingBottom =
+        basePadding + keyboardHeight + 'px';
     }
 
     function scrollInputIntoView(input) {
@@ -196,14 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
       activeScroll = scroll;
       basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
 
-      updateKeyboardOffsetSafe();
+      updateKeyboardOffset();
       scrollInputIntoView(input);
 
-      // updateKeyboardOffset();
-      // scrollInputIntoView(input);
-
-      // visualViewport.addEventListener('resize', updateKeyboardOffset);
-      // visualViewport.addEventListener('scroll', updateKeyboardOffset);
+      visualViewport.addEventListener('resize', updateKeyboardOffset);
+      visualViewport.addEventListener('scroll', updateKeyboardOffset);
     });
 
     document.addEventListener('focusout', () => {
@@ -211,10 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeScroll.style.paddingBottom = basePadding + 'px';
 
-      // visualViewport.removeEventListener('resize', updateKeyboardOffset);
-      // visualViewport.removeEventListener('scroll', updateKeyboardOffset);
-
-      updateKeyboardOffsetSafe();
+      visualViewport.removeEventListener('resize', updateKeyboardOffset);
+      visualViewport.removeEventListener('scroll', updateKeyboardOffset);
 
       activeScroll = null;
     });
@@ -239,6 +238,43 @@ document.addEventListener('DOMContentLoaded', () => {
       lastScrollTop = scrollPosition();
     })
   })();
+
+  // (function () {
+  //   if (!window.visualViewport) return;
+
+  //   const POPUP_SELECTOR =
+  //     '.popup[data-open="true"]:not(.is-under)';
+
+  //   let keyboardOpened = false;
+
+  //   function updatePopupHeight() {
+  //     const vv = window.visualViewport;
+
+  //     const keyboardVisible =
+  //       vv.height + vv.offsetTop < window.innerHeight - 10;
+
+  //     if (keyboardVisible === keyboardOpened) return;
+  //     keyboardOpened = keyboardVisible;
+
+  //     document.querySelectorAll(POPUP_SELECTOR).forEach((popup) => {
+  //       if (keyboardVisible) {
+  //         popup.style.height = 'calc(var(--vh) * 100)';
+  //       } else {
+  //         popup.style.height =
+  //           'calc(var(--vh) * 100 - var(--wrapper-padding))';
+  //       }
+  //     });
+  //   }
+
+  //   visualViewport.addEventListener('resize', updatePopupHeight);
+  // })();
+
+  // document.addEventListener('popup:close', (e) => {
+  //   const popup = e.target.closest('.popup');
+  //   if (!popup) return;
+
+  //   popup.style.height = '';
+  // });
 
   /**
    * Попапы
@@ -334,12 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stack.length === 0) {
           const scrollY = BottomPopup.scrollY;
 
-          // if (window.lenis) {
-          //   window.lenis.scrollTo(scrollY, { immediate: true });
-          // } else {
-          //   window.scrollTo(0, scrollY);
-          // }
-          if (!isIOS && window.lenis) {
+          if (window.lenis) {
             window.lenis.scrollTo(scrollY, { immediate: true });
           } else {
             window.scrollTo(0, scrollY);
