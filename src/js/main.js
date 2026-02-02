@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Инициализация Lenis
    */
+  // --- Проверка iOS ---
+  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
+
   const lenis = new Lenis({
     anchors: {
       offset: -100,
@@ -19,21 +22,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.lenis = lenis;
 
-  let isViewportChanging = false;
+  // --- Защита stop/start на iOS ---
+  let isStoppedByPopup = false;
 
-  function raf(time) {
-    if (!isViewportChanging) {
-      lenis.raf(time);
-    }
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  lenis.on('scroll', () => {
-    if (document.documentElement.classList.contains('popup-open')) {
+  // Функции для безопасного старта/остановки Lenis
+  function stopLenisSafe() {
+    if (!lenis.isStopped) {
       lenis.stop();
+      isStoppedByPopup = true;
     }
-  });
+  }
+
+  function startLenisSafe() {
+    if (lenis.isStopped && isStoppedByPopup) {
+      lenis.start();
+      isStoppedByPopup = false;
+    }
+  }
+
+  // --- RAF Lenis ---
+  (function rafLoop(time) {
+    lenis.raf(time);
+    requestAnimationFrame(rafLoop);
+  })();
+
+  // --- iOS-safe popup observer ---
+  if (isIOS) {
+    const observer = new MutationObserver(() => {
+      const isPopupOpen = document.documentElement.classList.contains('popup-open');
+      if (isPopupOpen) stopLenisSafe();
+      else startLenisSafe();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+  // --- ./Инициализация Lenis ---
 
   /**
    * Смена верхней границы крепления блоков при смене позции якоря Lenis
@@ -65,68 +87,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   // ТУТ УЯЗВИМОЕ МЕСТО
-  // iOS Safari safe (iOS 16–18)
-  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
-  (function () {
-    if (!isIOS) return;
-
-    let lastPopupState = null;
-    let rafId = null;
-
-    const update = () => {
-      rafId = null;
-
+  if (isIOS) {
+    const observer = new MutationObserver(() => {
       const isPopupOpen =
         document.documentElement.classList.contains('popup-open');
 
-      // защита от лишних start/stop
-      if (isPopupOpen === lastPopupState) return;
-      lastPopupState = isPopupOpen;
-
-      if (!window.lenis) return;
-
-      if (isPopupOpen) {
-        if (!window.lenis.isStopped) {
-          window.lenis.stop();
-        }
-      } else {
-        if (window.lenis.isStopped) {
-          window.lenis.start();
-        }
-      }
-    };
-
-    const scheduleUpdate = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(update);
-    };
-
-    // ТОЛЬКО resize — никаких scroll
-    if (window.visualViewport) {
-      visualViewport.addEventListener('resize', scheduleUpdate, {
-        passive: true,
-      });
-    }
-
-    // реагируем ТОЛЬКО на реальное изменение popup-open
-    const observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        if (m.attributeName === 'class') {
-          scheduleUpdate();
-          break;
-        }
-      }
+      if (isPopupOpen) stopLenisSafe();
+      else startLenisSafe();
     });
 
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });
-
-    // первичная синхронизация
-    scheduleUpdate();
-  })();
+  }
   // ./ТУТ УЯЗВИМОЕ МЕСТО
 
   /**
@@ -137,44 +111,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //   let activeScroll = null;
   //   let basePadding = 0;
+  //   let rafId = null;
+  //   let lastKeyboardHeight = -1;
 
-  //   function updateKeyboardOffset() {
-  //     if (!activeScroll) return;
-
+  //   function getKeyboardHeight() {
   //     const vv = window.visualViewport;
-  //     const keyboardHeight = Math.max(
+
+  //     // iOS-safe расчёт
+  //     const height = Math.max(
   //       0,
   //       window.innerHeight - vv.height - vv.offsetTop
   //     );
 
+  //     return Math.round(height);
+  //   }
+
+  //   function applyKeyboardOffset() {
+  //     rafId = null;
+  //     if (!activeScroll) return;
+
+  //     const keyboardHeight = getKeyboardHeight();
+
+  //     // защита от лишних layout-изменений
+  //     if (keyboardHeight === lastKeyboardHeight) return;
+  //     lastKeyboardHeight = keyboardHeight;
+
   //     activeScroll.style.paddingBottom =
   //       basePadding + keyboardHeight + 'px';
+  //   }
+
+  //   function scheduleUpdate() {
+  //     if (rafId) return;
+  //     rafId = requestAnimationFrame(applyKeyboardOffset);
   //   }
 
   //   function scrollInputIntoView(input) {
   //     const scroll = input.closest('[data-popup-scroll]');
   //     if (!scroll) return;
 
-  //     // абсолютная позиция input внутри scroll
   //     const inputRect = input.getBoundingClientRect();
   //     const scrollRect = scroll.getBoundingClientRect();
 
-  //     // верхний оффсет, с учётом клавиатуры
-  //     const vv = window.visualViewport;
-  //     const keyboardHeight = Math.max(
-  //       0,
-  //       window.innerHeight - vv.height - vv.offsetTop
-  //     );
-
-  //     // высота видимой области scroll
+  //     const keyboardHeight = getKeyboardHeight();
   //     const visibleHeight = scroll.clientHeight - keyboardHeight;
 
-  //     // если input не полностью виден — скроллим
-  //     const offsetTop = inputRect.top - scrollRect.top + scroll.scrollTop;
+  //     const offsetTop =
+  //       inputRect.top - scrollRect.top + scroll.scrollTop;
 
   //     if (offsetTop < scroll.scrollTop) {
   //       scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
-  //     } else if (offsetTop + inputRect.height > scroll.scrollTop + visibleHeight) {
+  //     } else if (
+  //       offsetTop + inputRect.height >
+  //       scroll.scrollTop + visibleHeight
+  //     ) {
   //       scroll.scrollTo({
   //         top: offsetTop - visibleHeight + inputRect.height,
   //         behavior: 'smooth',
@@ -183,20 +172,29 @@ document.addEventListener('DOMContentLoaded', () => {
   //   }
 
   //   document.addEventListener('focusin', (e) => {
-  //     const input = e.target.closest('input, textarea, [contenteditable]');
+  //     const input = e.target.closest(
+  //       'input, textarea, [contenteditable]'
+  //     );
   //     if (!input) return;
 
   //     const scroll = input.closest('[data-popup-scroll]');
   //     if (!scroll) return;
 
   //     activeScroll = scroll;
-  //     basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
+  //     basePadding =
+  //       parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
 
-  //     updateKeyboardOffset();
+  //     lastKeyboardHeight = -1;
+
+  //     scheduleUpdate();
   //     scrollInputIntoView(input);
 
-  //     visualViewport.addEventListener('resize', updateKeyboardOffset);
-  //     visualViewport.addEventListener('scroll', updateKeyboardOffset);
+  //     // ТОЛЬКО resize
+  //     visualViewport.addEventListener(
+  //       'resize',
+  //       scheduleUpdate,
+  //       { passive: true }
+  //     );
   //   });
 
   //   document.addEventListener('focusout', () => {
@@ -204,10 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //     activeScroll.style.paddingBottom = basePadding + 'px';
 
-  //     visualViewport.removeEventListener('resize', updateKeyboardOffset);
-  //     visualViewport.removeEventListener('scroll', updateKeyboardOffset);
+  //     visualViewport.removeEventListener(
+  //       'resize',
+  //       scheduleUpdate
+  //     );
 
   //     activeScroll = null;
+  //     lastKeyboardHeight = -1;
   //   });
   // })();
 
@@ -233,28 +234,28 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Попапы
    */
+  // Это надо проверить, бэкап если что есть
   (function () {
     class BottomPopup {
       static stack = [];
       static BASE_Z = 600;
 
-      constructor(popupEl, lenis) {
+      constructor(popupEl) {
         if (!popupEl) return;
 
         this.popup = popupEl;
-        this.lenis = lenis;
-
-        this.head = popupEl.querySelector('[data-popup-head]');
-        this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
-
         this._historyAdded = false;
         this._ignorePopstate = false;
 
+        // Drag vars
         this.startY = 0;
         this.lastY = 0;
         this.startTarget = null;
         this.isDragging = false;
         this.startTime = 0;
+
+        this.head = popupEl.querySelector('[data-popup-head]');
+        this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
 
         // Drag events
         this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
@@ -277,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- Запуск попапа ---
       open() {
         if (!this.popup || this.isOpen()) return;
-
         const stack = BottomPopup.stack;
         const prev = stack[stack.length - 1];
         if (prev) prev.popup.classList.add('is-under');
@@ -289,14 +289,10 @@ document.addEventListener('DOMContentLoaded', () => {
         this.popup.style.transform = 'translateY(0)';
         this.popup.dataset.open = 'true';
 
-        if (this.lenis && stack.length === 1 && !this.lenis.isStopped) {
-          this.lenis.stop();
-        }
+        if (stack.length === 1) stopLenisSafe();
         BottomPopup.scrollY = window.scrollY;
-
         document.documentElement.classList.add('popup-open');
 
-        // --- history для back button ---
         if (!this._historyAdded) {
           history.pushState({ popup: true }, '');
           this._historyAdded = true;
@@ -324,24 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stack.length === 0) {
           const scrollY = BottomPopup.scrollY;
 
-          if (window.lenis) {
-            window.lenis.scrollTo(scrollY, { immediate: true });
-          } else {
-            window.scrollTo(0, scrollY);
-          }
+          if (window.lenis) lenis.scrollTo(scrollY, { immediate: true });
+          else window.scrollTo(0, scrollY);
 
           requestAnimationFrame(() => {
             document.documentElement.classList.remove('popup-open');
+            startLenisSafe(); // безопасный restart
           });
-
-          if (
-            this.lenis &&
-            this.lenis.isStopped &&
-            !isViewportChanging
-          ) {
-            this.lenis.start();
-          }
-
         }
 
         // важно: флаг только при НЕ popstate
@@ -416,25 +401,20 @@ document.addEventListener('DOMContentLoaded', () => {
         this.startTime = Date.now();
         this.isDragging = true;
         this.startTarget = e.target;
-
         this.popup.style.transition = 'none';
       }
 
       onMove(e) {
         if (!this.isDragging) return;
-
         const y = e.touches[0].clientY;
         let delta = y - this.startY;
 
         const isDraggingScrollContent = this.scrollEl && e.target.closest('[data-popup-scroll]');
-
-        if (delta > 0) { // свайп вниз
-          if (isDraggingScrollContent) {
-            const scrollTop = this.scrollEl.scrollTop;
-            const startedOnHeader = this.startTarget.closest('[data-popup-head]');
-            if (scrollTop > 0 && !startedOnHeader) return; // обычный скролл
-          }
-        } else return; // свайп вверх не трогаем
+        if (delta > 0 && isDraggingScrollContent) {
+          const scrollTop = this.scrollEl.scrollTop;
+          const startedOnHeader = this.startTarget.closest('[data-popup-head]');
+          if (scrollTop > 0 && !startedOnHeader) return;
+        } else if (delta < 0) return;
 
         if (delta < 0) delta = 0;
         const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
@@ -442,17 +422,13 @@ document.addEventListener('DOMContentLoaded', () => {
         this.popup.style.transform = `translateY(${resistance / 10}rem)`;
         this.lastY = y;
 
-        if (!isIOS && e.cancelable) {
-          e.preventDefault();
-        }
+        if (!isIOS && e.cancelable) e.preventDefault();
       }
 
       onEnd() {
         if (!this.isDragging) return;
-
         const delta = this.lastY - this.startY;
         const velocity = delta / Math.max(Date.now() - this.startTime, 1);
-
         const shouldClose = delta > this.popup.offsetHeight * 0.3 || velocity > 0.6;
 
         if (shouldClose) this.close();
@@ -474,11 +450,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return BottomPopup.instances ? BottomPopup.instances[key] : null;
       }
 
-      static closeAll() {
+      // --- Безопасное закрытие всех попапов (iOS 16–18 + Lenis) ---
+      static closeAllSafe() {
         while (BottomPopup.stack.length) {
-          BottomPopup.stack[BottomPopup.stack.length - 1].close(0);
+          const top = BottomPopup.stack[BottomPopup.stack.length - 1];
+          if (!top) break;
+
+          // Безопасно останавливаем Lenis перед закрытием
+          if (top.lenis && !top.lenis.isStopped) {
+            top.lenis.stop();
+          }
+
+          top.close(0);
+
+          // После закрытия — безопасно запускаем Lenis, если стек пуст
+          if (BottomPopup.stack.length === 0 && top.lenis && top.lenis.isStopped) {
+            top.lenis.start();
+          }
         }
       }
+      // для вызова BottomPopup.closeAllSafe();
 
       static getOpen() {
         if (!BottomPopup.instances) return null;
@@ -523,49 +514,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Привязка кнопок ---
     document.querySelectorAll('[data-popup-target]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = btn.dataset.popupTarget;
-        const popup = BottomPopup.get(target);
-        if (!popup) return;
-
-        popup.toggleOrReopen();
+        const popup = BottomPopup.get(btn.dataset.popupTarget);
+        if (popup) popup.toggle();
       });
     });
 
     // --- Back button support ---
-    window.addEventListener('popstate', (e) => {
-      const stack = BottomPopup.stack;
-      if (stack.length === 0) return;
-
-      const top = stack[stack.length - 1];
-
-      // если мы сами закрываем попап, игнорируем popstate
-      if (top._ignorePopstate) {
-        top._ignorePopstate = false;
-        return;
-      }
-
-      // закрываем верхний попап мгновенно
-      top.close(0, true);
+    window.addEventListener('popstate', () => {
+      const openPopup = BottomPopup.getOpen();
+      if (openPopup && !openPopup._ignorePopstate) {
+        openPopup.close(0, true);
+      } else if (openPopup) openPopup._ignorePopstate = false;
     });
-  })();
-
-  /**
-   * Меняет класс у тега html на login
-   */
-  (() => {
-    const loginBtn = document.querySelector('[data-log="login"]');
-    const logoutBtn = document.querySelector('[data-log="logout"]');
-
-    if (loginBtn || logoutBtn) {
-      loginBtn.addEventListener('click', () => {
-        document.documentElement.classList.remove('logout');
-        document.documentElement.classList.add(loginBtn.dataset.log);
-      })
-      logoutBtn.addEventListener('click', () => {
-        document.documentElement.classList.remove('login');
-        document.documentElement.classList.add(logoutBtn.dataset.log);
-      })
-    }
   })();
 
   /**
@@ -778,6 +738,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
       updateActiveNav();
     });
+  })();
+
+  /**
+   * 
+   * 
+   * ТУТ ВСЁ ОК!
+   * 
+   * 
+   */
+
+  /**
+   * Меняет класс у тега html на login
+   */
+  (() => {
+    const loginBtn = document.querySelector('[data-log="login"]');
+    const logoutBtn = document.querySelector('[data-log="logout"]');
+
+    if (loginBtn || logoutBtn) {
+      loginBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('logout');
+        document.documentElement.classList.add(loginBtn.dataset.log);
+      })
+      logoutBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('login');
+        document.documentElement.classList.add(logoutBtn.dataset.log);
+      })
+    }
   })();
 
   /**
