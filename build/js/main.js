@@ -132,84 +132,84 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
    */
-  (function () {
-    if (!window.visualViewport) return;
+  // (function () {
+  //   if (!window.visualViewport) return;
 
-    let activeScroll = null;
-    let basePadding = 0;
+  //   let activeScroll = null;
+  //   let basePadding = 0;
 
-    function updateKeyboardOffset() {
-      if (!activeScroll) return;
+  //   function updateKeyboardOffset() {
+  //     if (!activeScroll) return;
 
-      const vv = window.visualViewport;
-      const keyboardHeight = Math.max(
-        0,
-        window.innerHeight - vv.height - vv.offsetTop
-      );
+  //     const vv = window.visualViewport;
+  //     const keyboardHeight = Math.max(
+  //       0,
+  //       window.innerHeight - vv.height - vv.offsetTop
+  //     );
 
-      activeScroll.style.paddingBottom =
-        basePadding + keyboardHeight + 'px';
-    }
+  //     activeScroll.style.paddingBottom =
+  //       basePadding + keyboardHeight + 'px';
+  //   }
 
-    function scrollInputIntoView(input) {
-      const scroll = input.closest('[data-popup-scroll]');
-      if (!scroll) return;
+  //   function scrollInputIntoView(input) {
+  //     const scroll = input.closest('[data-popup-scroll]');
+  //     if (!scroll) return;
 
-      // абсолютная позиция input внутри scroll
-      const inputRect = input.getBoundingClientRect();
-      const scrollRect = scroll.getBoundingClientRect();
+  //     // абсолютная позиция input внутри scroll
+  //     const inputRect = input.getBoundingClientRect();
+  //     const scrollRect = scroll.getBoundingClientRect();
 
-      // верхний оффсет, с учётом клавиатуры
-      const vv = window.visualViewport;
-      const keyboardHeight = Math.max(
-        0,
-        window.innerHeight - vv.height - vv.offsetTop
-      );
+  //     // верхний оффсет, с учётом клавиатуры
+  //     const vv = window.visualViewport;
+  //     const keyboardHeight = Math.max(
+  //       0,
+  //       window.innerHeight - vv.height - vv.offsetTop
+  //     );
 
-      // высота видимой области scroll
-      const visibleHeight = scroll.clientHeight - keyboardHeight;
+  //     // высота видимой области scroll
+  //     const visibleHeight = scroll.clientHeight - keyboardHeight;
 
-      // если input не полностью виден — скроллим
-      const offsetTop = inputRect.top - scrollRect.top + scroll.scrollTop;
+  //     // если input не полностью виден — скроллим
+  //     const offsetTop = inputRect.top - scrollRect.top + scroll.scrollTop;
 
-      if (offsetTop < scroll.scrollTop) {
-        scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
-      } else if (offsetTop + inputRect.height > scroll.scrollTop + visibleHeight) {
-        scroll.scrollTo({
-          top: offsetTop - visibleHeight + inputRect.height,
-          behavior: 'smooth',
-        });
-      }
-    }
+  //     if (offsetTop < scroll.scrollTop) {
+  //       scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
+  //     } else if (offsetTop + inputRect.height > scroll.scrollTop + visibleHeight) {
+  //       scroll.scrollTo({
+  //         top: offsetTop - visibleHeight + inputRect.height,
+  //         behavior: 'smooth',
+  //       });
+  //     }
+  //   }
 
-    document.addEventListener('focusin', (e) => {
-      const input = e.target.closest('input, textarea, [contenteditable]');
-      if (!input) return;
+  //   document.addEventListener('focusin', (e) => {
+  //     const input = e.target.closest('input, textarea, [contenteditable]');
+  //     if (!input) return;
 
-      const scroll = input.closest('[data-popup-scroll]');
-      if (!scroll) return;
+  //     const scroll = input.closest('[data-popup-scroll]');
+  //     if (!scroll) return;
 
-      activeScroll = scroll;
-      basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
+  //     activeScroll = scroll;
+  //     basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
 
-      updateKeyboardOffset();
-      scrollInputIntoView(input);
+  //     updateKeyboardOffset();
+  //     scrollInputIntoView(input);
 
-      visualViewport.addEventListener('resize', updateKeyboardOffset);
-      visualViewport.addEventListener('scroll', updateKeyboardOffset);
-    });
+  //     visualViewport.addEventListener('resize', updateKeyboardOffset);
+  //     visualViewport.addEventListener('scroll', updateKeyboardOffset);
+  //   });
 
-    document.addEventListener('focusout', () => {
-      if (!activeScroll) return;
+  //   document.addEventListener('focusout', () => {
+  //     if (!activeScroll) return;
 
-      activeScroll.style.paddingBottom = basePadding + 'px';
+  //     activeScroll.style.paddingBottom = basePadding + 'px';
 
-      visualViewport.removeEventListener('resize', updateKeyboardOffset);
-      visualViewport.removeEventListener('scroll', updateKeyboardOffset);
+  //     visualViewport.removeEventListener('resize', updateKeyboardOffset);
+  //     visualViewport.removeEventListener('scroll', updateKeyboardOffset);
 
-      activeScroll = null;
-    });
-  })();
+  //     activeScroll = null;
+  //   });
+  // })();
 
   /**
    * Управляет поведением хедера
