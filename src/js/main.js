@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.lenis = lenis;
 
   let isViewportChanging = false;
-  let viewportRAF = null;
 
   function raf(time) {
     if (!isViewportChanging) {
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Смена верхней границы крепления блоков при смене позции якоря Lenis
    */
-  (function syncLenisAnchorOffset() {
+  (function () {
     const html = document.documentElement;
 
     let lastOffset = -100;
@@ -65,51 +64,70 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 
-  // iOS Safari safe
+  // ТУТ УЯЗВИМОЕ МЕСТО
+  // iOS Safari safe (iOS 16–18)
   const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
 
   (function () {
     if (!isIOS) return;
 
+    let lastPopupState = null;
+    let rafId = null;
+
     const update = () => {
-      if (document.documentElement.classList.contains('popup-open')) {
-        // полностью блокируем Lenis
-        if (window.lenis && !window.lenis.isStopped) window.lenis.stop();
+      rafId = null;
+
+      const isPopupOpen =
+        document.documentElement.classList.contains('popup-open');
+
+      // защита от лишних start/stop
+      if (isPopupOpen === lastPopupState) return;
+      lastPopupState = isPopupOpen;
+
+      if (!window.lenis) return;
+
+      if (isPopupOpen) {
+        if (!window.lenis.isStopped) {
+          window.lenis.stop();
+        }
       } else {
-        if (window.lenis && window.lenis.isStopped) window.lenis.start();
+        if (window.lenis.isStopped) {
+          window.lenis.start();
+        }
       }
     };
 
-    // слушаем visualViewport
-    // if (window.visualViewport) {
-    //   visualViewport.addEventListener('resize', () => {
-    //     if (viewportRAF) cancelAnimationFrame(viewportRAF);
-    //     viewportRAF = requestAnimationFrame(update);
-    //   });
-    //   visualViewport.addEventListener('scroll', () => {
-    //     if (viewportRAF) cancelAnimationFrame(viewportRAF);
-    //     viewportRAF = requestAnimationFrame(update);
-    //   });
-    // }
+    const scheduleUpdate = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(update);
+    };
 
+    // ТОЛЬКО resize — никаких scroll
     if (window.visualViewport) {
-      visualViewport.addEventListener(
-        'resize',
-        () => {
-          if (viewportRAF) return;
-          viewportRAF = requestAnimationFrame(() => {
-            update();
-            viewportRAF = null;
-          });
-        },
-        { passive: true }
-      );
+      visualViewport.addEventListener('resize', scheduleUpdate, {
+        passive: true,
+      });
     }
 
-    // на случай, если popup открыли/закрыли без resize
-    const observer = new MutationObserver(update);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    // реагируем ТОЛЬКО на реальное изменение popup-open
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.attributeName === 'class') {
+          scheduleUpdate();
+          break;
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    // первичная синхронизация
+    scheduleUpdate();
   })();
+  // ./ТУТ УЯЗВИМОЕ МЕСТО
 
   /**
    * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
@@ -120,39 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeScroll = null;
     let basePadding = 0;
 
-    // function updateKeyboardOffset() {
-    //   if (!activeScroll) return;
-
-    //   const vv = window.visualViewport;
-    //   const keyboardHeight = Math.max(
-    //     0,
-    //     window.innerHeight - vv.height - vv.offsetTop
-    //   );
-
-    //   activeScroll.style.paddingBottom =
-    //     basePadding + keyboardHeight + 'px';
-    // }
-
-    let keyboardRAF = null;
-
-    function updateKeyboardOffsetSafe() {
+    function updateKeyboardOffset() {
       if (!activeScroll) return;
-      if (keyboardRAF) return;
 
-      keyboardRAF = requestAnimationFrame(() => {
-        const vv = window.visualViewport;
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
 
-        // iOS safe: без innerHeight
-        const keyboardHeight = Math.max(
-          0,
-          screen.height - vv.height
-        );
-
-        activeScroll.style.paddingBottom =
-          basePadding + keyboardHeight + 'px';
-
-        keyboardRAF = null;
-      });
+      activeScroll.style.paddingBottom =
+        basePadding + keyboardHeight + 'px';
     }
 
     function scrollInputIntoView(input) {
@@ -196,14 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
       activeScroll = scroll;
       basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
 
-      updateKeyboardOffsetSafe();
+      updateKeyboardOffset();
       scrollInputIntoView(input);
 
-      // updateKeyboardOffset();
-      // scrollInputIntoView(input);
-
-      // visualViewport.addEventListener('resize', updateKeyboardOffset);
-      // visualViewport.addEventListener('scroll', updateKeyboardOffset);
+      visualViewport.addEventListener('resize', updateKeyboardOffset);
+      visualViewport.addEventListener('scroll', updateKeyboardOffset);
     });
 
     document.addEventListener('focusout', () => {
@@ -211,10 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeScroll.style.paddingBottom = basePadding + 'px';
 
-      // visualViewport.removeEventListener('resize', updateKeyboardOffset);
-      // visualViewport.removeEventListener('scroll', updateKeyboardOffset);
-
-      updateKeyboardOffsetSafe();
+      visualViewport.removeEventListener('resize', updateKeyboardOffset);
+      visualViewport.removeEventListener('scroll', updateKeyboardOffset);
 
       activeScroll = null;
     });
@@ -225,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   (function headerFunc() {
     const html = document.documentElement;
-    const header = document.getElementById('header');
     const firstSection = document.querySelector('section');
     let lastScrollTop = 1;
     const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
@@ -334,12 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stack.length === 0) {
           const scrollY = BottomPopup.scrollY;
 
-          // if (window.lenis) {
-          //   window.lenis.scrollTo(scrollY, { immediate: true });
-          // } else {
-          //   window.scrollTo(0, scrollY);
-          // }
-          if (!isIOS && window.lenis) {
+          if (window.lenis) {
             window.lenis.scrollTo(scrollY, { immediate: true });
           } else {
             window.scrollTo(0, scrollY);
