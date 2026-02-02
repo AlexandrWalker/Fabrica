@@ -21,7 +21,6 @@
   inset: 0;
 
   position: fixed;
-  // top: auto;
   top: var(--wrapper-padding);
   bottom: 0;
   left: 0;
@@ -64,12 +63,5 @@
       left: 50%;
       transform: translateX(-50%);
     }
-  }
-}
-
-/* fallback */
-@supports not (height: 100svh) {
-  .popup {
-    height: calc((var(--vh) * 100) - var(--wrapper-padding));
   }
 }
