@@ -41,10 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- RAF Lenis ---
-  (function rafLoop(time) {
+  function raf(time) {
     lenis.raf(time);
-    requestAnimationFrame(rafLoop);
-  })();
+    requestAnimationFrame(raf);
+  };
+  requestAnimationFrame(raf);
 
   // --- iOS-safe popup observer ---
   if (isIOS) {
@@ -87,20 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   // ТУТ УЯЗВИМОЕ МЕСТО
-  if (isIOS) {
-    const observer = new MutationObserver(() => {
-      const isPopupOpen =
-        document.documentElement.classList.contains('popup-open');
+  // if (isIOS) {
+  //   const observer = new MutationObserver(() => {
+  //     const isPopupOpen =
+  //       document.documentElement.classList.contains('popup-open');
 
-      if (isPopupOpen) stopLenisSafe();
-      else startLenisSafe();
-    });
+  //     if (isPopupOpen) stopLenisSafe();
+  //     else startLenisSafe();
+  //   });
 
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  }
+  //   observer.observe(document.documentElement, {
+  //     attributes: true,
+  //     attributeFilter: ['class'],
+  //   });
+  // }
   // ./ТУТ УЯЗВИМОЕ МЕСТО
 
   /**
