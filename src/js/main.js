@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       offset: -165,
     },
   });
-  
+
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
@@ -43,23 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // Drag vars
         this.startY = 0;
         this.lastY = 0;
-        this.startTarget = null;
+        // this.startTarget = null;
         this.isDragging = false;
         this.startTime = 0;
 
         this.head = popupEl.querySelector('[data-popup-head]');
-        this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
+        // this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
 
         // Drag events
-        this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
-        this.head.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-        this.head.addEventListener('touchend', this.onEnd.bind(this));
-
-        if (this.scrollEl) {
-          this.scrollEl.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
-          this.scrollEl.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-          this.scrollEl.addEventListener('touchend', this.onEnd.bind(this));
+        if (this.head) {
+          this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+          this.head.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+          this.head.addEventListener('touchend', this.onEnd.bind(this));
         }
+
+        // if (this.scrollEl) {
+        //   this.scrollEl.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+        //   this.scrollEl.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+        //   this.scrollEl.addEventListener('touchend', this.onEnd.bind(this));
+        // }
       }
 
       isOpen() {
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.popup.style.transform = 'translateY(0)';
         this.popup.dataset.open = 'true';
 
-        BottomPopup.scrollY = window.scrollY;
+        // BottomPopup.scrollY = window.scrollY;
         document.documentElement.classList.add('popup-open');
 
         if (!this._historyAdded) {
@@ -178,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.lastY = this.startY;
         this.startTime = Date.now();
         this.isDragging = true;
-        this.startTarget = e.target;
+        // this.startTarget = e.target;
         this.popup.style.transition = 'none';
       }
 
@@ -187,20 +189,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = e.touches[0].clientY;
         let delta = y - this.startY;
 
-        const isDraggingScrollContent = this.scrollEl && e.target.closest('[data-popup-scroll]');
-        if (delta > 0 && isDraggingScrollContent) {
-          const scrollTop = this.scrollEl.scrollTop;
-          const startedOnHeader = this.startTarget.closest('[data-popup-head]');
-          if (scrollTop > 0 && !startedOnHeader) return;
-        } else if (delta < 0) return;
+        // const isDraggingScrollContent = this.scrollEl && e.target.closest('[data-popup-scroll]');
+        // if (delta > 0 && isDraggingScrollContent) {
+        //   const scrollTop = this.scrollEl.scrollTop;
+        //   const startedOnHeader = this.startTarget.closest('[data-popup-head]');
+        //   if (scrollTop > 0 && !startedOnHeader) return;
+        // } else if (delta < 0) return;
 
-        if (delta < 0) delta = 0;
-        const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+        // if (delta < 0) delta = 0;
+        // const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+
+        // this.popup.style.transform = `translateY(${resistance / 10}rem)`;
+        // this.lastY = y;
+
+        // if (e.cancelable) e.preventDefault();
+
+        if (delta < 0) return;
+
+        const resistance =
+          delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
 
         this.popup.style.transform = `translateY(${resistance / 10}rem)`;
         this.lastY = y;
-
-        if (e.cancelable) e.preventDefault();
       }
 
       onEnd() {

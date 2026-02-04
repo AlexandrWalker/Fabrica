@@ -1,5 +1,9 @@
 @use './../mixins' as *;
 
+[data-popup-head] {
+  touch-action: pan-y;
+}
+
 [data-popup-scroll] {
   flex: 1 1 auto;
   padding-bottom: 4rem;
