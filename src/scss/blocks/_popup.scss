@@ -2,42 +2,42 @@
 
 .popup {
   width: 100%;
-  // height: calc(100dvh - var(--wrapper-padding));
-  // height: calc(var(--vh) * 100 - var(--wrapper-padding));
-  height: calc(100% - var(--wrapper-padding));
+  height: 100dvh;
+  padding-top: var(--wrapper-padding);
 
-  z-index: 600;
-  border-radius: 1.6rem 1.6rem 0 0;
-  border: 0.1rem solid var(--beige);
-  overflow: hidden;
-  background-color: var(--white);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
   transition: transform 0.3s ease, height 0.25s ease;
   transform: translateY(100%);
   will-change: transform;
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
-  inset: 0;
+  pointer-events: none;
 
   position: fixed;
-  top: var(--wrapper-padding);
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
+  z-index: 600;
 
-  &.is-under {
-    pointer-events: none;
-  }
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 1.6rem 1.6rem 0 0;
+    border: 0.1rem solid var(--beige);
+    pointer-events: all;
+    overflow: hidden;
+    background-color: var(--white);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 
-  .popup-open & {
-    // transform: translateY(0);
+    .is-under & {
+      pointer-events: none;
+    }
   }
 
   &__inner {
     display: flex;
     flex-direction: column;
-    height: calc(100% - 3.6rem);
+    // height: calc(100% - 3.6rem);
+    height: 100%;
     overflow: hidden;
   }
 

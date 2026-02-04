@@ -1,0 +1,202 @@
+<div id="dish" class="dish popup" data-lenis-prevent>
+  <div class="popup__wrap">
+    <div class="popup__area" data-popup-head></div>
+    <div class="popup__inner">
+
+      <div class="layout" data-popup-scroll>
+        <div class="container">
+          <div class="layout__inner">
+
+            <div class="layout__head">
+              <div class="layout__head-cover">
+                <img src="./../../images/temp/dish-img.png" alt="">
+              </div>
+              <div class="layout__head-tags">
+                <div class="layout__head-tag tags-top">
+                  <i class="icon-top"></i>
+                  <span>
+                    Топчик
+                  </span>
+                </div>
+                <div class="layout__head-tag tags-hot">
+                  <i class="icon-hot"></i>
+                  <span>
+                    Островато
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="layout__body">
+              <div class="layout__content">
+                <div class="layout__content-wrap">
+                  <button class="layout__rating" data-popup-target="reviews">
+                    <div class="layout__rating-text">
+                      4.8
+                    </div>
+                    <i class="icon-star-fill"></i>
+                  </button>
+                  <a class="layout__share" href="/">
+                    <i class="icon-share"></i>
+                  </a>
+                </div>
+                <div class="layout__content-name">
+                  <h4>
+                    Домашний омлет с моцареллой и чоризо
+                  </h4>
+                </div>
+                <div class="layout__content-weight">
+                  <h6>
+                    380/30 Г
+                  </h6>
+                </div>
+                <div class="layout__content-time">
+                  <i class="icon-clock"></i>
+                  <p>
+                    Специальное новогоднее предложение до 01.01.2026
+                  </p>
+                </div>
+              </div>
+              <div class="layout__block">
+                <div class="layout__block-price">
+                  <h3 class="h3">
+                    1500 ₽
+                  </h3>
+                </div>
+                <div class="layout__block-wrap">
+                  <div class="layout__block-title">
+                    <h5>
+                      Состав:
+                    </h5>
+                  </div>
+                  <div>
+                    <p>
+                      Котлета из мраморной говядины, луковая карамель, сыр чеддер, маринованный огурец, томат, лист
+                      салата,
+                      соус
+                      «сырный», соус «bbq»
+                    </p>
+                  </div>
+                </div>
+                <div class="layout__block-wrap">
+                  <div class="layout__block-title">
+                    <h5>
+                      КБЖУ на 100 г
+                    </h5>
+                  </div>
+                  <div class="layout__block-values">
+                    <div class="layout__block-value">
+                      <i class="icon-calories"></i>
+                      <p>
+                        120 Ккал
+                      </p>
+                    </div>
+                    <div class="layout__block-value">
+                      <i class="icon-protein"></i>
+                      <p>
+                        Б-10г
+                      </p>
+                    </div>
+                    <div class="layout__block-value">
+                      <i class="icon-fat"></i>
+                      <p>
+                        Ж-10г
+                      </p>
+                    </div>
+                    <div class="layout__block-value">
+                      <i class="icon-carbohydrates"></i>
+                      <p>
+                        У-65г
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="layout__block-wrap">
+                  <div class="layout__block-title">
+                    <h5>
+                      Дополнительно:
+                    </h5>
+                    <p>
+                      Максимум 2
+                    </p>
+                  </div>
+                  <div class="layout__block-list">
+                    <ul>
+                      <li>
+                        Ломтик сыра - <b>100 ₽</b>
+                      </li>
+                      <li>
+                        Халапеньо - <b>30 ₽</b>
+                      </li>
+                      <li>
+                        Двойная котлета - <b>250 ₽</b>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="layout__block-wrap">
+                  <div class="layout__block-title">
+                    <h5>
+                      Можно убрать:
+                    </h5>
+                  </div>
+                  <div class="layout__block-list">
+                    <ul>
+                      <li>
+                        Картофель
+                      </li>
+                      <li>
+                        Томаты
+                      </li>
+                      <li>
+                        Листья салата
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="layout__btns">
+                  <button class="layout__btn btn btn--green" data-popup-target="favorite">
+                    <i class="icon-like"></i>
+                    По-кайфу!
+                  </button>
+                  <button class="layout__btn btn" data-popup-target="reviewsWrite">
+                    Оставить отзыв
+                  </button>
+                </div>
+              </div>
+              <div class="layout__banner">
+                <div class="layout__head">
+                  <div class="layout__head-title">
+                    <h2>
+                      Выгодное комбо
+                    </h2>
+                  </div>
+                </div>
+                <div class="layout__body">
+                  <div class="layout__banner-link" data-popup-target="offersInner">
+                    <img src="./../../images/temp/banner-1.png" alt="">
+                    <i class="icon-chevron-right"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="layout layout--carousel">
+                <div class="layout__inner">
+                  <div class="layout__head">
+                    <div class="layout__title">
+                      <h2>
+                        Вам понравится
+                      </h2>
+                    </div>
+                  </div>
+                  <div class="layout__items">
+                    @@loop('./../elements/card-item.html', './data/card-items.json')
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

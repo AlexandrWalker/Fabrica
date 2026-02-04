@@ -115,7 +115,7 @@ gulp.task('clean', function (done) {
 
 gulp.task('html', function () {
   return gulp
-    .src([`${srcFolder}html/**/*.html`, `!${srcFolder}html/blocks/*.html`, `!${srcFolder}html/elements/*.html`, `!${srcFolder}html/privacy/*.html`])
+    .src([`${srcFolder}html/**/*.html`, `!${srcFolder}html/blocks/*.html`,`!${srcFolder}html/popups/*.html`, `!${srcFolder}html/elements/*.html`, `!${srcFolder}html/privacy/*.html`])
     .pipe(plumber(plumberNotify('HTML')))
     .pipe(
       fileInclude({
@@ -339,7 +339,7 @@ gulp.task('fontsStyle', () => {
             fontWeight = 800;
           } else if (fontWeight.toLowerCase() === 'black') {
             fontWeight = 900;
-          } else if (fontWeight.toLowerCase() === 'гltra') {
+          } else if (fontWeight.toLowerCase() === 'ultra') {
             fontWeight = 1000;
           } else {
             fontWeight = 400;

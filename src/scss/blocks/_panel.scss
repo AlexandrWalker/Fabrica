@@ -1,39 +1,41 @@
 @use './../mixins' as *;
-
+/* Тут я поменял позиционирование с bottom на top. Также установил 100dvh для панели */
 .panel {
   display: flex;
   align-items: flex-end;
   width: calc(100% + 0.2rem);
-  height: var(--panel-height);
+  height: 100dvh;
   margin-left: -0.1rem;
+  pointer-events: none;
 
   position: fixed;
+  top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
   z-index: 500;
 
   &::before {
     content: "";
     width: 100%;
-    height: 100%;
+    height: 13rem;
     background: linear-gradient(0deg, #0A2533 22.45%, rgba(255, 255, 255, 0) 86.33%);
     pointer-events: none;
 
     position: absolute;
+    top: auto;
     right: 0;
-    bottom: 0;
     left: 0;
     z-index: -1;
   }
 
   &__inner {
     width: 100%;
-    height: fit-content;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAyIiBoZWlnaHQ9Ijc3IiB2aWV3Qm94PSIwIDAgNDAyIDc3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KPHBhdGggZD0iTTAgMjEuNDQ1OEMwIDkuNjAxNjEgOS41OTkwMiAwIDIxLjQ0IDBIMTQ1Ljc5NkMxNTIuNzc0IDAgMTU4LjczNyAyLjAyNjAzIDE2Mi44OSA3LjYzNDc4QzE3MS40MTYgMTkuMTUwNiAxNzguNTQ5IDM1LjM4NTUgMjAxIDM1LjM4NTVDMjIzLjQ5MSAzNS4zODU1IDIzMS4yODQgMTkuMDkyIDI0MC4xMTIgNy41NzI0N0MyNDQuMzU3IDIuMDMzMjcgMjUwLjI5OCAwIDI1Ny4yNzYgMEgzODAuNTZDMzkyLjQwMSAwIDQwMiA5LjYwMTYgNDAyIDIxLjQ0NThWNzdIMFYyMS40NDU4WiIgZmlsbD0iI0ZERjZFQyIvPg0KPC9zdmc+DQo=);
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 0 var(--container-padding);
+    height: var(--panel-height);
+    pointer-events: all;
   }
 
   &__btns {
