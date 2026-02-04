@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const lenis = new Lenis({
     anchors: {
-      offset: -100,
+      // offset: -100,
+      offset: -165,
     },
   });
 
@@ -61,31 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Смена верхней границы крепления блоков при смене позции якоря Lenis
    */
-  (function () {
-    const html = document.documentElement;
+  // (function () {
+  //   const html = document.documentElement;
 
-    let lastOffset = -100;
+  //   let lastOffset = -100;
 
-    function updateOffset() {
-      const hasHeaderOut = html.classList.contains('header-out');
-      const nextOffset = hasHeaderOut ? -165 : -100;
+  //   function updateOffset() {
+  //     const hasHeaderOut = html.classList.contains('header-out');
+  //     const nextOffset = hasHeaderOut ? -165 : -100;
 
-      if (nextOffset === lastOffset) return;
+  //     if (nextOffset === lastOffset) return;
 
-      lastOffset = nextOffset;
-      lenis.options.anchors.offset = nextOffset;
-    }
+  //     lastOffset = nextOffset;
+  //     lenis.options.anchors.offset = nextOffset;
+  //   }
 
-    // начальное состояние
-    updateOffset();
+  //   // начальное состояние
+  //   updateOffset();
 
-    // следим за изменением класса html
-    const observer = new MutationObserver(updateOffset);
-    observer.observe(html, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  })();
+  //   // следим за изменением класса html
+  //   const observer = new MutationObserver(updateOffset);
+  //   observer.observe(html, {
+  //     attributes: true,
+  //     attributeFilter: ['class'],
+  //   });
+  // })();
 
   // ТУТ УЯЗВИМОЕ МЕСТО
   // if (isIOS) {
@@ -216,21 +217,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Управляет поведением хедера
    */
-  (function headerFunc() {
-    const html = document.documentElement;
-    const firstSection = document.querySelector('section');
-    let lastScrollTop = 1;
-    const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
+  // (function headerFunc() {
+  //   const html = document.documentElement;
+  //   const firstSection = document.querySelector('section');
+  //   let lastScrollTop = 1;
+  //   const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
 
-    window.addEventListener('scroll', () => {
-      if (scrollPosition() > lastScrollTop && scrollPosition() > firstSection.offsetHeight) {
-        html.classList.add('header-out');
-      } else {
-        html.classList.remove('header-out');
-      }
-      lastScrollTop = scrollPosition();
-    })
-  })();
+  //   window.addEventListener('scroll', () => {
+  //     if (scrollPosition() > lastScrollTop && scrollPosition() > firstSection.offsetHeight) {
+  //       html.classList.add('header-out');
+  //     } else {
+  //       html.classList.remove('header-out');
+  //     }
+  //     lastScrollTop = scrollPosition();
+  //   })
+  // })();
 
   /**
    * Попапы
