@@ -2,6 +2,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const checkEditMode = document.querySelector('.bx-panel-toggle-on') ?? null;
 
+  let vhRAF = null;
+  let lastVh = 0;
+
+  function setVh() {
+    if (vhRAF) cancelAnimationFrame(vhRAF);
+
+    vhRAF = requestAnimationFrame(() => {
+      const height = window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+      const vh = Math.round(height * 0.01 * 100) / 100;
+
+      // защита от микроресайзов address bar
+      if (Math.abs(vh - lastVh) < 0.5) return;
+
+      lastVh = vh;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
+
+  if (window.visualViewport) {
+    const onViewportChange = () => {
+      isViewportChanging = true;
+
+      if (viewportRAF) cancelAnimationFrame(viewportRAF);
+
+      viewportRAF = requestAnimationFrame(() => {
+        isViewportChanging = false;
+        setVh();
+      });
+    };
+
+    visualViewport.addEventListener('resize', onViewportChange);
+  }
+
   /**
    * Подключение ScrollTrigger
    * Подключение SplitText
@@ -13,55 +51,267 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const lenis = new Lenis({
     anchors: {
-      offset: -165,
+      offset: -100,
     },
   });
 
+  window.lenis = lenis;
+
+  let isViewportChanging = false;
+  let viewportRAF = null;
+
   function raf(time) {
-    lenis.raf(time);
+    if (!isViewportChanging) {
+      lenis.raf(time);
+    }
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
-  // --- ./Инициализация Lenis ---
+
+  lenis.on('scroll', () => {
+    if (document.documentElement.classList.contains('popup-open')) {
+      lenis.stop();
+    }
+  });
+
+  /**
+   * Смена верхней границы крепления блоков при смене позции якоря Lenis
+   */
+  (function syncLenisAnchorOffset() {
+    const html = document.documentElement;
+
+    let lastOffset = -100;
+
+    function updateOffset() {
+      const hasHeaderOut = html.classList.contains('header-out');
+      const nextOffset = hasHeaderOut ? -165 : -100;
+
+      if (nextOffset === lastOffset) return;
+
+      lastOffset = nextOffset;
+      lenis.options.anchors.offset = nextOffset;
+    }
+
+    // начальное состояние
+    updateOffset();
+
+    // следим за изменением класса html
+    const observer = new MutationObserver(updateOffset);
+    observer.observe(html, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  })();
+
+  // iOS Safari safe
+  const isIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
+
+  function lockLenisDuringPopup() {
+    if (!isIOS) return;
+
+    const update = () => {
+      if (document.documentElement.classList.contains('popup-open')) {
+        // полностью блокируем Lenis
+        if (window.lenis && !window.lenis.isStopped) window.lenis.stop();
+      } else {
+        if (window.lenis && window.lenis.isStopped) window.lenis.start();
+      }
+    };
+
+    // слушаем visualViewport
+    if (window.visualViewport) {
+      visualViewport.addEventListener('resize', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
+      visualViewport.addEventListener('scroll', () => {
+        if (viewportRAF) cancelAnimationFrame(viewportRAF);
+        viewportRAF = requestAnimationFrame(update);
+      });
+    }
+
+    // на случай, если popup открыли/закрыли без resize
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  lockLenisDuringPopup();
+
+  /**
+   * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
+   */
+  (function () {
+    if (!window.visualViewport) return;
+
+    let activeScroll = null;
+    let basePadding = 0;
+
+    function updateKeyboardOffset() {
+      if (!activeScroll) return;
+
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
+
+      activeScroll.style.paddingBottom =
+        basePadding + keyboardHeight + 'px';
+    }
+
+    function scrollInputIntoView(input) {
+      const scroll = input.closest('[data-popup-scroll]');
+      if (!scroll) return;
+
+      // абсолютная позиция input внутри scroll
+      const inputRect = input.getBoundingClientRect();
+      const scrollRect = scroll.getBoundingClientRect();
+
+      // верхний оффсет, с учётом клавиатуры
+      const vv = window.visualViewport;
+      const keyboardHeight = Math.max(
+        0,
+        window.innerHeight - vv.height - vv.offsetTop
+      );
+
+      // высота видимой области scroll
+      const visibleHeight = scroll.clientHeight - keyboardHeight;
+
+      // если input не полностью виден — скроллим
+      const offsetTop = inputRect.top - scrollRect.top + scroll.scrollTop;
+
+      if (offsetTop < scroll.scrollTop) {
+        scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      } else if (offsetTop + inputRect.height > scroll.scrollTop + visibleHeight) {
+        scroll.scrollTo({
+          top: offsetTop - visibleHeight + inputRect.height,
+          behavior: 'smooth',
+        });
+      }
+    }
+
+    document.addEventListener('focusin', (e) => {
+      const input = e.target.closest('input, textarea, [contenteditable]');
+      if (!input) return;
+
+      const scroll = input.closest('[data-popup-scroll]');
+      if (!scroll) return;
+
+      activeScroll = scroll;
+      basePadding = parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
+
+      updateKeyboardOffset();
+      scrollInputIntoView(input);
+
+      visualViewport.addEventListener('resize', updateKeyboardOffset);
+      visualViewport.addEventListener('scroll', updateKeyboardOffset);
+    });
+
+    document.addEventListener('focusout', () => {
+      if (!activeScroll) return;
+
+      activeScroll.style.paddingBottom = basePadding + 'px';
+
+      visualViewport.removeEventListener('resize', updateKeyboardOffset);
+      visualViewport.removeEventListener('scroll', updateKeyboardOffset);
+
+      activeScroll = null;
+    });
+  })();
+
+  /**
+   * Управляет поведением хедера
+   */
+  (function headerFunc() {
+    const html = document.documentElement;
+    const header = document.getElementById('header');
+    const firstSection = document.querySelector('section');
+    let lastScrollTop = 1;
+    const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
+
+    window.addEventListener('scroll', () => {
+      if (scrollPosition() > lastScrollTop && scrollPosition() > firstSection.offsetHeight) {
+        html.classList.add('header-out');
+      } else {
+        html.classList.remove('header-out');
+      }
+      lastScrollTop = scrollPosition();
+    })
+  })();
+
+  // (function () {
+  //   if (!window.visualViewport) return;
+
+  //   const POPUP_SELECTOR =
+  //     '.popup[data-open="true"]:not(.is-under)';
+
+  //   let keyboardOpened = false;
+
+  //   function updatePopupHeight() {
+  //     const vv = window.visualViewport;
+
+  //     const keyboardVisible =
+  //       vv.height + vv.offsetTop < window.innerHeight - 10;
+
+  //     if (keyboardVisible === keyboardOpened) return;
+  //     keyboardOpened = keyboardVisible;
+
+  //     document.querySelectorAll(POPUP_SELECTOR).forEach((popup) => {
+  //       if (keyboardVisible) {
+  //         popup.style.height = 'calc(var(--vh) * 100)';
+  //       } else {
+  //         popup.style.height =
+  //           'calc(var(--vh) * 100 - var(--wrapper-padding))';
+  //       }
+  //     });
+  //   }
+
+  //   visualViewport.addEventListener('resize', updatePopupHeight);
+  // })();
+
+  // document.addEventListener('popup:close', (e) => {
+  //   const popup = e.target.closest('.popup');
+  //   if (!popup) return;
+
+  //   popup.style.height = '';
+  // });
 
   /**
    * Попапы
    */
-  // Это надо проверить, бэкап если что есть
   (function () {
     class BottomPopup {
       static stack = [];
       static BASE_Z = 600;
 
-      constructor(popupEl) {
+      constructor(popupEl, lenis) {
         if (!popupEl) return;
 
         this.popup = popupEl;
+        this.lenis = lenis;
+
+        this.head = popupEl.querySelector('[data-popup-head]');
+        this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
+
         this._historyAdded = false;
         this._ignorePopstate = false;
 
-        // Drag vars
         this.startY = 0;
         this.lastY = 0;
-        // this.startTarget = null;
+        this.startTarget = null;
         this.isDragging = false;
         this.startTime = 0;
 
-        this.head = popupEl.querySelector('[data-popup-head]');
-        // this.scrollEl = popupEl.querySelector('[data-popup-scroll]');
-
         // Drag events
-        if (this.head) {
-          this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
-          this.head.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-          this.head.addEventListener('touchend', this.onEnd.bind(this));
-        }
+        this.head.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+        this.head.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+        this.head.addEventListener('touchend', this.onEnd.bind(this));
 
-        // if (this.scrollEl) {
-        //   this.scrollEl.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
-        //   this.scrollEl.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
-        //   this.scrollEl.addEventListener('touchend', this.onEnd.bind(this));
-        // }
+        if (this.scrollEl) {
+          this.scrollEl.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+          this.scrollEl.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+          this.scrollEl.addEventListener('touchend', this.onEnd.bind(this));
+        }
       }
 
       isOpen() {
@@ -73,6 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- Запуск попапа ---
       open() {
         if (!this.popup || this.isOpen()) return;
+
         const stack = BottomPopup.stack;
         const prev = stack[stack.length - 1];
         if (prev) prev.popup.classList.add('is-under');
@@ -84,9 +335,14 @@ document.addEventListener('DOMContentLoaded', () => {
         this.popup.style.transform = 'translateY(0)';
         this.popup.dataset.open = 'true';
 
-        // BottomPopup.scrollY = window.scrollY;
+        if (this.lenis && stack.length === 1 && !this.lenis.isStopped) {
+          this.lenis.stop();
+        }
+        BottomPopup.scrollY = window.scrollY;
+
         document.documentElement.classList.add('popup-open');
 
+        // --- history для back button ---
         if (!this._historyAdded) {
           history.pushState({ popup: true }, '');
           this._historyAdded = true;
@@ -112,9 +368,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prev) prev.popup.classList.remove('is-under');
 
         if (stack.length === 0) {
+          const scrollY = BottomPopup.scrollY;
+
+          if (window.lenis) {
+            window.lenis.scrollTo(scrollY, { immediate: true });
+          } else {
+            window.scrollTo(0, scrollY);
+          }
+
           requestAnimationFrame(() => {
             document.documentElement.classList.remove('popup-open');
           });
+
+          if (
+            this.lenis &&
+            this.lenis.isStopped &&
+            !isViewportChanging
+          ) {
+            this.lenis.start();
+          }
+
         }
 
         // важно: флаг только при НЕ popstate
@@ -159,6 +432,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (p !== this) p.popup.classList.add('is-under');
           else p.popup.classList.remove('is-under');
         });
+
+        if (
+          this.lenis &&
+          stack.length === 1 &&
+          !this.lenis.isStopped
+        ) {
+          this.lenis.stop();
+        }
       }
 
       // --- Toggle + Reopen для кнопок ---
@@ -180,43 +461,44 @@ document.addEventListener('DOMContentLoaded', () => {
         this.lastY = this.startY;
         this.startTime = Date.now();
         this.isDragging = true;
-        // this.startTarget = e.target;
+        this.startTarget = e.target;
+
         this.popup.style.transition = 'none';
       }
 
       onMove(e) {
         if (!this.isDragging) return;
+
         const y = e.touches[0].clientY;
         let delta = y - this.startY;
 
-        // const isDraggingScrollContent = this.scrollEl && e.target.closest('[data-popup-scroll]');
-        // if (delta > 0 && isDraggingScrollContent) {
-        //   const scrollTop = this.scrollEl.scrollTop;
-        //   const startedOnHeader = this.startTarget.closest('[data-popup-head]');
-        //   if (scrollTop > 0 && !startedOnHeader) return;
-        // } else if (delta < 0) return;
+        const isDraggingScrollContent = this.scrollEl && e.target.closest('[data-popup-scroll]');
 
-        // if (delta < 0) delta = 0;
-        // const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+        if (delta > 0) { // свайп вниз
+          if (isDraggingScrollContent) {
+            const scrollTop = this.scrollEl.scrollTop;
+            const startedOnHeader = this.startTarget.closest('[data-popup-head]');
+            if (scrollTop > 0 && !startedOnHeader) return; // обычный скролл
+          }
+        } else return; // свайп вверх не трогаем
 
-        // this.popup.style.transform = `translateY(${resistance / 10}rem)`;
-        // this.lastY = y;
-
-        // if (e.cancelable) e.preventDefault();
-
-        if (delta < 0) return;
-
-        const resistance =
-          delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
+        if (delta < 0) delta = 0;
+        const resistance = delta > 120 ? 120 + (delta - 120) * 0.35 : delta;
 
         this.popup.style.transform = `translateY(${resistance / 10}rem)`;
         this.lastY = y;
+
+        if (!isIOS && e.cancelable) {
+          e.preventDefault();
+        }
       }
 
       onEnd() {
         if (!this.isDragging) return;
+
         const delta = this.lastY - this.startY;
         const velocity = delta / Math.max(Date.now() - this.startTime, 1);
+
         const shouldClose = delta > this.popup.offsetHeight * 0.3 || velocity > 0.6;
 
         if (shouldClose) this.close();
@@ -238,6 +520,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return BottomPopup.instances ? BottomPopup.instances[key] : null;
       }
 
+      static closeAll() {
+        while (BottomPopup.stack.length) {
+          BottomPopup.stack[BottomPopup.stack.length - 1].close(0);
+        }
+      }
+
       static getOpen() {
         if (!BottomPopup.instances) return null;
         return Object.values(BottomPopup.instances).find(p => p.isOpen()) || null;
@@ -246,34 +534,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Инициализация ---
     const popups = {
-      menu: new BottomPopup(document.getElementById('menu')),
-      dish: new BottomPopup(document.getElementById('dish')),
-      filter: new BottomPopup(document.getElementById('filter')),
-      branch: new BottomPopup(document.getElementById('branch')),
-      reviews: new BottomPopup(document.getElementById('reviews')),
-      reviewsWrite: new BottomPopup(document.getElementById('reviewsWrite')),
-      rules: new BottomPopup(document.getElementById('rules')),
-      loyalty: new BottomPopup(document.getElementById('loyalty')),
-      catering: new BottomPopup(document.getElementById('catering')),
-      seating: new BottomPopup(document.getElementById('seating')),
-      slang: new BottomPopup(document.getElementById('slang')),
-      contacts: new BottomPopup(document.getElementById('contacts')),
-      offers: new BottomPopup(document.getElementById('offers')),
-      offersInner: new BottomPopup(document.getElementById('offersInner')),
-      shares: new BottomPopup(document.getElementById('shares')),
-      profile: new BottomPopup(document.getElementById('profile')),
-      profileCard: new BottomPopup(document.getElementById('profileCard')),
-      profileDetails: new BottomPopup(document.getElementById('profileDetails')),
-      reg: new BottomPopup(document.getElementById('reg')),
-      regCode: new BottomPopup(document.getElementById('regCode')),
-      cards: new BottomPopup(document.getElementById('cards')),
-      cardsAdd: new BottomPopup(document.getElementById('cardsAdd')),
-      branchSelect: new BottomPopup(document.getElementById('branchSelect')),
-      addressAdd: new BottomPopup(document.getElementById('addressAdd')),
-      addressEdit: new BottomPopup(document.getElementById('addressEdit')),
-      afisha: new BottomPopup(document.getElementById('afisha')),
-      favorite: new BottomPopup(document.getElementById('favorite')),
-      search: new BottomPopup(document.getElementById('search'))
+      menu: new BottomPopup(document.getElementById('menu'), window.lenis),
+      dish: new BottomPopup(document.getElementById('dish'), window.lenis),
+      filter: new BottomPopup(document.getElementById('filter'), window.lenis),
+      branch: new BottomPopup(document.getElementById('branch'), window.lenis),
+      reviews: new BottomPopup(document.getElementById('reviews'), window.lenis),
+      reviewsWrite: new BottomPopup(document.getElementById('reviewsWrite'), window.lenis),
+      rules: new BottomPopup(document.getElementById('rules'), window.lenis),
+      loyalty: new BottomPopup(document.getElementById('loyalty'), window.lenis),
+      catering: new BottomPopup(document.getElementById('catering'), window.lenis),
+      seating: new BottomPopup(document.getElementById('seating'), window.lenis),
+      slang: new BottomPopup(document.getElementById('slang'), window.lenis),
+      contacts: new BottomPopup(document.getElementById('contacts'), window.lenis),
+      offers: new BottomPopup(document.getElementById('offers'), window.lenis),
+      offersInner: new BottomPopup(document.getElementById('offersInner'), window.lenis),
+      shares: new BottomPopup(document.getElementById('shares'), window.lenis),
+      profile: new BottomPopup(document.getElementById('profile'), window.lenis),
+      profileCard: new BottomPopup(document.getElementById('profileCard'), window.lenis),
+      profileDetails: new BottomPopup(document.getElementById('profileDetails'), window.lenis),
+      reg: new BottomPopup(document.getElementById('reg'), window.lenis),
+      regCode: new BottomPopup(document.getElementById('regCode'), window.lenis),
+      cards: new BottomPopup(document.getElementById('cards'), window.lenis),
+      cardsAdd: new BottomPopup(document.getElementById('cardsAdd'), window.lenis),
+      branchSelect: new BottomPopup(document.getElementById('branchSelect'), window.lenis),
+      addressAdd: new BottomPopup(document.getElementById('addressAdd'), window.lenis),
+      addressEdit: new BottomPopup(document.getElementById('addressEdit'), window.lenis),
+      afisha: new BottomPopup(document.getElementById('afisha'), window.lenis),
+      favorite: new BottomPopup(document.getElementById('favorite'), window.lenis),
+      search: new BottomPopup(document.getElementById('search'), window.lenis)
     };
 
     for (let key in popups) BottomPopup.register(key, popups[key]);
@@ -281,18 +569,113 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Привязка кнопок ---
     document.querySelectorAll('[data-popup-target]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const popup = BottomPopup.get(btn.dataset.popupTarget);
-        if (popup) popup.toggle();
+        const target = btn.dataset.popupTarget;
+        const popup = BottomPopup.get(target);
+        if (!popup) return;
+
+        popup.toggleOrReopen();
       });
     });
 
     // --- Back button support ---
-    window.addEventListener('popstate', () => {
-      const openPopup = BottomPopup.getOpen();
-      if (openPopup && !openPopup._ignorePopstate) {
-        openPopup.close(0, true);
-      } else if (openPopup) openPopup._ignorePopstate = false;
+    window.addEventListener('popstate', (e) => {
+      const stack = BottomPopup.stack;
+      if (stack.length === 0) return;
+
+      const top = stack[stack.length - 1];
+
+      // если мы сами закрываем попап, игнорируем popstate
+      if (top._ignorePopstate) {
+        top._ignorePopstate = false;
+        return;
+      }
+
+      // закрываем верхний попап мгновенно
+      top.close(0, true);
     });
+  })();
+
+  /**
+   * Меняет класс у тега html на login
+   */
+  (() => {
+    const loginBtn = document.querySelector('[data-log="login"]');
+    const logoutBtn = document.querySelector('[data-log="logout"]');
+
+    if (loginBtn || logoutBtn) {
+      loginBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('logout');
+        document.documentElement.classList.add(loginBtn.dataset.log);
+      })
+      logoutBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('login');
+        document.documentElement.classList.add(logoutBtn.dataset.log);
+      })
+    }
+  })();
+
+  /**
+   * Шагово меняем фокус у инпута при вводе кода при регистрации
+   */
+  (() => {
+    const regCode = document.getElementById('regCode');
+    if (!regCode) return;
+
+    const inputs = regCode.querySelectorAll('.form-code');
+    const btn = regCode.querySelector('.btn');
+
+    // Функция для проверки, все ли поля заполнены
+    const checkInputs = () => {
+      const allFilled = Array.from(inputs).every(input => input.value.length > 0);
+      btn.disabled = !allFilled;
+    };
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        // Ограничиваем ввод только одной цифрой (на случай ошибок или автозаполнения)
+        if (e.target.value.length > 1) {
+          e.target.value = e.target.value.slice(-1);
+        }
+
+        if (e.target.value) {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          } else {
+            btn.focus();
+          }
+        }
+
+        checkInputs(); // Проверяем состояние кнопки при каждом вводе
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+        // Вызываем проверку после нажатия клавиши (с небольшой задержкой, чтобы значение обновилось)
+        setTimeout(checkInputs, 0);
+      });
+
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const data = e.clipboardData.getData('text').trim().slice(0, inputs.length);
+        if (data) {
+          data.split('').forEach((char, i) => {
+            if (inputs[i]) inputs[i].value = char;
+          });
+
+          if (data.length === inputs.length) {
+            btn.focus();
+          } else {
+            inputs[data.length].focus();
+          }
+        }
+        checkInputs(); // Проверяем состояние после вставки
+      });
+    });
+
+    // Инициализация: проверяем состояние кнопки при загрузке (если поля вдруг предзаполнены)
+    checkInputs();
   })();
 
   /**
@@ -349,10 +732,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cardTop = targetCard.getBoundingClientRect().top + window.scrollY - offsetPx;
 
-        window.scrollTo({
-          top: cardTop,
-          behavior: 'smooth'
-        });
+        if (lenis && lenis.scrollTo) {
+          lenis.scrollTo(cardTop, {
+            duration: 1.1,
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
+        } else {
+          window.scrollTo({ top: cardTop, behavior: 'smooth' });
+        }
       }
 
       navItems.forEach(btn => btn.classList.remove('active'));
@@ -429,276 +816,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = layout.querySelector('.layout__items');
         container.addEventListener('scroll', updateActiveNav);
       } else {
-        document.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('scroll', updateActiveNav);
+        if (lenis && lenis.on) {
+          lenis.on('scroll', updateActiveNav);
+        }
       }
 
       updateActiveNav();
     });
-  })();
-
-  /**
-   * Смена верхней границы крепления блоков при смене позции якоря Lenis
-   */
-  // (function () {
-  //   const html = document.documentElement;
-
-  //   let lastOffset = -100;
-
-  //   function updateOffset() {
-  //     const hasHeaderOut = html.classList.contains('header-out');
-  //     const nextOffset = hasHeaderOut ? -165 : -100;
-
-  //     if (nextOffset === lastOffset) return;
-
-  //     lastOffset = nextOffset;
-  //     lenis.options.anchors.offset = nextOffset;
-  //   }
-
-  //   // начальное состояние
-  //   updateOffset();
-
-  //   // следим за изменением класса html
-  //   const observer = new MutationObserver(updateOffset);
-  //   observer.observe(html, {
-  //     attributes: true,
-  //     attributeFilter: ['class'],
-  //   });
-  // })();
-
-  // ТУТ УЯЗВИМОЕ МЕСТО
-  // if (isIOS) {
-  //   const observer = new MutationObserver(() => {
-  //     const isPopupOpen =
-  //       document.documentElement.classList.contains('popup-open');
-
-  //     if (isPopupOpen) stopLenisSafe();
-  //     else startLenisSafe();
-  //   });
-
-  //   observer.observe(document.documentElement, {
-  //     attributes: true,
-  //     attributeFilter: ['class'],
-  //   });
-  // }
-  // ./ТУТ УЯЗВИМОЕ МЕСТО
-
-  /**
-   * Автоскролл контейнера с формой, для того чтобы активный инпут был в поле зрения
-   */
-  // (function () {
-  //   if (!window.visualViewport) return;
-
-  //   let activeScroll = null;
-  //   let basePadding = 0;
-  //   let rafId = null;
-  //   let lastKeyboardHeight = -1;
-
-  //   function getKeyboardHeight() {
-  //     const vv = window.visualViewport;
-
-  //     // iOS-safe расчёт
-  //     const height = Math.max(
-  //       0,
-  //       window.innerHeight - vv.height - vv.offsetTop
-  //     );
-
-  //     return Math.round(height);
-  //   }
-
-  //   function applyKeyboardOffset() {
-  //     rafId = null;
-  //     if (!activeScroll) return;
-
-  //     const keyboardHeight = getKeyboardHeight();
-
-  //     // защита от лишних layout-изменений
-  //     if (keyboardHeight === lastKeyboardHeight) return;
-  //     lastKeyboardHeight = keyboardHeight;
-
-  //     activeScroll.style.paddingBottom =
-  //       basePadding + keyboardHeight + 'px';
-  //   }
-
-  //   function scheduleUpdate() {
-  //     if (rafId) return;
-  //     rafId = requestAnimationFrame(applyKeyboardOffset);
-  //   }
-
-  //   function scrollInputIntoView(input) {
-  //     const scroll = input.closest('[data-popup-scroll]');
-  //     if (!scroll) return;
-
-  //     const inputRect = input.getBoundingClientRect();
-  //     const scrollRect = scroll.getBoundingClientRect();
-
-  //     const keyboardHeight = getKeyboardHeight();
-  //     const visibleHeight = scroll.clientHeight - keyboardHeight;
-
-  //     const offsetTop =
-  //       inputRect.top - scrollRect.top + scroll.scrollTop;
-
-  //     if (offsetTop < scroll.scrollTop) {
-  //       scroll.scrollTo({ top: offsetTop, behavior: 'smooth' });
-  //     } else if (
-  //       offsetTop + inputRect.height >
-  //       scroll.scrollTop + visibleHeight
-  //     ) {
-  //       scroll.scrollTo({
-  //         top: offsetTop - visibleHeight + inputRect.height,
-  //         behavior: 'smooth',
-  //       });
-  //     }
-  //   }
-
-  //   document.addEventListener('focusin', (e) => {
-  //     const input = e.target.closest(
-  //       'input, textarea, [contenteditable]'
-  //     );
-  //     if (!input) return;
-
-  //     const scroll = input.closest('[data-popup-scroll]');
-  //     if (!scroll) return;
-
-  //     activeScroll = scroll;
-  //     basePadding =
-  //       parseFloat(getComputedStyle(scroll).paddingBottom) || 0;
-
-  //     lastKeyboardHeight = -1;
-
-  //     scheduleUpdate();
-  //     scrollInputIntoView(input);
-
-  //     // ТОЛЬКО resize
-  //     visualViewport.addEventListener(
-  //       'resize',
-  //       scheduleUpdate,
-  //       { passive: true }
-  //     );
-  //   });
-
-  //   document.addEventListener('focusout', () => {
-  //     if (!activeScroll) return;
-
-  //     activeScroll.style.paddingBottom = basePadding + 'px';
-
-  //     visualViewport.removeEventListener(
-  //       'resize',
-  //       scheduleUpdate
-  //     );
-
-  //     activeScroll = null;
-  //     lastKeyboardHeight = -1;
-  //   });
-  // })();
-
-  /**
-   * Управляет поведением хедера
-   */
-  // (function headerFunc() {
-  //   const html = document.documentElement;
-  //   const firstSection = document.querySelector('section');
-  //   let lastScrollTop = 1;
-  //   const scrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
-
-  //   window.addEventListener('scroll', () => {
-  //     if (scrollPosition() > lastScrollTop && scrollPosition() > firstSection.offsetHeight) {
-  //       html.classList.add('header-out');
-  //     } else {
-  //       html.classList.remove('header-out');
-  //     }
-  //     lastScrollTop = scrollPosition();
-  //   })
-  // })();
-
-  /**
-   * 
-   * 
-   * ТУТ ВСЁ ОК!
-   * 
-   * 
-   */
-
-  /**
-   * Шагово меняем фокус у инпута при вводе кода при регистрации
-   */
-  (() => {
-    const regCode = document.getElementById('regCode');
-    if (!regCode) return;
-
-    const inputs = regCode.querySelectorAll('.form-code');
-    const btn = regCode.querySelector('.btn');
-
-    // Функция для проверки, все ли поля заполнены
-    const checkInputs = () => {
-      const allFilled = Array.from(inputs).every(input => input.value.length > 0);
-      btn.disabled = !allFilled;
-    };
-
-    inputs.forEach((input, index) => {
-      input.addEventListener('input', (e) => {
-        // Ограничиваем ввод только одной цифрой (на случай ошибок или автозаполнения)
-        if (e.target.value.length > 1) {
-          e.target.value = e.target.value.slice(-1);
-        }
-
-        if (e.target.value) {
-          if (index < inputs.length - 1) {
-            inputs[index + 1].focus();
-          } else {
-            btn.focus();
-          }
-        }
-
-        checkInputs(); // Проверяем состояние кнопки при каждом вводе
-      });
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && !e.target.value && index > 0) {
-          inputs[index - 1].focus();
-        }
-        // Вызываем проверку после нажатия клавиши (с небольшой задержкой, чтобы значение обновилось)
-        setTimeout(checkInputs, 0);
-      });
-
-      input.addEventListener('paste', (e) => {
-        e.preventDefault();
-        const data = e.clipboardData.getData('text').trim().slice(0, inputs.length);
-        if (data) {
-          data.split('').forEach((char, i) => {
-            if (inputs[i]) inputs[i].value = char;
-          });
-
-          if (data.length === inputs.length) {
-            btn.focus();
-          } else {
-            inputs[data.length].focus();
-          }
-        }
-        checkInputs(); // Проверяем состояние после вставки
-      });
-    });
-
-    // Инициализация: проверяем состояние кнопки при загрузке (если поля вдруг предзаполнены)
-    checkInputs();
-  })();
-
-  /**
-   * Меняет класс у тега html на login
-   */
-  (() => {
-    const loginBtn = document.querySelector('[data-log="login"]');
-    const logoutBtn = document.querySelector('[data-log="logout"]');
-
-    if (loginBtn || logoutBtn) {
-      loginBtn.addEventListener('click', () => {
-        document.documentElement.classList.remove('logout');
-        document.documentElement.classList.add(loginBtn.dataset.log);
-      })
-      logoutBtn.addEventListener('click', () => {
-        document.documentElement.classList.remove('login');
-        document.documentElement.classList.add(logoutBtn.dataset.log);
-      })
-    }
   })();
 
   /**
@@ -777,181 +902,181 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     });
 
-    // swiper.on('touchStart', () => {
-    //   if (window.lenis && !window.lenis.isStopped) {
-    //     window.lenis.stop();
-    //   }
-    // });
+    swiper.on('touchStart', () => {
+      if (window.lenis && !window.lenis.isStopped) {
+        window.lenis.stop();
+      }
+    });
 
-    // swiper.on('touchEnd', () => {
-    //   if (window.lenis && window.lenis.isStopped) {
-    //     window.lenis.start();
-    //   }
-    // });
+    swiper.on('touchEnd', () => {
+      if (window.lenis && window.lenis.isStopped) {
+        window.lenis.start();
+      }
+    });
 
   }
 
   /**
    * Поведение навигации nav
    */
-  // (() => {
-  //   const sliderEl = document.querySelector('.nav__slider');
-  //   if (!sliderEl || !window.lenis) return;
+  (() => {
+    const sliderEl = document.querySelector('.nav__slider');
+    if (!sliderEl || !window.lenis) return;
 
-  //   const swiper = sliderEl.swiper;
-  //   if (!swiper) return;
+    const swiper = sliderEl.swiper;
+    if (!swiper) return;
 
-  //   const items = [...sliderEl.querySelectorAll('.nav__item[data-id]')];
-  //   const sections = items
-  //     .map(i => document.getElementById(i.dataset.id))
-  //     .filter(Boolean);
+    const items = [...sliderEl.querySelectorAll('.nav__item[data-id]')];
+    const sections = items
+      .map(i => document.getElementById(i.dataset.id))
+      .filter(Boolean);
 
-  //   const itemMap = new Map(items.map(i => [i.dataset.id, i]));
+    const itemMap = new Map(items.map(i => [i.dataset.id, i]));
 
-  //   let activeId = null;
-  //   let isAutoSliding = false;
-  //   let isClickActivation = false;
+    let activeId = null;
+    let isAutoSliding = false;
+    let isClickActivation = false;
 
-  //   /* =======================
-  //      Активный пункт
-  //   ======================= */
-  //   function setActive(id) {
-  //     if (activeId === id) return;
-  //     activeId = id;
+    /* =======================
+       Активный пункт
+    ======================= */
+    function setActive(id) {
+      if (activeId === id) return;
+      activeId = id;
 
-  //     for (const item of items) {
-  //       if (item.dataset.id === id) item.classList.add('is-active');
-  //       else item.classList.remove('is-active');
-  //     }
+      for (const item of items) {
+        if (item.dataset.id === id) item.classList.add('is-active');
+        else item.classList.remove('is-active');
+      }
 
-  //     const item = itemMap.get(id);
-  //     if (item) ensureVisible(item);
-  //   }
+      const item = itemMap.get(id);
+      if (item) ensureVisible(item);
+    }
 
-  //   /* =======================
-  //      Центрирование слайда
-  //   ======================= */
-  //   function ensureVisible(item) {
-  //     // кликом НИКОГДА не двигаем swiper
-  //     if (isClickActivation) return;
+    /* =======================
+       Центрирование слайда
+    ======================= */
+    function ensureVisible(item) {
+      // кликом НИКОГДА не двигаем swiper
+      if (isClickActivation) return;
 
-  //     const slide = item.closest('.swiper-slide');
-  //     if (!slide) return;
+      const slide = item.closest('.swiper-slide');
+      if (!slide) return;
 
-  //     const slideIndex = swiper.slides.indexOf(slide);
-  //     if (slideIndex === -1) return;
+      const slideIndex = swiper.slides.indexOf(slide);
+      if (slideIndex === -1) return;
 
-  //     const maxIndex = swiper.slides.length - 1;
+      const maxIndex = swiper.slides.length - 1;
 
-  //     // жёсткий лок крайних
-  //     if (slideIndex === 0 || slideIndex === maxIndex) {
-  //       return;
-  //     }
+      // жёсткий лок крайних
+      if (slideIndex === 0 || slideIndex === maxIndex) {
+        return;
+      }
 
-  //     const slideRect = slide.getBoundingClientRect();
-  //     const wrapRect = swiper.el.getBoundingClientRect();
+      const slideRect = slide.getBoundingClientRect();
+      const wrapRect = swiper.el.getBoundingClientRect();
 
-  //     // если уже виден — ничего не делаем
-  //     if (
-  //       slideRect.left >= wrapRect.left &&
-  //       slideRect.right <= wrapRect.right
-  //     ) {
-  //       return;
-  //     }
+      // если уже виден — ничего не делаем
+      if (
+        slideRect.left >= wrapRect.left &&
+        slideRect.right <= wrapRect.right
+      ) {
+        return;
+      }
 
-  //     const currentTranslate = swiper.getTranslate();
+      const currentTranslate = swiper.getTranslate();
 
-  //     const targetTranslate =
-  //       currentTranslate -
-  //       (
-  //         slideRect.left -
-  //         wrapRect.left -
-  //         (wrapRect.width / 2 - slideRect.width / 2)
-  //       );
+      const targetTranslate =
+        currentTranslate -
+        (
+          slideRect.left -
+          wrapRect.left -
+          (wrapRect.width / 2 - slideRect.width / 2)
+        );
 
-  //     // ограничиваем translate, чтобы не уехать за края
-  //     const minTranslate = swiper.maxTranslate();
-  //     const maxTranslate = swiper.minTranslate();
+      // ограничиваем translate, чтобы не уехать за края
+      const minTranslate = swiper.maxTranslate();
+      const maxTranslate = swiper.minTranslate();
 
-  //     const clampedTranslate = Math.max(
-  //       minTranslate,
-  //       Math.min(maxTranslate, targetTranslate)
-  //     );
+      const clampedTranslate = Math.max(
+        minTranslate,
+        Math.min(maxTranslate, targetTranslate)
+      );
 
-  //     isAutoSliding = true;
+      isAutoSliding = true;
 
-  //     swiper.setTransition(220);
-  //     swiper.setTranslate(clampedTranslate);
+      swiper.setTransition(220);
+      swiper.setTranslate(clampedTranslate);
 
-  //     setTimeout(() => {
-  //       swiper.setTransition(0);
-  //       isAutoSliding = false;
-  //     }, 230);
-  //   }
+      setTimeout(() => {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }, 230);
+    }
 
-  //   /* =======================
-  //      Клик по навигации
-  //   ======================= */
-  //   items.forEach(item => {
-  //     item.addEventListener('click', e => {
-  //       e.preventDefault();
+    /* =======================
+       Клик по навигации
+    ======================= */
+    items.forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
 
-  //       isClickActivation = true;
+        isClickActivation = true;
 
-  //       const id = item.dataset.id;
-  //       const section = document.getElementById(id);
-  //       if (!section) return;
+        const id = item.dataset.id;
+        const section = document.getElementById(id);
+        if (!section) return;
 
-  //       setActive(id);
+        setActive(id);
 
-  //       window.lenis.scrollTo(section, {
-  //         offset: -100,
-  //         duration: 1.1,
-  //         easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-  //       });
+        window.lenis.scrollTo(section, {
+          offset: -100,
+          duration: 1.1,
+          easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
 
-  //       requestAnimationFrame(() => {
-  //         isClickActivation = false;
-  //       });
-  //     });
-  //   });
+        requestAnimationFrame(() => {
+          isClickActivation = false;
+        });
+      });
+    });
 
-  //   /* =======================
-  //      IntersectionObserver
-  //      30% viewport
-  //   ======================= */
-  //   const observer = new IntersectionObserver(
-  //     entries => {
-  //       entries.forEach(entry => {
-  //         if (!entry.isIntersecting) return;
-  //         setActive(entry.target.id);
-  //       });
-  //     },
-  //     {
-  //       threshold: 0.3
-  //     }
-  //   );
+    /* =======================
+       IntersectionObserver
+       30% viewport
+    ======================= */
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          setActive(entry.target.id);
+        });
+      },
+      {
+        threshold: 0.3
+      }
+    );
 
-  //   sections.forEach(sec => observer.observe(sec));
+    sections.forEach(sec => observer.observe(sec));
 
-  //   /* =======================
-  //      Прерывание автоскролла
-  //      при касании
-  //   ======================= */
-  //   swiper.on('touchStart', () => {
-  //     if (isAutoSliding) {
-  //       swiper.setTransition(0);
-  //       isAutoSliding = false;
-  //     }
-  //   });
+    /* =======================
+       Прерывание автоскролла
+       при касании
+    ======================= */
+    swiper.on('touchStart', () => {
+      if (isAutoSliding) {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }
+    });
 
-  //   swiper.on('touchStart', () => {
-  //     if (isAutoSliding) {
-  //       swiper.setTransition(0);
-  //       isAutoSliding = false;
-  //     }
-  //   });
+    swiper.on('touchStart', () => {
+      if (isAutoSliding) {
+        swiper.setTransition(0);
+        isAutoSliding = false;
+      }
+    });
 
-  // })();
+  })();
 
 });
