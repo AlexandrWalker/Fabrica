@@ -11,10 +11,6 @@ html {
   @include domd {
     --refRes: 1920;
   }
-
-  &.popup-open {
-    // overflow: hidden;
-  }
 }
 
 body {
@@ -27,6 +23,12 @@ body {
   line-height: 140%;
   color: var(--black);
   cursor: default;
+}
+
+html.popup-open,
+body.popup-open {
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .wrapper {
